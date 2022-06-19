@@ -1,0 +1,26 @@
+# Logs
+*.log
+
+# Results
+output
+dist
+*.csg
+*.csv
+
+# Runtime data
+*.pid
+*.seed
+
+# System files
+*~
+.DS_Store
+
+# Projects
+nbproject/
+.idea
+.settings
+.project
+
+# Generated files
+*.stl
+
