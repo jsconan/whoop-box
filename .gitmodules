@@ -1,0 +1,3 @@
+[submodule "lib/camelSCAD"]
+	path = lib/camelSCAD
+	url = git@github.com:jsconan/camelSCAD.git
