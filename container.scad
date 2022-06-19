@@ -23,9 +23,8 @@
 /**
  * A box to store tiny-whoops.
  *
- * Cupboard that will contain several tiny-whoops and their surrounding
- * protection boxes. This should be printed in rigid a material, like PLA
- * or PETG.
+ * Container box that will contain several tiny-whoops and their surrounding
+ * protection boxes. This should be printed in rigid material, like PLA or PETG.
  *
  * @author jsconan
  * @version 0.1.0
@@ -36,17 +35,15 @@ include <util/setup.scad>
 
 // Sets the minimum facet angle and size using the defined render mode.
 // Displays a build box visualization to preview the printer area.
-buildBox(mode=renderMode) {
+applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
-    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 20])
-    whoopCupboard(
+    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 5])
+    whoopContainer(
         whoopType = whoopType,
-        whoopCount = whoopCountDrawer,
-        drawerWallThickness = getBoxWallThickness(DRAWER),
-        drawerHeight = getBoxHeight(CUPBOARD, whoopType),
-        drawerCount = drawerCountCupboard,
-        drawerDistance = getBoxWallDistance(CUPBOARD),
-        ductDistance = getBoxWhoopDistance(DRAWER),
-        wallThickness = getBoxWallThickness(CUPBOARD)
+        wallThickness = getBoxWallThickness(CONTAINER),
+        groundThickness = getBoxGroundThickness(CONTAINER),
+        boxHeight = getBoxHeight(CONTAINER, whoopType),
+        ductDistance = getBoxWhoopDistance(CONTAINER),
+        whoopCount = whoopCountBox
     );
 }

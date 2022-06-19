@@ -21,28 +21,25 @@
  */
 
 /**
- * A box to store tiny-whoops.
+ * A box to store a tiny whoop.
  *
- * Rounded box that will directly contain a tiny-whoop.
- * This should be printed in a soft and rubber material, like TPU.
+ * Setup the context.
  *
  * @author jsconan
  * @version 0.1.0
  */
 
-// Import the project's setup.
-include <util/setup.scad>
+// As we need to use some shapes, use the right entry point of the library.
+include <../lib/camelSCAD/shapes.scad>
 
-// Sets the minimum facet angle and size using the defined render mode.
-// Displays a build box visualization to preview the printer area.
-buildBox(mode=renderMode) {
-    // Uncomment the next line to cut a sample from the object
-    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 10], offset=[0, 0, 5])
-    whoopRoundedBox(
-        whoopType = whoopType,
-        wallThickness = getBoxWallThickness(ROUNDED_BOX),
-        groundThickness = getBoxGroundThickness(ROUNDED_BOX),
-        boxHeight = getBoxHeight(ROUNDED_BOX, whoopType),
-        ductDistance = getBoxWhoopDistance(ROUNDED_BOX)
-    );
-}
+// Then we need the config for the project, as well as the related functions
+include <../config/config.scad>
+include <functions.scad>
+
+// Finally, include the shapes
+include <../shapes/box-util.scad>
+include <../shapes/rounded-box.scad>
+include <../shapes/angled-box.scad>
+include <../shapes/container.scad>
+include <../shapes/drawer.scad>
+include <../shapes/cupboard.scad>
