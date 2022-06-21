@@ -23,7 +23,7 @@
 /**
  * A box to store tiny-whoops.
  *
- * Defines some functions.
+ * Global functions.
  *
  * @author jsconan
  * @version 0.1.0

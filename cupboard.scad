@@ -32,7 +32,7 @@
  */
 
 // Import the project's setup.
-include <util/setup.scad>
+include <config/setup.scad>
 
 // Sets the minimum facet angle and size using the defined render mode.
 // Displays a build box visualization to preview the printer area.

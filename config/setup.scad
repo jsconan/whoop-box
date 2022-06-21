@@ -33,8 +33,8 @@
 include <../lib/camelSCAD/shapes.scad>
 
 // Then we need the config for the project, as well as the related functions
-include <../config/config.scad>
-include <functions.scad>
+include <config.scad>
+include <helpers.scad>
 
 // Finally, include the shapes
 include <../shapes/box-util.scad>
