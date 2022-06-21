@@ -2,22 +2,22 @@
  * @license
  * GPLv3 License
  *
- * Copyright (c) 2019 Jean-Sebastien CONAN
+ * Copyright (c) 2019-2022 Jean-Sebastien CONAN
  *
- * This file is part of jsconan/things.
+ * This file is part of jsconan/whoop-box.
  *
- * jsconan/things is free software: you can redistribute it and/or modify
+ * jsconan/whoop-box is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * jsconan/things is distributed in the hope that it will be useful,
+ * jsconan/whoop-box is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with jsconan/things. If not, see <http://www.gnu.org/licenses/>.
+ * along with jsconan/whoop-box. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -27,11 +27,10 @@
  * protection boxes. This should be printed in rigid material, like PLA or PETG.
  *
  * @author jsconan
- * @version 0.1.0
  */
 
 // Import the project's setup.
-include <util/setup.scad>
+include <config/setup.scad>
 
 // Sets the minimum facet angle and size using the defined render mode.
 // Displays a build box visualization to preview the printer area.

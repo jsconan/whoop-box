@@ -23,25 +23,9 @@
 /**
  * A box to store tiny-whoops.
  *
- * Rounded box that will directly contain a tiny-whoop.
- * This should be printed in a soft and rubber material, like TPU.
+ * Version of the project.
  *
  * @author jsconan
  */
 
-// Import the project's setup.
-include <config/setup.scad>
-
-// Sets the minimum facet angle and size using the defined render mode.
-// Displays a build box visualization to preview the printer area.
-applyMode(mode=renderMode) {
-    // Uncomment the next line to cut a sample from the object
-    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 10], offset=[0, 0, 5])
-    whoopRoundedBox(
-        whoopType = whoopType,
-        wallThickness = getBoxWallThickness(ROUNDED_BOX),
-        groundThickness = getBoxGroundThickness(ROUNDED_BOX),
-        boxHeight = getBoxHeight(ROUNDED_BOX, whoopType),
-        ductDistance = getBoxWhoopDistance(ROUNDED_BOX)
-    );
-}
+PROJECT_VERSION = "0.1.1";
