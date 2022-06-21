@@ -21,27 +21,11 @@
  */
 
 /**
- * A box to store a tiny whoop.
+ * A box to store tiny-whoops.
  *
- * Setup the context.
+ * Version of the project.
  *
  * @author jsconan
  */
 
-// As we need to use some shapes, use the right entry point of the library.
-include <../lib/camelSCAD/shapes.scad>
-
-// Defines the project's version
-include <version.scad>
-
-// Then we need the config for the project, as well as the related functions
-include <config.scad>
-include <helpers.scad>
-
-// Finally, include the shapes
-include <../shapes/box-util.scad>
-include <../shapes/rounded-box.scad>
-include <../shapes/angled-box.scad>
-include <../shapes/container.scad>
-include <../shapes/drawer.scad>
-include <../shapes/cupboard.scad>
+PROJECT_VERSION = "0.1.0";

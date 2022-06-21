@@ -2,7 +2,7 @@
  * @license
  * GPLv3 License
  *
- * Copyright (c) 2019 Jean-Sebastien CONAN
+ * Copyright (c) 2019-2022 Jean-Sebastien CONAN
  *
  * This file is part of jsconan/whoop-box.
  *
@@ -28,7 +28,6 @@
  * or PETG.
  *
  * @author jsconan
- * @version 0.1.0
  */
 
 // Import the project's setup.
