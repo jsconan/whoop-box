@@ -45,7 +45,7 @@ fileext=".scad"
 scriptPath=$(dirname $0)
 project=$(pwd)
 dstpath=${project}/${output}
-src=${project}/*${fileext}
+src=${project}/parts/*${fileext}
 
 # color codes
 C_ERR="\033[31m"
