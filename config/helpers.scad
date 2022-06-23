@@ -29,18 +29,113 @@
  */
 
 /**
- * Adjust a height with respect to the target layer height
- * @param Number height
+ * Aligns a value with respect to the target layer height.
+ * @param Number value
  * @returns Number
  */
-function adjustToLayer(height) = roundBy(height, layerHeight);
+function layerAligned(value) = roundBy(value, layerHeight);
 
 /**
- * Adjust a width with respect to the target nozzle size
- * @param Number width
+ * Aligns a value with respect to the target nozzle size.
+ * @param Number value
  * @returns Number
  */
-function adjustToNozzle(width) = roundBy(width, nozzleWidth);
+function nozzleAligned(value) = roundBy(value, nozzleWidth);
+
+/**
+ * Gets the thickness of N layers.
+ * @param Number N
+ * @returns Number
+ */
+function layers(N) = N * layerHeight;
+
+/**
+ * Gets the width of N times the nozzle width.
+ * @param Number N
+ * @returns Number
+ */
+function shells(N) = N * nozzleWidth;
+
+/**
+ * Computes the print interval between the centers of 2 objects.
+ * @param Number size - The size of the shape.
+ * @returns Number
+ */
+function getPrintInterval(size) = size + printInterval;
+
+/**
+ * Gets the adjusted quantity of shapes to place on a grid with respect to the size of one shape.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @returns Number
+ */
+function getMaxQuantity(length, width, quantity=1) =
+    let(
+        maxLine = floor(printerLength / length),
+        maxCol = floor(printerWidth / width)
+    )
+    min(maxLine * maxCol, quantity)
+;
+
+/**
+ * Gets the maximal number of shapes that can be placed on a line with respect the size of one shape.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @param Number [line] - The expected number of shapes per line.
+ * @returns Number
+ */
+function getMaxLine(length, width, quantity=1, line=undef) =
+    let(
+        maxLine = floor(printerLength / length)
+    )
+    min(uor(line, ceil(sqrt(quantity))), maxLine)
+;
+
+/**
+ * Gets the overall length of the area taken to place the repeated shapes on a grid with respect to the expected quantity.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @param Number [line] - The expected number of shapes per line.
+ * @returns Number
+ */
+function getGridLength(length, width, quantity=1, line=undef) =
+    let(
+        length = getPrintInterval(length),
+        width = getPrintInterval(width),
+        quantity = getMaxQuantity(length, width, quantity)
+    )
+    min(quantity, getMaxLine(length, width, quantity, line)) * length
+;
+
+/**
+ * Gets the overall width of the area taken to place the repeated shapes on a grid with respect to the expected quantity.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @param Number [line] - The expected number of shapes per line.
+ * @returns Number
+ */
+function getGridWidth(length, width, quantity=1, line=undef) =
+    let(
+        length = getPrintInterval(length),
+        width = getPrintInterval(width),
+        quantity = getMaxQuantity(length, width, quantity),
+        line = getMaxLine(length, width, quantity, line)
+    )
+    ceil(quantity / line) * width
+;
+
+/**
+ * Prints the project version, including the package version.
+ * @returns String
+ */
+function printVersion() = str(PROJECT_VERSION, " (package: ", PACKAGE_VERSION, ")");
+
+
+/** OLD HELPERS **/
 
 /**
  * Gets the data defined for a particular tiny-whoop type
@@ -120,7 +215,7 @@ function getWhoopMotorInterval(whoopType) =
  * @param String whoopType - The type of tiny-whoop
  * @returns Number - The height of the tiny-whoop
  */
-function getWhoopHeight(whoopType) = adjustToLayer(
+function getWhoopHeight(whoopType) = layerAligned(
     getWhoopData(whoopType, IDX_WHOOP_HEIGHT)
 );
 
@@ -129,7 +224,7 @@ function getWhoopHeight(whoopType) = adjustToLayer(
  * @param String boxType - The type of box
  * @returns Number - The ground thickness for the given box
  */
-function getBoxGroundThickness(boxType) = adjustToLayer(
+function getBoxGroundThickness(boxType) = layerAligned(
     getBoxData(boxType, IDX_BOX_GROUND)
 );
 
@@ -138,7 +233,7 @@ function getBoxGroundThickness(boxType) = adjustToLayer(
  * @param String boxType - The type of box
  * @returns Number - The wall thickness for the given box
  */
-function getBoxWallThickness(boxType) = adjustToNozzle(
+function getBoxWallThickness(boxType) = nozzleAligned(
     getBoxData(boxType, IDX_BOX_WALL)
 );
 
@@ -170,7 +265,7 @@ function getBoxWhoopDistance(boxType) =
  */
 function getBoxHeight(boxType, whoopType) =
     getWhoopHeight(whoopType) +
-    adjustToLayer(getBoxData(boxType, IDX_BOX_HEIGHT)) +
+    layerAligned(getBoxData(boxType, IDX_BOX_HEIGHT)) +
     vsum([
         for (type = getBoxTypeList(boxType))
             getBoxGroundThickness(type)
