@@ -39,10 +39,11 @@ applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 20])
     whoopCupboard(
-        whoopType = whoopType,
+        motorDistance = motorDistance,
+        ductDiameter = ductDiameter,
         whoopCount = whoopCountDrawer,
         drawerWallThickness = getBoxWallThickness(DRAWER),
-        drawerHeight = getBoxHeight(CUPBOARD, whoopType),
+        drawerHeight = getBoxHeight(CUPBOARD, whoopHeight),
         drawerCount = drawerCountCupboard,
         drawerDistance = getBoxWallDistance(CUPBOARD),
         ductDistance = getBoxWhoopDistance(DRAWER),

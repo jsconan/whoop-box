@@ -93,16 +93,17 @@ function drawWhoopContainerShape(duct, interval, wall = 0, count = 1) =
 
 /**
  * Builds a box that will contain several tiny-whoops.
- * @param String whoopType - The type of tiny-whoop
+ * @param Number motorDistance - The distance between motors on the diagonal
+ * @param Number ductDiameter - The outer diameter of a motor duct
  * @param Number wallThickness - The thickness of the walls
  * @param Number groundThickness - The thickness of the ground
  * @param Number boxHeight - The height of the box
  * @param Number [ductDistance] - The distance between a duct and the wall
  * @param Vector [whoopCount] - The number of tiny-whoops on each axis
  */
-module whoopContainer(whoopType, wallThickness, groundThickness, boxHeight, ductDistance = 0, whoopCount = 1) {
-    duct = getWhoopDuctDiameter(whoopType) + ductDistance * 2;
-    interval = getWhoopMotorInterval(whoopType);
+module whoopContainer(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, ductDistance = 0, whoopCount = 1) {
+    duct = ductDiameter + ductDistance * 2;
+    interval = getMotorInterval(motorDistance);
     boxWidth = interval + duct + wallThickness * 2;
     innerWidth = boxWidth - wallThickness;
 

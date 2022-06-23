@@ -23,7 +23,7 @@
 /**
  * A box to store a tiny whoop.
  *
- * Setup the context.
+ * Project's bootstrap.
  *
  * @author jsconan
  */
@@ -35,9 +35,9 @@ include <../lib/camelSCAD/shapes.scad>
 include <version.scad>
 
 // Then we need the config for the project, as well as the related functions
-include <constants.scad>
 include <config.scad>
 include <helpers.scad>
+include <constants.scad>
 
 // Finally, include the shapes
 include <../shapes/box-util.scad>

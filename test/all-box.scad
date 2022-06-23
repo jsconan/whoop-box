@@ -38,26 +38,29 @@ buildBox(mode=renderMode) {
     //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 5])
     union() {
         whoopContainer(
-            whoopType = whoopType,
+            motorDistance = motorDistance,
+            ductDiameter = ductDiameter,
             wallThickness = getBoxWallThickness(CONTAINER),
             groundThickness = getBoxGroundThickness(CONTAINER),
-            boxHeight = getBoxHeight(CONTAINER, whoopType),
+            boxHeight = getBoxHeight(CONTAINER, whoopHeight),
             ductDistance = getBoxWhoopDistance(CONTAINER)
         );
         translateZ(getBoxGroundThickness(CONTAINER)) {
             whoopAngledBox(
-                whoopType = whoopType,
+                motorDistance = motorDistance,
+                ductDiameter = ductDiameter,
                 wallThickness = getBoxWallThickness(ANGLED_BOX),
                 groundThickness = getBoxGroundThickness(ANGLED_BOX),
-                boxHeight = getBoxHeight(ANGLED_BOX, whoopType),
+                boxHeight = getBoxHeight(ANGLED_BOX, whoopHeight),
                 ductDistance = getBoxWhoopDistance(ANGLED_BOX)
             );
             translateZ(getBoxGroundThickness(ANGLED_BOX)) {
                 whoopRoundedBox(
-                    whoopType = whoopType,
+                    motorDistance = motorDistance,
+                    ductDiameter = ductDiameter,
                     wallThickness = getBoxWallThickness(ROUNDED_BOX),
                     groundThickness = getBoxGroundThickness(ROUNDED_BOX),
-                    boxHeight = getBoxHeight(ROUNDED_BOX, whoopType),
+                    boxHeight = getBoxHeight(ROUNDED_BOX, whoopHeight),
                     ductDistance = getBoxWhoopDistance(ROUNDED_BOX)
                 );
             }

@@ -41,20 +41,11 @@ IDX_BOX_HEIGHT = 3;     // index of the height addition in box data
 IDX_BOX_DISTANCE = 4;   // index of the distance to walls factor in box data
 
 // Defines the types of data
-TINY_WHOOP_65_BL = "tiny65bl";
-TINY_WHOOP_75_BL = "tiny75bl";
 ROUNDED_BOX = "rounded";
 ANGLED_BOX = "angled";
 CONTAINER = "drawer";
 DRAWER = "drawer";
 CUPBOARD = "cupboard";
-
-// Defines the size for each types of tiny-whoops
-whoopData = [
-    // id,             duct, frame, height
-    [TINY_WHOOP_65_BL,  37,   65,    48],
-    [TINY_WHOOP_75_BL,  48,   76,    48],
-];
 
 // Defines the constraints for the tiny-whoops boxes
 boxData = [

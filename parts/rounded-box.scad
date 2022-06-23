@@ -38,10 +38,11 @@ applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 10], offset=[0, 0, 5])
     whoopRoundedBox(
-        whoopType = whoopType,
+        motorDistance = motorDistance,
+        ductDiameter = ductDiameter,
         wallThickness = getBoxWallThickness(ROUNDED_BOX),
         groundThickness = getBoxGroundThickness(ROUNDED_BOX),
-        boxHeight = getBoxHeight(ROUNDED_BOX, whoopType),
+        boxHeight = getBoxHeight(ROUNDED_BOX, whoopHeight),
         ductDistance = getBoxWhoopDistance(ROUNDED_BOX)
     );
 }

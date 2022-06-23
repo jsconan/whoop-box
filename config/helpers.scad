@@ -134,21 +134,14 @@ function getGridWidth(length, width, quantity=1, line=undef) =
  */
 function printVersion() = str(PROJECT_VERSION, " (package: ", PACKAGE_VERSION, ")");
 
+/**
+ * Computes the side distance between motors based on the given diagonal.
+ * @param Number diagonal - The distance between motors on the diagonal.
+ * @returns Number - The distance between motors.
+ */
+function getMotorInterval(diagonal) = sqrt(pow(diagonal, 2) / 2);
 
 /** OLD HELPERS **/
-
-/**
- * Gets the data defined for a particular tiny-whoop type
- * @param String whoopType - The type of tiny-whoop
- * @param Number [index] - The index of the data to get
- * @returns Array|Number - The tiny-whoop data
- */
-function getWhoopData(whoopType, index) =
-    let(
-        data = fetch(whoopData, whoopType)
-    )
-    index ? data[index] : data
-;
 
 /**
  * Gets the data defined for a particular box type
@@ -195,31 +188,6 @@ function getBoxTypeList(boxType) =
 ;
 
 /**
- * Gets the diameter of the propeller duct
- * @param String whoopType - The type of tiny-whoop for which compute the size
- * @returns Number - The diameter of the propeller duct
- */
-function getWhoopDuctDiameter(whoopType) = getWhoopData(whoopType, IDX_WHOOP_DUCT);
-
-/**
- * Computes the distance between motors based on the diagonal size of a tiny-whoop frame
- * @param String whoopType - The type of tiny-whoop for which compute the size
- * @returns Number - The distance between motors
- */
-function getWhoopMotorInterval(whoopType) =
-    sqrt(pow(getWhoopData(whoopType, IDX_WHOOP_FRAME), 2) / 2)
-;
-
-/**
- * Gets the height of a tiny-whoop
- * @param String whoopType - The type of tiny-whoop
- * @returns Number - The height of the tiny-whoop
- */
-function getWhoopHeight(whoopType) = layerAligned(
-    getWhoopData(whoopType, IDX_WHOOP_HEIGHT)
-);
-
-/**
  * Gets the ground thickness
  * @param String boxType - The type of box
  * @returns Number - The ground thickness for the given box
@@ -260,11 +228,11 @@ function getBoxWhoopDistance(boxType) =
 /**
  * Gets the height of a box with respect to the given tiny-whoop
  * @param String boxType - The type of box
- * @param String whoopType - The type of tiny-whoop
+ * @param Number whoopHeight - The height of tiny-whoop
  * @returns Number - The height of the box
  */
-function getBoxHeight(boxType, whoopType) =
-    getWhoopHeight(whoopType) +
+function getBoxHeight(boxType, whoopHeight) =
+    whoopHeight +
     layerAligned(getBoxData(boxType, IDX_BOX_HEIGHT)) +
     vsum([
         for (type = getBoxTypeList(boxType))
@@ -290,7 +258,7 @@ function getDuctRadius(sides, diameter) =
  * @param Number diameter - The diameter of a duct
  * @param Vector count - The count of tiny-whoops in each direction
  * @param Number wall - The thickness of a wall
- * @returns Vector - The distance betwenn external ducts
+ * @returns Vector - The distance between external ducts
  */
 function getDuctDistance(interval, diameter, count = 1, wall = 0) =
     let(
@@ -307,7 +275,7 @@ function getDuctDistance(interval, diameter, count = 1, wall = 0) =
  * @param Number diameter - The diameter of a duct
  * @param Vector count - The count of tiny-whoops in each direction
  * @param Number wall - The thickness of a wall
- * @returns Vector - The distance betwenn external ducts
+ * @returns Vector - The distance between external ducts
  */
 function getDuctPoints(interval, diameter, count = 1, wall = 0) =
     let(

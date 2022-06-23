@@ -85,15 +85,16 @@ function drawWhoopAngledBoxShape(duct, interval) =
 /**
  * Builds a box that will contain a tiny-whoop.
  * Angled version.
- * @param String whoopType - The type of tiny-whoop
+ * @param Number motorDistance - The distance between motors on the diagonal
+ * @param Number ductDiameter - The outer diameter of a motor duct
  * @param Number wallThickness - The thickness of the walls
  * @param Number groundThickness - The thickness of the ground
  * @param Number boxHeight - The height of the box
  * @param Number [ductDistance] - The distance between a duct and the wall
  */
-module whoopAngledBox(whoopType, wallThickness, groundThickness, boxHeight, ductDistance = 0) {
-    duct = getWhoopDuctDiameter(whoopType) + ductDistance * 2;
-    interval = getWhoopMotorInterval(whoopType);
+module whoopAngledBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, ductDistance = 0) {
+    duct = ductDiameter + ductDistance * 2;
+    interval = getMotorInterval(motorDistance);
     boxWidth = interval + duct + wallThickness * 2;
     points = drawWhoopAngledBoxShape(duct=duct, interval=interval);
 

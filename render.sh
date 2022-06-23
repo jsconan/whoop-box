@@ -27,7 +27,6 @@
 #
 
 # application params
-whoop="tiny65bl"
 boxX=
 boxY=
 drawerX=
@@ -59,11 +58,10 @@ C_INF="\033[32m"
 # renders a file
 # @param fileName
 render() {
-    dst="${dstpath}/${whoop}-$(basename $1 ${fileext}).stl"
+    dst="${dstpath}/$(basename $1 ${fileext}).stl"
     echo -e "${C_RST}Rendering of ${C_SEL}$(basename $1)${C_RST} to ${C_SEL}${dst}"
     openscad --render -o "${dst}" "$1" \
         -D "renderMode=\"prod\"" \
-        -D "whoopType=\"${whoop}\"" \
         -D "${whoopCountBox}" \
         -D "${whoopCountDrawer}" \
         -D "${drawerCountCupboard}"
@@ -74,10 +72,6 @@ echo -e "${C_RST}"
 # load parameters
 while (( "$#" )); do
     case $1 in
-        "-t"|"--whoop")
-            whoop=$2
-            shift
-        ;;
         "-x")
             boxX=$2
             drawerX=$2
@@ -124,7 +118,6 @@ while (( "$#" )); do
             echo -e "${C_CTX}\t$0 [-h|--help] [-o|--option value] files${C_RST}"
             echo
             echo -e "${C_MSG}  -h,  --help         ${C_RST}Show this help"
-            echo -e "${C_MSG}  -t,  --whoop        ${C_RST}Set the type of tiny-whoop (tiny65bl, tiny75bl)"
             echo -e "${C_MSG}  -x                  ${C_RST}Set the number of tiny-whoops in the length of a box and a drawer"
             echo -e "${C_MSG}  -y                  ${C_RST}Set the number of tiny-whoops in the width of a box and a drawer"
             echo -e "${C_MSG}  -b,  --box          ${C_RST}Set the number of tiny-whoops in both directions for a box"

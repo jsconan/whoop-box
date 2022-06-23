@@ -38,10 +38,11 @@ applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 5])
     whoopAngledBox(
-        whoopType = whoopType,
+        motorDistance = motorDistance,
+        ductDiameter = ductDiameter,
         wallThickness = getBoxWallThickness(ANGLED_BOX),
         groundThickness = getBoxGroundThickness(ANGLED_BOX),
-        boxHeight = getBoxHeight(ANGLED_BOX, whoopType),
+        boxHeight = getBoxHeight(ANGLED_BOX, whoopHeight),
         ductDistance = getBoxWhoopDistance(ANGLED_BOX)
     );
 }

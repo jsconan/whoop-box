@@ -29,7 +29,7 @@
  */
 
 /**
- * Computes the points defining the polygon shape of a cupboatd that will
+ * Computes the points defining the polygon shape of a cupboard that will
  * contain drawers for several tiny-whoops.
  * @param Number duct - The duct diameter
  * @param Number interval - The distance between ducts
@@ -53,8 +53,9 @@ function drawWhoopCupboardShape(duct, interval, wall = 0, offset = 0, count = 1)
 ;
 
 /**
- * Builds a cupboatd that will contain drawers for several tiny-whoops.
- * @param String whoopType - The type of tiny-whoop
+ * Builds a cupboard that will contain drawers for several tiny-whoops.
+ * @param Number motorDistance - The distance between motors on the diagonal
+ * @param Number ductDiameter - The outer diameter of a motor duct
  * @param Number drawerWallThickness - The thickness of the internal walls
  * @param Number wallThickness - The thickness of the walls
  * @param Number drawerHeight - The height of a drawer
@@ -63,9 +64,9 @@ function drawWhoopCupboardShape(duct, interval, wall = 0, offset = 0, count = 1)
  * @param Number [drawerCount] - The number of drawers
  * @param Vector [whoopCount] - The number of tiny-whoops on each axis
  */
-module whoopCupboard(whoopType, drawerWallThickness, wallThickness, drawerHeight, ductDistance = 0, drawerDistance = 0, drawerCount = 1, whoopCount = 1) {
-    duct = getWhoopDuctDiameter(whoopType) + ductDistance * 2;
-    interval = getWhoopMotorInterval(whoopType);
+module whoopCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThickness, drawerHeight, ductDistance = 0, drawerDistance = 0, drawerCount = 1, whoopCount = 1) {
+    duct = ductDiameter + ductDistance * 2;
+    interval = getMotorInterval(motorDistance);
     cupboardWidth = getDuctDistance(interval, duct, whoopCount, drawerWallThickness)[0] + duct + (drawerWallThickness + drawerDistance + wallThickness) * 2;
     fullHeight = (drawerHeight + wallThickness) * drawerCount + wallThickness;
 
