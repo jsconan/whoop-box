@@ -29,18 +29,18 @@
  */
 
 /**
- * Ajust a height with respect to the target layer height
+ * Adjust a height with respect to the target layer height
  * @param Number height
  * @returns Number
  */
-function adjustToLayer(height) = roundBy(height, printResolution);
+function adjustToLayer(height) = roundBy(height, layerHeight);
 
 /**
- * Ajust a width with respect to the target nozzle size
+ * Adjust a width with respect to the target nozzle size
  * @param Number width
  * @returns Number
  */
-function adjustToNozzle(width) = roundBy(width, nozzle);
+function adjustToNozzle(width) = roundBy(width, nozzleWidth);
 
 /**
  * Gets the data defined for a particular tiny-whoop type
@@ -147,7 +147,7 @@ function getBoxWallThickness(boxType) = adjustToNozzle(
  * @param String boxType - The type of box
  * @returns Number - The distance to walls for the given box
  */
-function getBoxWallDistance(boxType) = wallDistance * getBoxData(boxType, IDX_BOX_DISTANCE);
+function getBoxWallDistance(boxType) = printTolerance * getBoxData(boxType, IDX_BOX_DISTANCE);
 
 /**
  * Gets the distance from the tiny-whoop ducts to walls
@@ -155,7 +155,7 @@ function getBoxWallDistance(boxType) = wallDistance * getBoxData(boxType, IDX_BO
  * @returns Number - The distance to walls for the given box
  */
 function getBoxWhoopDistance(boxType) =
-    wallDistance * getBoxCumulativeData(boxType, IDX_BOX_DISTANCE) +
+    printTolerance * getBoxCumulativeData(boxType, IDX_BOX_DISTANCE) +
     vsum([
         for (type = pop(getBoxTypeList(boxType)))
             getBoxWallThickness(type)

@@ -35,6 +35,7 @@ include <../lib/camelSCAD/shapes.scad>
 include <version.scad>
 
 // Then we need the config for the project, as well as the related functions
+include <constants.scad>
 include <config.scad>
 include <helpers.scad>
 
