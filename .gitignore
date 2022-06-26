@@ -21,6 +21,10 @@ nbproject/
 .settings
 .project
 
+# Local config
+config.ini
+config.scad
+
 # Generated files
 *.stl
 
