@@ -101,3 +101,57 @@ module whoopBox(motorDistance, ductDiameter, wallThickness, groundThickness, box
         }
     }
 }
+
+/**
+ * Builds a container that will contain tiny-whoop boxes.
+ * @param Number motorDistance - The distance between motors on the diagonal.
+ * @param Number ductDiameter - The outer diameter of a motor duct.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number containerThickness - The thickness of the container walls.
+ * @param Number boxHeight - The height of the box.
+ * @param Number paddingWidth - The width of the padding between the box sides and the tiny-whoop.
+ * @param Number wallDistance - The distance between a box and the container wall.
+ * @param Number|Vector [cells] - The number of boxes per container. It gives the number on the horizontal and vertical axis.
+ */
+module whoopBoxContainer(motorDistance, ductDiameter, wallThickness, containerThickness, boxHeight, paddingWidth, wallDistance, cells=[1, 1]) {
+    cells = vector2D(cells);
+    innerDistance = paddingWidth + wallThickness + wallDistance;
+    innerPoints = outline(points=drawWhoopBox(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=innerDistance);
+    innerWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=0, wallDistance=innerDistance);
+    innerHeight = boxHeight + wallDistance * 2;
+
+    containerWidth = innerWidth + containerThickness;
+    containerLength = (innerWidth + containerThickness) * cells.x + containerThickness;
+    containerHeight = (innerHeight + containerThickness) * cells.y + containerThickness;
+    containerOffset = ductDiameter / 2 + innerDistance;
+
+    outerPoints = outline(points=drawWhoopBox(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=innerDistance + containerThickness);
+    outerWidth = innerWidth + containerThickness * 2;;
+    outerHeight = innerHeight + containerThickness * 2;
+
+    difference() {
+        union() {
+            translateZ(-outerWidth / 2) {
+                box([containerLength / 3, containerHeight, containerWidth / 2]);
+            }
+            repeatShape2D([outerWidth - containerThickness, outerHeight - containerThickness], cells, center=true) {
+                rotateX(90) {
+                    extrudePolygon(points=outerPoints, height=outerHeight, center=true);
+                }
+            }
+        }
+        translateZ(containerThickness / 2) {
+            repeatShape2D(vadd([innerWidth, innerHeight], containerThickness), cells, center=true) {
+                box([innerWidth, innerHeight, innerWidth]);
+                rotateX(90) {
+                    extrudePolygon(points=innerPoints, height=innerHeight, center=true);
+                }
+            }
+        }
+        translateZ(containerWidth / 2 - containerOffset + 1) {
+            repeatShape2D([outerWidth - containerThickness, outerHeight - containerThickness], [1, cells.y], center=true) {
+                box([containerLength + 1, innerHeight, containerOffset + 1]);
+            }
+        }
+    }
+}
