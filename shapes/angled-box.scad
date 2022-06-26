@@ -99,7 +99,7 @@ module whoopAngledBox(motorDistance, ductDiameter, wallThickness, groundThicknes
     points = drawWhoopAngledBoxShape(duct=duct, interval=interval);
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness) {
-        extrudeShape(points=points, height=boxHeight, distance=wallThickness);
-        extrudeShape(points=points, height=boxHeight);
+        extrudePolygon(points=points, height=boxHeight, distance=wallThickness);
+        extrudePolygon(points=points, height=boxHeight);
     }
 }

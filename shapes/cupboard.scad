@@ -73,7 +73,7 @@ module whoopCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThick
     rotateX(270) {
         translate(-[0, cupboardWidth, fullHeight] / 2) {
             difference() {
-                extrudeShape(points=drawWhoopCupboardShape(
+                extrudePolygon(points=drawWhoopCupboardShape(
                     duct = duct,
                     interval = interval,
                     wall = drawerWallThickness,
@@ -83,7 +83,7 @@ module whoopCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThick
 
                 translateZ(wallThickness) {
                     repeat(count=drawerCount, interval = [0, 0, drawerHeight + wallThickness]) {
-                        extrudeShape(points=drawWhoopCupboardShape(
+                        extrudePolygon(points=drawWhoopCupboardShape(
                             duct = duct,
                             interval = interval,
                             wall = drawerWallThickness,

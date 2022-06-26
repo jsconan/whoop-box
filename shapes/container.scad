@@ -108,7 +108,7 @@ module whoopContainer(motorDistance, ductDiameter, wallThickness, groundThicknes
     innerWidth = boxWidth - wallThickness;
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness, count=whoopCount) {
-        extrudeShape(points=drawWhoopContainerShape(
+        extrudePolygon(points=drawWhoopContainerShape(
             duct = duct,
             interval = interval,
             wall = wallThickness,
@@ -116,7 +116,7 @@ module whoopContainer(motorDistance, ductDiameter, wallThickness, groundThicknes
         ), height=boxHeight, distance=wallThickness);
 
         repeatShape2D(innerWidth, whoopCount, center=true) {
-            extrudeShape(points=drawWhoopContainerShape(
+            extrudePolygon(points=drawWhoopContainerShape(
                 duct = duct,
                 interval = interval
             ), height=boxHeight);
