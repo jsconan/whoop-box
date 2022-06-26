@@ -73,7 +73,7 @@ renderpath() {
 showconfig() {
     local input="${configpath}/setup.scad"
     local output="${dstpath}/setup.echo"
-    local config="${dstpath}/config.txt"
+    local config="${dstpath}/${preset}/config.txt"
     createpath "${dstpath}" "output"
     printmessage "${C_MSG}The box elements would be generated with respect to the following config:"
     scadecho "${input}" "${dstpath}" "" "" showConfig=1 $(paramlist) > /dev/null
