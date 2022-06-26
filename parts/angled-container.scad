@@ -44,6 +44,6 @@ applyMode(mode=renderMode) {
         groundThickness = groundThickness,
         boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2),
         wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
-        whoopCount = whoopCountBox
+        whoopCount = [whoopBoxHor, whoopBoxVer]
     );
 }

@@ -132,7 +132,7 @@ function getGridWidth(length, width, quantity=1, line=undef) =
  * Prints the project version, including the package version.
  * @returns String
  */
-function printVersion() = str(PROJECT_VERSION, " (package: ", PACKAGE_VERSION, ")");
+function printVersion() = str(PROJECT_VERSION);
 
 /**
  * Computes the side distance between motors based on the given diagonal.

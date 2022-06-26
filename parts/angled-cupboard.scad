@@ -41,10 +41,10 @@ applyMode(mode=renderMode) {
     angledCupboard(
         motorDistance = motorDistance,
         ductDiameter = ductDiameter,
-        whoopCount = whoopCountDrawer,
+        whoopCount = [whoopBoxHor, whoopBoxVer],
         drawerWallThickness = wallThickness * 2,
         drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=4),
-        drawerCount = drawerCountCupboard,
+        drawerCount = whoopBoxDrw,
         drawerDistance = outerDistance,
         wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
         wallThickness = wallThickness * 2

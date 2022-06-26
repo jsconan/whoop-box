@@ -35,6 +35,8 @@ include <../lib/camelSCAD/shapes.scad>
 include <version.scad>
 
 // Then we need the config for the project, as well as the related functions
+include <constants.scad>
+include <presets.scad>
 include <config.scad>
 include <helpers.scad>
 
@@ -46,3 +48,34 @@ include <../shapes/angled-box.scad>
 include <../shapes/angled-container.scad>
 include <../shapes/angled-drawer.scad>
 include <../shapes/angled-cupboard.scad>
+
+// Show the config values
+if (showConfig) {
+    echo(join([
+        "",
+        str("-- Tiny-Whoop boxes System ----------"),
+        str("Version:                       ", printVersion()),
+        str("-- Tiny-Whoop settings --------------"),
+        str("Preset:                        ", preset),
+        str("Motor distance:                ", motorDistance, "mm"),
+        str("Duct diameter:                 ", ductDiameter, "mm"),
+        str("Duct height:                   ", ductHeight, "mm"),
+        str("Whoop height:                  ", whoopHeight, "mm"),
+        str("Box padding:                   ", boxPadding, "mm"),
+        str("-- Box settings ---------------------"),
+        str("Wall thickness:                ", wallThickness, "mm"),
+        str("Ground thickness:              ", groundThickness, "mm"),
+        str("Outer distance:                ", outerDistance, "mm"),
+        str("Boxes per lines:               ", whoopBoxHor),
+        str("Boxes per columns:             ", whoopBoxVer),
+        str("Drawers:                       ", whoopBoxDrw),
+        str("-- Printer settings -----------------"),
+        str("Nozzle diameter:               ", nozzleWidth, "mm"),
+        str("Print layer:                   ", layerHeight, "mm"),
+        str("Print tolerance:               ", printTolerance, "mm"),
+        str("Printer's length:              ", printerLength / 10, "cm"),
+        str("Printer's width:               ", printerWidth / 10, "cm"),
+        str("Print interval:                ", printInterval, "mm"),
+        ""
+    ], str(chr(13), chr(10))));
+}

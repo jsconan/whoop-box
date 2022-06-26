@@ -39,49 +39,24 @@ printInterval = 5;          // The interval between 2 pieces when presented toge
 printerLength = 250;        // The length of the printer's build plate.
 printerWidth = 210;         // The width of the printer's build plate.
 
-// Defines the size of a tiny-whoop - frame 65, props 31
-// motorDistance = 65;         // The distance between motors on the diagonal.
-// ductDiameter = 36;          // The outer diameter of a motor duct.
-// ductHeight = 17;            // The outer height of a motor duct, including the screw heads.
-// whoopHeight = 40;           // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-// boxPadding = 7.5;           // The width of padding between the box sides and the tiny-whoop.
-
-// Defines the size of a tiny-whoop - frame 65, props 31, HD
-// motorDistance = 65;         // The distance between motors on the diagonal.
-// ductDiameter = 36;          // The outer diameter of a motor duct.
-// ductHeight = 17;            // The outer height of a motor duct, including the screw heads.
-// whoopHeight = 43;           // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-// boxPadding = 7.5;           // The width of padding between the box sides and the tiny-whoop.
-
-// Defines the size of a tiny-whoop - frame 65, props 35
-motorDistance = 65;         // The distance between motors on the diagonal.
-ductDiameter = 39;          // The outer diameter of a motor duct.
-ductHeight = 16;            // The outer height of a motor duct, including the screw heads.
-whoopHeight = 40;           // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-boxPadding = 6;             // The width of padding between the box sides and the tiny-whoop.
-
-// Defines the size of a tiny-whoop - frame 75, props 40
-// motorDistance = 78;         // The distance between motors on the diagonal.
-// ductDiameter = 48;          // The outer diameter of a motor duct.
-// ductHeight = 28;            // The outer height of a motor duct, including the screw heads.
-// whoopHeight = 54;           // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-// boxPadding = 6;             // The width of padding between the box sides and the tiny-whoop.
-
-// Defines the size of a tiny-whoop - frame 75, props 40, HD
-// motorDistance = 78;         // The distance between motors on the diagonal.
-// ductDiameter = 48;          // The outer diameter of a motor duct.
-// ductHeight = 28;            // The outer height of a motor duct, including the screw heads.
-// whoopHeight = 65;           // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-// boxPadding = 6;             // The width of padding between the box sides and the tiny-whoop.
+// Defines the size of a tiny-whoop
+preset = "DEFAULT";
+motorDistance = getPreset(preset, IDX_MOTOR_DISTANCE);   // The distance between motors on the diagonal.
+ductDiameter = getPreset(preset, IDX_DUCT_DIAMETER);     // The outer diameter of a motor duct.
+ductHeight = getPreset(preset, IDX_DUCT_HEIGHT);         // The outer height of a motor duct, including the screw heads.
+whoopHeight = getPreset(preset, IDX_WHOOP_HEIGHT);       // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
+boxPadding = getPreset(preset, IDX_BOX_PADDING);         // The width of padding between the box sides and the tiny-whoop.
 
 // Specifications for the boxes
 wallThickness = 0.8;        // The thickness of the box walls.
 groundThickness = 0.8;      // The thickness of the box ground.
 boxIndentation = [30, 10];  // Defines the size of a handle indentation, it will be cut from each box side. The first value represents the top width, the second represents the bottom width and the depth.
 outerDistance = 0.5;        // The distance between a box and its container. This is additional size added to the container inner room to fit the box.
-cellsCount = [1, 1];        // The number of boxes per container. It gives the number on the horizontal and vertical axis.
 
 // Sets the count of tiny-whoops in each kind of box
-whoopCountBox = 2;
-whoopCountDrawer = 2;
-drawerCountCupboard = 2;
+whoopBoxHor = 1;            // The number of boxes per lines in the container (horizontal axis).
+whoopBoxVer = 1;            // The number of boxes per columns in the container (vertical axis).
+whoopBoxDrw = 1;            // The number of drawers in the cupboard.
+
+// Options for the ready to print models
+showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config
