@@ -43,6 +43,6 @@ include <../shapes/box-util.scad>
 include <../shapes/whoop-box.scad>
 include <../shapes/rounded-box.scad>
 include <../shapes/angled-box.scad>
-include <../shapes/container.scad>
-include <../shapes/drawer.scad>
-include <../shapes/cupboard.scad>
+include <../shapes/angled-container.scad>
+include <../shapes/angled-drawer.scad>
+include <../shapes/angled-cupboard.scad>

@@ -37,7 +37,7 @@ applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
     union() {
-        whoopContainer(
+        angledContainer(
             motorDistance = motorDistance,
             ductDiameter = ductDiameter,
             wallThickness = wallThickness * 2,
@@ -46,7 +46,7 @@ applyMode(mode=renderMode) {
             wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance
         );
         translateZ(groundThickness) {
-            whoopAngledBox(
+            angledBox(
                 motorDistance = motorDistance,
                 ductDiameter = ductDiameter,
                 wallThickness = wallThickness,
@@ -55,7 +55,7 @@ applyMode(mode=renderMode) {
                 wallDistance = getWallDistance(wallThickness=wallThickness, shells=1)
             );
             translateZ(groundThickness) {
-                whoopRoundedBox(
+                roundedBox(
                     motorDistance = motorDistance,
                     ductDiameter = ductDiameter,
                     wallThickness = wallThickness,

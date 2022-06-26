@@ -37,7 +37,7 @@
  * @param Vector [count] - The number of whoops on each axis
  * @returns Vector[]
  */
-function drawWhoopContainerShape(duct, interval, wall=0, count=1) =
+function drawAngledContainerShape(duct, interval, wall=0, count=1) =
     let(
         n = 8,
         angle = getPolygonAngle(1, n),
@@ -101,14 +101,14 @@ function drawWhoopContainerShape(duct, interval, wall=0, count=1) =
  * @param Number [wallDistance] - The distance between a duct and the wall
  * @param Vector [whoopCount] - The number of tiny-whoops on each axis
  */
-module whoopContainer(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0, whoopCount=1) {
+module angledContainer(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0, whoopCount=1) {
     duct = ductDiameter + wallDistance * 2;
     interval = getMotorInterval(motorDistance);
     boxWidth = interval + duct + wallThickness * 2;
     innerWidth = boxWidth - wallThickness;
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness, count=whoopCount) {
-        extrudePolygon(points=drawWhoopContainerShape(
+        extrudePolygon(points=drawAngledContainerShape(
             duct = duct,
             interval = interval,
             wall = wallThickness,
@@ -116,7 +116,7 @@ module whoopContainer(motorDistance, ductDiameter, wallThickness, groundThicknes
         ), height=boxHeight, distance=wallThickness);
 
         repeatShape2D(innerWidth, whoopCount, center=true) {
-            extrudePolygon(points=drawWhoopContainerShape(
+            extrudePolygon(points=drawAngledContainerShape(
                 duct = duct,
                 interval = interval
             ), height=boxHeight);

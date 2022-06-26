@@ -38,7 +38,7 @@
  * @param Vector [count] - The number of whoops on each axis
  * @returns Vector[]
  */
-function drawWhoopCupboardShape(duct, interval, wall=0, offset=0, count=1) =
+function drawAngledCupboardShape(duct, interval, wall=0, offset=0, count=1) =
     let(
         n = 8,
         count = vector2D(count),
@@ -64,7 +64,7 @@ function drawWhoopCupboardShape(duct, interval, wall=0, offset=0, count=1) =
  * @param Number [drawerCount] - The number of drawers
  * @param Vector [whoopCount] - The number of tiny-whoops on each axis
  */
-module whoopCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThickness, drawerHeight, wallDistance=0, drawerDistance=0, drawerCount=1, whoopCount=1) {
+module angledCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThickness, drawerHeight, wallDistance=0, drawerDistance=0, drawerCount=1, whoopCount=1) {
     duct = ductDiameter + wallDistance * 2;
     interval = getMotorInterval(motorDistance);
     cupboardWidth = getDuctDistance(interval, duct, whoopCount, drawerWallThickness)[0] + duct + (drawerWallThickness + drawerDistance + wallThickness) * 2;
@@ -73,7 +73,7 @@ module whoopCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThick
     rotateX(270) {
         translate(-[0, cupboardWidth, fullHeight] / 2) {
             difference() {
-                extrudePolygon(points=drawWhoopCupboardShape(
+                extrudePolygon(points=drawAngledCupboardShape(
                     duct = duct,
                     interval = interval,
                     wall = drawerWallThickness,
@@ -83,7 +83,7 @@ module whoopCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThick
 
                 translateZ(wallThickness) {
                     repeat(count=drawerCount, interval = [0, 0, drawerHeight + wallThickness]) {
-                        extrudePolygon(points=drawWhoopCupboardShape(
+                        extrudePolygon(points=drawAngledCupboardShape(
                             duct = duct,
                             interval = interval,
                             wall = drawerWallThickness,

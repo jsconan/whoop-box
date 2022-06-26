@@ -39,7 +39,7 @@
  * @param Number n - The number of sectors for the surrounding points
  * @returns Vector[]
  */
-function drawWhoopAngledBoxDuct(point, duct, start, end, m=8, n=12) =
+function drawAngledBoxDuct(point, duct, start, end, m=8, n=12) =
     let(
         point = vector2D(point),
         angleM = getPolygonAngle(1, m),
@@ -68,17 +68,17 @@ function drawWhoopAngledBoxDuct(point, duct, start, end, m=8, n=12) =
  * @param Number ductDiameter - The outer diameter of a motor duct.
  * @returns Vector[]
  */
-function drawWhoopAngledBoxShape(motorDistance, ductDiameter) =
+function drawAngledBoxShape(motorDistance, ductDiameter) =
     let(
         m = 8,
         n = 12,
         points = getDuctPoints(getMotorInterval(motorDistance), ductDiameter)
     )
     concat(
-        drawWhoopAngledBoxDuct(point=points[0], duct=ductDiameter, start=10.5, end=16.5, m=m, n=n),
-        drawWhoopAngledBoxDuct(point=points[1], duct=ductDiameter, start= 1.5, end= 7.5, m=m, n=n),
-        drawWhoopAngledBoxDuct(point=points[2], duct=ductDiameter, start= 4.5, end=10.0, m=m, n=n),
-        drawWhoopAngledBoxDuct(point=points[3], duct=ductDiameter, start= 8.0, end=13.5, m=m, n=n)
+        drawAngledBoxDuct(point=points[0], duct=ductDiameter, start=10.5, end=16.5, m=m, n=n),
+        drawAngledBoxDuct(point=points[1], duct=ductDiameter, start= 1.5, end= 7.5, m=m, n=n),
+        drawAngledBoxDuct(point=points[2], duct=ductDiameter, start= 4.5, end=10.0, m=m, n=n),
+        drawAngledBoxDuct(point=points[3], duct=ductDiameter, start= 8.0, end=13.5, m=m, n=n)
     )
 ;
 
@@ -92,9 +92,9 @@ function drawWhoopAngledBoxShape(motorDistance, ductDiameter) =
  * @param Number boxHeight - The height of the box
  * @param Number [wallDistance] - The distance between a duct and the wall
  */
-module whoopAngledBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0) {
+module angledBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0) {
     boxWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=wallThickness, wallDistance=wallDistance);
-    points = outline(points=drawWhoopAngledBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=wallDistance);
+    points = outline(points=drawAngledBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=wallDistance);
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness) {
         extrudePolygon(points=points, height=boxHeight, distance=wallThickness);

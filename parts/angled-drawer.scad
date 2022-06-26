@@ -23,9 +23,8 @@
 /**
  * A box to store tiny-whoops.
  *
- * Cupboard that will contain several tiny-whoops and their surrounding
- * protection boxes. This should be printed in rigid a material, like PLA
- * or PETG.
+ * Drawer that will contain several tiny-whoops and their surrounding protection
+ * boxes. This should be printed in rigid a material, like PLA or PETG.
  *
  * @author jsconan
  */
@@ -38,15 +37,13 @@ include <../config/setup.scad>
 applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
-    whoopCupboard(
+    angledDrawer(
         motorDistance = motorDistance,
         ductDiameter = ductDiameter,
-        whoopCount = whoopCountDrawer,
-        drawerWallThickness = wallThickness * 2,
-        drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=4),
-        drawerCount = drawerCountCupboard,
-        drawerDistance = outerDistance,
+        wallThickness = wallThickness * 2,
+        groundThickness = groundThickness,
+        boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2),
         wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
-        wallThickness = wallThickness * 2
+        whoopCount = whoopCountBox
     );
 }

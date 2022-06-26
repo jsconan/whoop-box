@@ -38,7 +38,7 @@
  * @param Number n - The number of sectors
  * @returns Vector[]
  */
-function drawWhoopRoundedBoxDuct(point, duct, start, end, n=12) =
+function drawRoundedBoxDuct(point, duct, start, end, n=12) =
     let(
         point = vector2D(point),
         radius = float(duct) / 2,
@@ -56,16 +56,16 @@ function drawWhoopRoundedBoxDuct(point, duct, start, end, n=12) =
  * @param Number ductDiameter - The outer diameter of a motor duct.
  * @returns Vector[]
  */
-function drawWhoopRoundedBoxShape(motorDistance, ductDiameter) =
+function drawRoundedBoxShape(motorDistance, ductDiameter) =
     let(
         n = 12,
         points = getDuctPoints(getMotorInterval(motorDistance), ductDiameter)
     )
     concat(
-        drawWhoopRoundedBoxDuct(point=points[0], duct=ductDiameter, start=-1.5, end= 4.5, n=n),
-        drawWhoopRoundedBoxDuct(point=points[1], duct=ductDiameter, start= 1.5, end= 7.5, n=n),
-        drawWhoopRoundedBoxDuct(point=points[2], duct=ductDiameter, start= 4.5, end=10.0, n=n),
-        drawWhoopRoundedBoxDuct(point=points[3], duct=ductDiameter, start=-4.0, end= 1.5, n=n)
+        drawRoundedBoxDuct(point=points[0], duct=ductDiameter, start=-1.5, end= 4.5, n=n),
+        drawRoundedBoxDuct(point=points[1], duct=ductDiameter, start= 1.5, end= 7.5, n=n),
+        drawRoundedBoxDuct(point=points[2], duct=ductDiameter, start= 4.5, end=10.0, n=n),
+        drawRoundedBoxDuct(point=points[3], duct=ductDiameter, start=-4.0, end= 1.5, n=n)
     )
 ;
 
@@ -79,9 +79,9 @@ function drawWhoopRoundedBoxShape(motorDistance, ductDiameter) =
  * @param Number boxHeight - The height of the box
  * @param Number [wallDistance] - The distance between a duct and the wall
  */
-module whoopRoundedBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0) {
+module roundedBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0) {
     boxWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=wallThickness, wallDistance=wallDistance);
-    points = outline(points=drawWhoopRoundedBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=wallDistance);
+    points = outline(points=drawRoundedBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=wallDistance);
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness) {
         extrudePolygon(points=points, height=boxHeight, distance=wallThickness);
