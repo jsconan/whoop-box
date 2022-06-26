@@ -24,7 +24,7 @@
  * A box to store tiny-whoops.
  *
  * Angled box that will contain a tiny-whoop and its surrounding protection box.
- * This should be printed in rigid material, like PLA.
+ * This should be printed in rigid material, like PLA or PETG.
  *
  * @author jsconan
  */

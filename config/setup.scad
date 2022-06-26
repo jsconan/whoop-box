@@ -40,6 +40,7 @@ include <helpers.scad>
 
 // Finally, include the shapes
 include <../shapes/box-util.scad>
+include <../shapes/whoop-box.scad>
 include <../shapes/rounded-box.scad>
 include <../shapes/angled-box.scad>
 include <../shapes/container.scad>
