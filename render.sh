@@ -27,193 +27,155 @@
 #
 
 # application params
-boxX=
-boxY=
-drawerX=
-drawerY=
-drawers=
-whoopCountBox=
-whoopCountDrawer=
-drawerCountCupboard=
-
-# script params
-output="output"
-fileext=".scad"
+preset="DEFAULT"
+whoopBoxHor=1
+whoopBoxVer=1
+whoopBoxDrw=1
 
 # script config
-scriptPath=$(dirname $0)
+scriptpath=$(dirname $0)
 project=$(pwd)
-dstpath=${project}/${output}
-src=${project}/parts/*${fileext}
+srcpath=${project}
+dstpath=${project}/dist/stl
+slcpath=${project}/dist/gcode
+configpath=${srcpath}/config
+partpath=${srcpath}/parts
+format=
+parallel=
+cleanUp=
+slice=
 
-# color codes
-C_ERR="\033[31m"
-C_SEL="\033[32m"
-C_SPE="\033[33m"
-C_CTX="\033[36m"
-C_RST="\033[0m"
-C_MSG="\033[1m"
-C_INF="\033[32m"
+# include libs
+source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
-# renders a file
-# @param fileName
-render() {
-    dst="${dstpath}/$(basename $1 ${fileext}).stl"
-    echo -e "${C_RST}Rendering of ${C_SEL}$(basename $1)${C_RST} to ${C_SEL}${dst}"
-    openscad --render -o "${dst}" "$1" \
-        -D "renderMode=\"prod\"" \
-        -D "${whoopCountBox}" \
-        -D "${whoopCountDrawer}" \
-        -D "${drawerCountCupboard}"
+# Builds the list of config parameters.
+paramlist() {
+    local params=(
+        "$(varif "whoopBoxHor" ${whoopBoxHor})"
+        "$(varif "whoopBoxVer" ${whoopBoxVer})"
+        "$(varif "whoopBoxDrw" ${whoopBoxDrw})"
+        "$(varif "preset" "\"${preset}\"")"
+    )
+    echo "${params[@]}"
 }
 
-echo -e "${C_RST}"
+# Renders the files from a path.
+#
+# @param sourcepath - The path of the folder containing the SCAD files to render.
+# @param destpath - The path to the output folder.
+# @param prefix - Optional prefix added to the output file name
+# @param suffix - Optional suffix added to the output file name
+renderpath() {
+    scadrenderall "$1" "$2" "$3" "$4" --quiet $(paramlist)
+}
+
+# Display the render config
+showconfig() {
+    local input="${configpath}/setup.scad"
+    local output="${dstpath}/setup.echo"
+    local config="${dstpath}/config.txt"
+    createpath "${dstpath}" "output"
+    printmessage "${C_MSG}The box elements would be generated with respect to the following config:"
+    scadecho "${input}" "${dstpath}" "" "" showConfig=1 $(paramlist) > /dev/null
+    sed '1d; $d' "${output}" > "${config}"
+    rm "${output}" > /dev/null
+    cat "${config}"
+}
 
 # load parameters
 while (( "$#" )); do
     case $1 in
-        "-x")
-            boxX=$2
-            drawerX=$2
+        "-p"|"--preset")
+            preset=$2
             shift
         ;;
-        "-y")
-            boxY=$2
-            drawerY=$2
+        "-l"|"--line")
+            whoopBoxHor=$2
             shift
         ;;
-        "-b"|"--box")
-            boxX=$2
-            boxY=$2
-            shift
-        ;;
-        "-bx"|"--boxX")
-            boxX=$2
-            shift
-        ;;
-        "-by"|"--boxY")
-            boxY=$2
+        "-c"|"--column")
+            whoopBoxVer=$2
             shift
         ;;
         "-d"|"--drawer")
-            drawerX=$2
-            drawerY=$2
+            whoopBoxDrw=$2
             shift
         ;;
-        "-dx"|"--drawerX")
-            drawerX=$2
+        "-f"|"--format")
+            format=$2
             shift
         ;;
-        "-dy"|"--drawerY")
-            drawerY=$2
+        "-p"|"--parallel")
+            parallel=$2
             shift
         ;;
-        "-ds"|"--drawers")
-            drawers=$2
-            shift
+        "-s"|"--slice")
+            slice=1
+        ;;
+        "-c"|"--clean")
+            cleanUp=1
         ;;
         "-h"|"--help")
             echo -e "${C_INF}Renders OpenSCAD files${C_RST}"
             echo -e "  ${C_INF}Usage:${C_RST}"
-            echo -e "${C_CTX}\t$0 [-h|--help] [-o|--option value] files${C_RST}"
+            echo -e "${C_CTX}\t$0 [command] [-h|--help] [-o|--option value] files${C_RST}"
             echo
             echo -e "${C_MSG}  -h,  --help         ${C_RST}Show this help"
-            echo -e "${C_MSG}  -x                  ${C_RST}Set the number of tiny-whoops in the length of a box and a drawer"
-            echo -e "${C_MSG}  -y                  ${C_RST}Set the number of tiny-whoops in the width of a box and a drawer"
-            echo -e "${C_MSG}  -b,  --box          ${C_RST}Set the number of tiny-whoops in both directions for a box"
-            echo -e "${C_MSG}  -bx, --boxX         ${C_RST}Set the number of tiny-whoops in the length of a box"
-            echo -e "${C_MSG}  -by, --boxY         ${C_RST}Set the number of tiny-whoops in the width of a box"
-            echo -e "${C_MSG}  -d,  --drawer       ${C_RST}Set the number of tiny-whoops in both directions for a drawer"
-            echo -e "${C_MSG}  -dx, --drawerX      ${C_RST}Set the number of tiny-whoops in the length of a drawer"
-            echo -e "${C_MSG}  -dy, --drawerY      ${C_RST}Set the number of tiny-whoops in the width of a drawer"
-            echo -e "${C_MSG}  -ds, --drawers      ${C_RST}Set the number of drawers"
+            echo -e "${C_MSG}  -p   --preset       ${C_RST}Set size preset to apply"
+            echo -e "${C_MSG}  -l,  --line         ${C_RST}Set the number of boxes per lines in the container"
+            echo -e "${C_MSG}  -c   --column       ${C_RST}Set the nu,ber of boxes per columns in the container"
+            echo -e "${C_MSG}  -d   --drawer       ${C_RST}Set the number of drawers in the cupboard"
+            echo -e "${C_MSG}  -f   --format       ${C_RST}Set the output format"
+            echo -e "${C_MSG}  -p   --parallel     ${C_RST}Set the number of parallel processes"
+            echo -e "${C_MSG}  -s   --slice        ${C_RST}Slice the rendered files using the default configuration"
+            echo -e "${C_MSG}  -c   --clean        ${C_RST}Clean up the output folder before rendering"
             echo
             exit 0
         ;;
         *)
             ls $1 >/dev/null 2>&1
             if [ "$?" == "0" ]; then
-                src=$1
+                srcpath=$1
             else
-                echo -e "${C_ERR}"
-                echo -e "${C_ERR}Unknown parameter ${1}${C_RST}"
-                echo -e "${C_RST}"
-                exit 1
+                printerror "Unknown parameter ${1}"
             fi
         ;;
     esac
     shift
 done
 
-# compose value for the number of tiny-whoops per container
-if [ "${boxX}" != "" ] || [ "${boxY}" != "" ]; then
-    if [ "${boxX}" == "" ]; then
-        boxX="1"
-    fi
-    if [ "${boxY}" == "" ]; then
-        boxY="1"
-    fi
-    whoopCountBox="whoopCountBox=[${boxX}, ${boxY}]"
-fi
-
-# compose value for the number of tiny-whoops per drawer
-if [ "${drawerX}" != "" ] || [ "${drawerY}" != "" ]; then
-    if [ "${drawerX}" == "" ]; then
-        drawerX="1"
-    fi
-    if [ "${drawerY}" == "" ]; then
-        drawerY="1"
-    fi
-    whoopCountDrawer="whoopCountDrawer=[${drawerX}, ${drawerY}]"
-fi
-
-# compose value for the number of drawers
-if [ "${drawers}" != "" ]; then
-    drawerCountCupboard="drawerCountCupboard=${drawers}"
-fi
-
-# create the output folder if needed
-if [ ! -d "${dstpath}" ]; then
-    echo -e "${C_SEL}Create output folder.${C_RST}"
-    mkdir -p "${dstpath}" >/dev/null
-
-    if [ ! -d "${dstpath}" ]; then
-        echo -e "${C_ERR}"
-        echo "Cannot create output folder!"
-        echo -e "${C_RST}"
-        exit 1
-    fi
-fi
-
 # check OpenSCAD
-echo -e "Detecting ${C_SPE}OpenSCAD${C_RST}..."
-openscad -v >/dev/null 2>&1
-if [ "$?" != "0" ]; then
-    echo -e "${C_ERR}"
-    echo "It seems OpenSCAD has not been installed on your system."
-    echo "Or perhaps is it just not reachable..."
-    echo "Have you placed it in your environment PATH variable?"
-    echo -e "${C_RST}"
-    exit 3
+scadcheck
+
+# defines the output format
+scadformat "${format}"
+
+# defines the number of parallel processes
+scadprocesses "${parallel}"
+
+# clean up the output
+if [ "${cleanUp}" != "" ]; then
+    printmessage "${C_CTX}Cleaning up the output folder"
+    rm -rf "${dstpath}"
+
+    if [ "${slice}" != "" ]; then
+        printmessage "${C_CTX}Cleaning up the slicer output folder"
+        rm -rf "${slcpath}"
+    fi
 fi
 
-echo -e "${C_SPE}OpenSCAD${C_RST} has been detected."
-echo -e "${C_RST}"
-echo -e "${C_RST}Processing rendering from ${C_CTX}${project}"
-echo -e "${C_RST}"
+# make sure the config exists
+distfile "${configpath}/config.scad"
 
-# render the files, if exist
-ls ${src} >/dev/null 2>&1
-if [ "$?" == "0" ]; then
-    for filename in ${src}; do
-        render "${filename}"
-    done
-else
-    echo -e "${C_ERR}"
-    echo "There is nothing to render!"
-    echo -e "${C_RST}"
-    exit 1
+# show the config
+showconfig
+
+# render the files
+printmessage "${C_MSG}Rendering box elements"
+renderpath "${partpath}" "${dstpath}/${preset}"
+
+# slice the rendered files
+if [ "${slice}" != "" ]; then
+    printmessage "${C_CTX}Slicing the rendered files"
+    ./slice.sh
 fi
-
-echo -e "${C_RST}"
-echo "Done!"
