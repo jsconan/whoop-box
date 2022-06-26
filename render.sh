@@ -28,9 +28,9 @@
 
 # application params
 preset="DEFAULT"
-whoopBoxHor=1
-whoopBoxVer=1
-whoopBoxDrw=1
+whoopBoxHor=
+whoopBoxVer=
+whoopBoxDrw=
 
 # script config
 scriptpath=$(dirname $0)
