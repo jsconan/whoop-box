@@ -36,6 +36,21 @@ include <../config/setup.scad>
 applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
+    %translateZ(getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2) / 2) {
+        rotateX(90) {
+            angledCupboard(
+                motorDistance = motorDistance,
+                ductDiameter = ductDiameter,
+                whoopCount = 1,
+                drawerWallThickness = wallThickness * 2,
+                drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=4),
+                drawerCount = 1,
+                drawerDistance = outerDistance,
+                wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
+                wallThickness = wallThickness * 2
+            );
+        }
+    }
     union() {
         angledContainer(
             motorDistance = motorDistance,

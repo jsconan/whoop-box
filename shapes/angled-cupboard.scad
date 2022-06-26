@@ -71,7 +71,7 @@ module angledCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThic
     fullHeight = (drawerHeight + wallThickness) * drawerCount + wallThickness;
 
     rotateX(270) {
-        translate(-[0, cupboardWidth, fullHeight] / 2) {
+        translateZ(-fullHeight / 2) {
             difference() {
                 extrudePolygon(points=drawAngledCupboardShape(
                     duct = duct,
