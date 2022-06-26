@@ -37,7 +37,7 @@
  * @param Vector [count] - The number of whoops on each axis
  * @returns Vector[]
  */
-function drawWhoopDrawerShape(duct, interval, wall = 0, count = 1) =
+function drawWhoopDrawerShape(duct, interval, wall=0, count=1) =
     let(
         n = 8,
         count = vector2D(count),
@@ -57,11 +57,11 @@ function drawWhoopDrawerShape(duct, interval, wall = 0, count = 1) =
  * @param Number wallThickness - The thickness of the walls
  * @param Number groundThickness - The thickness of the ground
  * @param Number boxHeight - The height of the box
- * @param Number [ductDistance] - The distance between a duct and the wall
+ * @param Number [wallDistance] - The distance between a duct and the wall
  * @param Vector [whoopCount] - The number of tiny-whoops on each axis
  */
-module whoopDrawer(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, ductDistance = 0, whoopCount = 1) {
-    duct = ductDiameter + ductDistance * 2;
+module whoopDrawer(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0, whoopCount=1) {
+    duct = ductDiameter + wallDistance * 2;
     interval = getMotorInterval(motorDistance);
     boxWidth = interval + duct + wallThickness * 2;
     innerWidth = boxWidth - wallThickness;

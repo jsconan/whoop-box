@@ -33,35 +33,35 @@ include <../config/setup.scad>
 
 // Sets the minimum facet angle and size using the defined render mode.
 // Displays a build box visualization to preview the printer area.
-buildBox(mode=renderMode) {
+applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
-    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 5])
+    // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
     union() {
         whoopContainer(
             motorDistance = motorDistance,
             ductDiameter = ductDiameter,
-            wallThickness = getBoxWallThickness(CONTAINER),
-            groundThickness = getBoxGroundThickness(CONTAINER),
-            boxHeight = getBoxHeight(CONTAINER, whoopHeight),
-            ductDistance = getBoxWhoopDistance(CONTAINER)
+            wallThickness = wallThickness * 2,
+            groundThickness = groundThickness,
+            boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2),
+            wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance
         );
-        translateZ(getBoxGroundThickness(CONTAINER)) {
+        translateZ(groundThickness) {
             whoopAngledBox(
                 motorDistance = motorDistance,
                 ductDiameter = ductDiameter,
-                wallThickness = getBoxWallThickness(ANGLED_BOX),
-                groundThickness = getBoxGroundThickness(ANGLED_BOX),
-                boxHeight = getBoxHeight(ANGLED_BOX, whoopHeight),
-                ductDistance = getBoxWhoopDistance(ANGLED_BOX)
+                wallThickness = wallThickness,
+                groundThickness = groundThickness,
+                boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=1),
+                wallDistance = getWallDistance(wallThickness=wallThickness, shells=1)
             );
-            translateZ(getBoxGroundThickness(ANGLED_BOX)) {
+            translateZ(groundThickness) {
                 whoopRoundedBox(
                     motorDistance = motorDistance,
                     ductDiameter = ductDiameter,
-                    wallThickness = getBoxWallThickness(ROUNDED_BOX),
-                    groundThickness = getBoxGroundThickness(ROUNDED_BOX),
-                    boxHeight = getBoxHeight(ROUNDED_BOX, whoopHeight),
-                    ductDistance = getBoxWhoopDistance(ROUNDED_BOX)
+                    wallThickness = wallThickness,
+                    groundThickness = groundThickness,
+                    boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
+                    wallDistance = getWallDistance(wallThickness=wallThickness, shells=0)
                 );
             }
         }

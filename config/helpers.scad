@@ -141,103 +141,49 @@ function printVersion() = str(PROJECT_VERSION, " (package: ", PACKAGE_VERSION, "
  */
 function getMotorInterval(diagonal) = sqrt(pow(diagonal, 2) / 2);
 
-/** OLD HELPERS **/
-
 /**
- * Gets the data defined for a particular box type
- * @param String boxType - The type of box
- * @param Number [index] - The index of the data to get
- * @returns Array|Number - The box data
+ * Computes the outer width of a box that will contain a tiny-whoop.
+ * @param Number motorDistance - The distance between motors on the diagonal.
+ * @param Number ductDiameter - The outer diameter of a motor duct.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number wallDistance - The distance between a duct and the wall.
  */
-function getBoxData(boxType, index) =
+function getBoxWidth(motorDistance, ductDiameter, wallThickness, wallDistance) =
     let(
-        data = fetch(boxData, boxType)
+        motorDistance = float(motorDistance),
+        ductDiameter = float(ductDiameter),
+        wallThickness = float(wallThickness),
+        wallDistance = float(wallDistance)
     )
-    index ? data[index] : data
+    ceil(getMotorInterval(motorDistance)) + ductDiameter + (wallDistance + wallThickness) * 2
 ;
 
 /**
- * Gets the cumulative data defined for a particular box type
- * @param String boxType - The type of box
- * @param Number index - The index of the data to sum
- * @returns Number - The box cumulative data
+ * Computes the outer height of a box that will contain a tiny-whoop.
+ * @param Number whoopHeight - The outer height of the tiny-whoop.
+ * @param Number groundThickness - The thickness of the box ground.
+ * @param Number shells - Th number of shells. This represents the number of nested boxes.
  */
-function getBoxCumulativeData(boxType, index) =
+function getBoxHeight(whoopHeight, groundThickness, shells) =
     let(
-        dataIndex = find(boxData, boxType)
+        whoopHeight = float(whoopHeight),
+        groundThickness = float(groundThickness),
+        shells = float(shells) + 1
     )
-    vsum([
-        for (boxIndex = [0:dataIndex])
-            boxData[boxIndex][index]
-    ])
+    layerAligned(whoopHeight + groundThickness * shells)
 ;
 
 /**
- * Gets the list of box types till the provided one
- * @param String boxType - The type of box
- * @returns Array - The box cumulative data
+ * Computes the distance between the walls and the ducts of the tiny-whoop.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number shells - Th number of shells. This represents the number of nested boxes.
  */
-function getBoxTypeList(boxType) =
+function getWallDistance(wallThickness, shells) =
     let(
-        dataIndex = find(boxData, boxType)
+        wallThickness = float(wallThickness),
+        shells = float(shells)
     )
-    [
-        for (boxIndex = [0:dataIndex])
-            boxData[boxIndex][IDX_ID]
-    ]
-;
-
-/**
- * Gets the ground thickness
- * @param String boxType - The type of box
- * @returns Number - The ground thickness for the given box
- */
-function getBoxGroundThickness(boxType) = layerAligned(
-    getBoxData(boxType, IDX_BOX_GROUND)
-);
-
-/**
- * Gets the wall thickness
- * @param String boxType - The type of box
- * @returns Number - The wall thickness for the given box
- */
-function getBoxWallThickness(boxType) = nozzleAligned(
-    getBoxData(boxType, IDX_BOX_WALL)
-);
-
-/**
- * Gets the distance from the internal space to walls
- * @param String boxType - The type of box
- * @returns Number - The distance to walls for the given box
- */
-function getBoxWallDistance(boxType) = printTolerance * getBoxData(boxType, IDX_BOX_DISTANCE);
-
-/**
- * Gets the distance from the tiny-whoop ducts to walls
- * @param String boxType - The type of box
- * @returns Number - The distance to walls for the given box
- */
-function getBoxWhoopDistance(boxType) =
-    printTolerance * getBoxCumulativeData(boxType, IDX_BOX_DISTANCE) +
-    vsum([
-        for (type = pop(getBoxTypeList(boxType)))
-            getBoxWallThickness(type)
-    ])
-;
-
-/**
- * Gets the height of a box with respect to the given tiny-whoop
- * @param String boxType - The type of box
- * @param Number whoopHeight - The height of tiny-whoop
- * @returns Number - The height of the box
- */
-function getBoxHeight(boxType, whoopHeight) =
-    whoopHeight +
-    layerAligned(getBoxData(boxType, IDX_BOX_HEIGHT)) +
-    vsum([
-        for (type = getBoxTypeList(boxType))
-            getBoxGroundThickness(type)
-    ])
+    printTolerance + (wallThickness + printTolerance) * shells
 ;
 
 /**
@@ -260,7 +206,7 @@ function getDuctRadius(sides, diameter) =
  * @param Number wall - The thickness of a wall
  * @returns Vector - The distance between external ducts
  */
-function getDuctDistance(interval, diameter, count = 1, wall = 0) =
+function getDuctDistance(interval, diameter, count=1, wall=0) =
     let(
         count = vector2D(count),
         interval = float(interval),
@@ -277,7 +223,7 @@ function getDuctDistance(interval, diameter, count = 1, wall = 0) =
  * @param Number wall - The thickness of a wall
  * @returns Vector - The distance between external ducts
  */
-function getDuctPoints(interval, diameter, count = 1, wall = 0) =
+function getDuctPoints(interval, diameter, count=1, wall=0) =
     let(
         point = getDuctDistance(interval, diameter, count, wall) / 2
     )

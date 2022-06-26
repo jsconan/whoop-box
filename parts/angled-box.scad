@@ -36,13 +36,13 @@ include <../config/setup.scad>
 // Displays a build box visualization to preview the printer area.
 applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
-    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 5])
+    // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
     whoopAngledBox(
         motorDistance = motorDistance,
         ductDiameter = ductDiameter,
-        wallThickness = getBoxWallThickness(ANGLED_BOX),
-        groundThickness = getBoxGroundThickness(ANGLED_BOX),
-        boxHeight = getBoxHeight(ANGLED_BOX, whoopHeight),
-        ductDistance = getBoxWhoopDistance(ANGLED_BOX)
+        wallThickness = wallThickness,
+        groundThickness = groundThickness,
+        boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=1),
+        wallDistance = getWallDistance(wallThickness=wallThickness, shells=1)
     );
 }
