@@ -23,7 +23,7 @@
 /**
  * A box to store tiny-whoops.
  *
- * Draws a box following the outline shape of a tiny-whoop.
+ * Test the angled boxes.
  *
  * @author jsconan
  */
