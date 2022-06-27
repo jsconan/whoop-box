@@ -36,9 +36,9 @@ include <version.scad>
 
 // Then we need the config for the project, as well as the related functions
 include <constants.scad>
+include <helpers.scad>
 include <presets.scad>
 include <config.scad>
-include <helpers.scad>
 
 // Finally, include the shapes
 include <../shapes/box-util.scad>

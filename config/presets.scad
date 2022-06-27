@@ -85,17 +85,3 @@ presets = [
         5                       // IDX_BOX_PADDING
     ]
 ];
-
-
-/**
- * Gets the preset defined by a name, or a value from a preset.
- * @param String name - The name of the preset to get
- * @param Number [index] - The index inside the preset for the value to get
- * @returns Array|Number - The preset or the value at index
- */
-function getPreset(name, index) =
-    let(
-        data = uor(fetch(presets, name), fetch(presets, "DEFAULT"))
-    )
-    index ? data[index] : data
-;

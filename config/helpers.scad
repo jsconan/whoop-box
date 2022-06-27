@@ -135,6 +135,19 @@ function getGridWidth(length, width, quantity=1, line=undef) =
 function printVersion() = str(PROJECT_VERSION);
 
 /**
+ * Gets the preset defined by a name, or a value from a preset.
+ * @param String name - The name of the preset to get
+ * @param Number [index] - The index inside the preset for the value to get
+ * @returns Array|Number - The preset or the value at index
+ */
+function getPreset(name, index) =
+    let(
+        data = uor(fetch(presets, name), fetch(presets, "DEFAULT"))
+    )
+    index ? data[index] : data
+;
+
+/**
  * Computes the side distance between motors based on the given diagonal.
  * @param Number diagonal - The distance between motors on the diagonal.
  * @returns Number - The distance between motors.
