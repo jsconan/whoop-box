@@ -27,7 +27,7 @@
 #
 
 # application params
-preset="DEFAULT"
+preset=
 whoopBoxHor=
 whoopBoxVer=
 whoopBoxDrw=
@@ -48,13 +48,20 @@ slice=
 # include libs
 source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
+# Builds the destination path using the selected preset.
+#
+# @param destpath - The path to the output folder.
+presetpath() {
+    echo "${dstpath}$(prefixif "/" "${preset}")"
+}
+
 # Builds the list of config parameters.
 paramlist() {
     local params=(
         "$(varif "whoopBoxHor" ${whoopBoxHor})"
         "$(varif "whoopBoxVer" ${whoopBoxVer})"
         "$(varif "whoopBoxDrw" ${whoopBoxDrw})"
-        "$(varif "preset" "\"${preset}\"")"
+        "$(varif "preset" "${preset}" 1)"
     )
     echo "${params[@]}"
 }
@@ -73,7 +80,7 @@ renderpath() {
 showconfig() {
     local input="${configpath}/setup.scad"
     local output="${dstpath}/setup.echo"
-    local config="${dstpath}/${preset}/config.txt"
+    local config="$(presetpath)/config.txt"
     createpath "${dstpath}" "output"
     printmessage "${C_MSG}The box elements would be generated with respect to the following config:"
     scadecho "${input}" "${dstpath}" "" "" showConfig=1 $(paramlist) > /dev/null
@@ -167,12 +174,15 @@ fi
 # make sure the config exists
 distfile "${configpath}/config.scad"
 
+# make sure the destination path exists
+createpath "$(presetpath)"
+
 # show the config
 showconfig
 
 # render the files
 printmessage "${C_MSG}Rendering box elements"
-renderpath "${partpath}" "${dstpath}/${preset}"
+renderpath "${partpath}" "$(presetpath)"
 
 # slice the rendered files
 if [ "${slice}" != "" ]; then
