@@ -10,6 +10,7 @@ A printable box system to store tiny-whoops.
     -   [Source code](#Sourcecode)
         -   [Download the zip file](#Downloadthezipfile)
         -   [Get the code from the repository](#Getthecodefromtherepository)
+    -   [Configuration](#Configuration)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -33,6 +34,8 @@ First of all you need [OpenSCAD](https://openscad.org/) to be installed. To do s
 
 The source code is hosted on a [Git](https://git-scm.com/) repository. To get it you can either download a [zip file](https://github.com/jsconan/whoop-box/archive/refs/heads/main.zip), or clone the repository locally.
 
+Note: the easiest way is to call the `init.sh` script, that will take care of this for you.
+
 #### <a name='Downloadthezipfile'></a>Download the zip file
 
 The source code can be downloaded from the [GitHub repository](https://github.com/jsconan/whoop-box).
@@ -41,7 +44,7 @@ You can download it as zip file from this [link](https://github.com/jsconan/whoo
 
 As the project is using a shared library, that is not supplied with the package, you will need to also download it.
 
-Download the zip file from this [link](https://github.com/jsconan/camelSCAD/archive/refs/heads/master.zip).
+Download the zip file from this [link](https://github.com/jsconan/camelSCAD/archive/refs/heads/main.zip).
 
 Then extract its content inside the folder `lib/camelSCAD`. Please make sure the folder directly contains the library and not an intermediate folder like `lib/camelSCAD/camelSCAD-master`. If this is the case, please move the content one folder up and delete the extra folder.
 
@@ -61,3 +64,16 @@ git submodule update
 The source code should have been downloaded, as well as the libraries.
 
 Note: you can also use a graphical interface tool. In this case, please make it can also install the submodules.
+
+### <a name='Configuration'></a>Configuration
+
+The configuration may be changed locally. To not collide with changes in the main implementation, the configuration files are not versioned. Instead, you will find `-dist` files that contain a copy of the typical configuration.
+
+From a fresh copy of the project, you will need first to create these configuration files. The easiest way is to call the `init.sh` script, that will take care of this for you. The configuration files will also be checked and created if needed each time the `render.sh` script is called.
+
+This initial creation of the configuration files could also be done manually. Here is how:
+
+1. Go to the `config` folder
+2. Copy any of the files having a `-dist` suffix in their name to a file without this suffix.
+
+    _Example:_ copy `config-dist.scad` to `config.scad`
