@@ -24,6 +24,7 @@ nbproject/
 # Local config
 config.ini
 config.scad
+presets.scad
 
 # Generated files
 *.stl

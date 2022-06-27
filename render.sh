@@ -173,6 +173,7 @@ fi
 
 # make sure the config exists
 distfile "${configpath}/config.scad"
+distfile "${configpath}/presets.scad"
 
 # make sure the destination path exists
 createpath "$(presetpath)"
