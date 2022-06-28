@@ -31,13 +31,13 @@ scriptpath=$(dirname $0)
 configpath="config/config.ini"
 
 # include libs
-source "${scriptpath}/../lib/camelSCAD/scripts/utils.sh"
+source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
 # defines the config path
 distfile "${configpath}"
 
 # redirect to the lib utils
-"$(dirname $0)/../lib/camelSCAD/scripts/slice.sh" \
+"$(dirname $0)/lib/camelSCAD/scripts/slice.sh" \
     --input "dist/stl" \
     --output "dist/gcode" \
     --config "${configpath}" \
