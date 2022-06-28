@@ -11,6 +11,7 @@ A printable box system to store tiny-whoops.
         -   [Download the zip file](#Downloadthezipfile)
         -   [Get the code from the repository](#Getthecodefromtherepository)
     -   [Configuration](#Configuration)
+-   [Render the parts](#Rendertheparts)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -20,7 +21,7 @@ A printable box system to store tiny-whoops.
 
 ## <a name='Ataglance'></a>At a glance
 
-The project contains designs for a box system for storing tiny-whoop quadcopters.. The parts are designed using a scripting language, processed by [OpenSCAD](https://openscad.org/about.html). There is no ready to use 3D model files in the source code. If you are interested in such files, please look at the [released versions](https://github.com/jsconan/whoop-box/releases) which contains 3D model files built with default parameters. However, if you want to customize these parts, tailoring them with your measures, you should rather download the source code and then tweak the configuration files before generating your own 3D model files.
+The project contains designs for a box system for storing tiny-whoop quadcopters. The parts are designed using a scripting language, processed by [OpenSCAD](https://openscad.org/about.html). There is no ready to use 3D model files in the source code. If you are interested in such files, please look at the [released versions](https://github.com/jsconan/whoop-box/releases) which contains 3D model files built with default parameters. However, if you want to customize these parts, tailoring them with your measures, you should rather download the source code and then tweak the configuration files before generating your own 3D model files.
 
 ## <a name='Installandrequirements'></a>Install and requirements
 
@@ -77,3 +78,40 @@ This initial creation of the configuration files could also be done manually. He
 2. Copy any of the files having a `-dist` suffix in their name to a file without this suffix.
 
     _Example:_ copy `config-dist.scad` to `config.scad`
+
+## <a name='Rendertheparts'></a>Render the parts
+
+The parts are all located into the `parts` folder. They can all be opened separately in [OpenSCAD](https://openscad.org/) and rendered.
+
+However, it is possible to render all parts in batch. The script `render.sh` takes care of this.
+
+This is a command-line tool, which accept several parameters. By default, it will render the preset selected in the config.
+
+It is possible to select another preset, as well as set a different number of cells for the containers.
+
+The parameter `-h` make it show the help.
+
+Running the command `render.sh -h` will show this message:
+
+```
+Renders OpenSCAD files
+  Usage:
+	./render.sh [command] [-h|--help] [-o|--option value] files
+
+  -h,  --help         Show this help
+  -p   --preset       Set size preset to apply
+  -a,  --all          Render all presets
+  -l,  --line         Set the number of boxes per lines in the container
+  -m   --column       Set the nu,ber of boxes per columns in the container
+  -d   --drawer       Set the number of drawers in the cupboard
+  -f   --format       Set the output format
+  -p   --parallel     Set the number of parallel processes
+  -s   --slice        Slice the rendered files using the default configuration
+  -c   --clean        Clean up the output folder before rendering
+```
+
+All presets can be rendered at once by calling the command `render.sh -a`.
+
+The STL files are rendered to the `dist/stl` folder.
+
+If the slicer [PrusaSlicer](https://github.com/prusa3d/PrusaSlicer) is installed, running the command `render.sh -s` will produce the [G-code](https://en.wikipedia.org/wiki/G-code) from the rendered STL files and using the setting from the file `config/config.ini`. Out of the box, it is produce instruction for PETG and a 0.2mm layer height.
