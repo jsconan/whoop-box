@@ -55,8 +55,8 @@ if (showConfig) {
         "",
         str("-- Tiny-Whoop boxes System ----------"),
         str("Version:                       ", printVersion()),
-        str("-- Tiny-Whoop settings --------------"),
         str("Preset:                        ", preset),
+        str("-- Tiny-Whoop settings --------------"),
         str("Motor distance:                ", motorDistance, "mm"),
         str("Duct diameter:                 ", ductDiameter, "mm"),
         str("Duct height:                   ", ductHeight, "mm"),
@@ -77,5 +77,15 @@ if (showConfig) {
         str("Printer's width:               ", printerWidth / 10, "cm"),
         str("Print interval:                ", printInterval, "mm"),
         ""
-    ], str(chr(13), chr(10))));
+    ], "\n"));
+}
+
+
+// Show the list of available presets
+if (showPresets) {
+    echo(str(
+        "\n",
+        join(getPresets(IDX_NAME), "\n"),
+        "\n"
+    ));
 }

@@ -40,6 +40,7 @@ dstpath=${project}/dist/stl
 slcpath=${project}/dist/gcode
 configpath=${srcpath}/config
 partpath=${srcpath}/parts
+allpresets=
 format=
 parallel=
 cleanUp=
@@ -89,6 +90,29 @@ showconfig() {
     cat "${config}"
 }
 
+# List the available presets
+listpresets() {
+    local input="${configpath}/setup.scad"
+    local output="${dstpath}/setup.echo"
+    createpath "${dstpath}" "output" > /dev/null
+    scadecho "${input}" "${dstpath}" "" "" showPresets=1 $(paramlist) > /dev/null
+    sed '1d; $d' "${output}"
+    rm "${output}" > /dev/null
+}
+
+# Renders the selected preset
+renderpreset() {
+    # make sure the destination path exists
+    createpath "$(presetpath)"
+
+    # show the config
+    showconfig
+
+    # render the files
+    printmessage "${C_MSG}Rendering box elements"
+    renderpath "${partpath}" "$(presetpath)"
+}
+
 # load parameters
 while (( "$#" )); do
     case $1 in
@@ -96,11 +120,14 @@ while (( "$#" )); do
             preset=$2
             shift
         ;;
+        "-a"|"--all")
+            allpresets=1
+        ;;
         "-l"|"--line")
             whoopBoxHor=$2
             shift
         ;;
-        "-c"|"--column")
+        "-m"|"--column")
             whoopBoxVer=$2
             shift
         ;;
@@ -129,8 +156,9 @@ while (( "$#" )); do
             echo
             echo -e "${C_MSG}  -h,  --help         ${C_RST}Show this help"
             echo -e "${C_MSG}  -p   --preset       ${C_RST}Set size preset to apply"
+            echo -e "${C_MSG}  -a,  --all          ${C_RST}Render all presets"
             echo -e "${C_MSG}  -l,  --line         ${C_RST}Set the number of boxes per lines in the container"
-            echo -e "${C_MSG}  -c   --column       ${C_RST}Set the nu,ber of boxes per columns in the container"
+            echo -e "${C_MSG}  -m   --column       ${C_RST}Set the nu,ber of boxes per columns in the container"
             echo -e "${C_MSG}  -d   --drawer       ${C_RST}Set the number of drawers in the cupboard"
             echo -e "${C_MSG}  -f   --format       ${C_RST}Set the output format"
             echo -e "${C_MSG}  -p   --parallel     ${C_RST}Set the number of parallel processes"
@@ -175,15 +203,15 @@ fi
 distfile "${configpath}/config.scad"
 distfile "${configpath}/presets.scad"
 
-# make sure the destination path exists
-createpath "$(presetpath)"
-
-# show the config
-showconfig
-
-# render the files
-printmessage "${C_MSG}Rendering box elements"
-renderpath "${partpath}" "$(presetpath)"
+if [ "${allpresets}" == "1" ]; then
+    presets=($(listpresets))
+    for p in "${presets[@]}"; do
+        preset=$p
+        renderpreset
+    done
+else
+    renderpreset
+fi
 
 # slice the rendered files
 if [ "${slice}" != "" ]; then

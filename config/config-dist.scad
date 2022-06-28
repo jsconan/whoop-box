@@ -60,3 +60,4 @@ whoopBoxDrw = 1;            // The number of drawers in the cupboard.
 
 // Options for the ready to print models
 showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config
+showPresets = 0;            // Show the list of available presets.
