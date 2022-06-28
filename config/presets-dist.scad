@@ -73,7 +73,7 @@ presets = [
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
         54,                     // IDX_WHOOP_HEIGHT
-        5                       // IDX_BOX_PADDING
+        1                       // IDX_BOX_PADDING
     ],
     [
         // frame 75, props 40, HD
@@ -82,6 +82,6 @@ presets = [
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
         65,                     // IDX_WHOOP_HEIGHT
-        5                       // IDX_BOX_PADDING
+        1                       // IDX_BOX_PADDING
     ]
 ];
