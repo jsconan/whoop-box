@@ -136,9 +136,9 @@ function printVersion() = str(PROJECT_VERSION);
 
 /**
  * Gets the preset defined by a name, or a value from a preset.
- * @param String name - The name of the preset to get
- * @param Number [index] - The index inside the preset for the value to get
- * @returns Array|Number - The preset or the value at index
+ * @param String name - The name of the preset to get.
+ * @param Number [index] - The index inside the preset for the value to get.
+ * @returns Array|Number - The preset or the value at index.
  */
 function getPreset(name, index) =
     let(
@@ -146,6 +146,13 @@ function getPreset(name, index) =
     )
     index ? data[index] : data
 ;
+
+/**
+ * Gets the list of preset values.
+ * @param Number index - The index inside each preset for the value to get.
+ * @returns Array - The list of preset values.
+ */
+function getPresets(index) = [ for (preset = presets) preset[index] ];
 
 /**
  * Computes the side distance between motors based on the given diagonal.
