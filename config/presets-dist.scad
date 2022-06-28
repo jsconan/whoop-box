@@ -77,7 +77,7 @@ presets = [
     ],
     [
         // frame 75, props 40, HD
-        "BETA75X",              // IDX_NAME
+        "BETA75HD",             // IDX_NAME
         78,                     // IDX_MOTOR_DISTANCE
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
