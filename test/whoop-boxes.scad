@@ -43,10 +43,11 @@ applyMode(mode=renderMode) {
                 ductDiameter = ductDiameter,
                 wallThickness = wallThickness,
                 containerThickness = wallThickness * 2,
+                linkThickness = linkThickness,
                 boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
                 paddingWidth = boxPadding,
                 wallDistance = outerDistance,
-                cells = [whoopBoxHor, whoopBoxVer]
+                cells = [1, 1]
             );
         }
     }
