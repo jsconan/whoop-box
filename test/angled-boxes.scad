@@ -42,12 +42,12 @@ applyMode(mode=renderMode) {
                 motorDistance = motorDistance,
                 ductDiameter = ductDiameter,
                 whoopCount = 1,
-                drawerWallThickness = wallThickness * 2,
+                drawerWallThickness = containerThickness,
                 drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=4),
                 drawerCount = 1,
                 drawerDistance = outerDistance,
                 wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
-                wallThickness = wallThickness * 2
+                wallThickness = containerThickness
             );
         }
     }
@@ -55,7 +55,7 @@ applyMode(mode=renderMode) {
         angledContainer(
             motorDistance = motorDistance,
             ductDiameter = ductDiameter,
-            wallThickness = wallThickness * 2,
+            wallThickness = containerThickness,
             groundThickness = groundThickness,
             boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2),
             wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance

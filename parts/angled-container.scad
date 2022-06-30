@@ -40,7 +40,7 @@ applyMode(mode=renderMode) {
     angledContainer(
         motorDistance = motorDistance,
         ductDiameter = ductDiameter,
-        wallThickness = wallThickness * 2,
+        wallThickness = containerThickness,
         groundThickness = groundThickness,
         boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2),
         wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,

@@ -41,7 +41,7 @@ applyMode(mode=renderMode) {
         motorDistance = motorDistance,
         ductDiameter = ductDiameter,
         wallThickness = wallThickness,
-        containerThickness = wallThickness * 2,
+        containerThickness = containerThickness,
         linkThickness = linkThickness,
         boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
         paddingWidth = boxPadding,

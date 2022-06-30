@@ -49,6 +49,7 @@ boxPadding = getPreset(preset, IDX_BOX_PADDING);         // The width of padding
 
 // Specifications for the boxes
 wallThickness = 0.8;        // The thickness of the box walls.
+containerThickness = 1.2;   // The thickness of the container walls.
 groundThickness = 0.8;      // The thickness of the box ground.
 linkThickness = 2;          // The thickness of the link elements.
 boxIndentation = [30, 10];  // Defines the size of a handle indentation, it will be cut from each box side. The first value represents the top width, the second represents the bottom width and the depth.

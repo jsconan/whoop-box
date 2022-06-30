@@ -42,11 +42,11 @@ applyMode(mode=renderMode) {
         motorDistance = motorDistance,
         ductDiameter = ductDiameter,
         whoopCount = [whoopBoxHor, whoopBoxVer],
-        drawerWallThickness = wallThickness * 2,
+        drawerWallThickness = containerThickness,
         drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=4),
         drawerCount = whoopBoxDrw,
         drawerDistance = outerDistance,
         wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
-        wallThickness = wallThickness * 2
+        wallThickness = containerThickness
     );
 }
