@@ -72,7 +72,7 @@ presets = [
         78,                     // IDX_MOTOR_DISTANCE
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
-        54,                     // IDX_WHOOP_HEIGHT
+        55,                     // IDX_WHOOP_HEIGHT
         1                       // IDX_BOX_PADDING
     ],
     [
@@ -81,7 +81,7 @@ presets = [
         78,                     // IDX_MOTOR_DISTANCE
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
-        65,                     // IDX_WHOOP_HEIGHT
+        63,                     // IDX_WHOOP_HEIGHT
         1                       // IDX_BOX_PADDING
     ]
 ];
