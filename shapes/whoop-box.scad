@@ -163,9 +163,9 @@ module whoopBox(motorDistance, ductDiameter, wallThickness, groundThickness, box
  */
 module whoopBoxContainer(motorDistance, ductDiameter, wallThickness, containerThickness, linkThickness, boxHeight, paddingWidth, wallDistance, cells=[1, 1]) {
     cells = vector2D(cells);
-    innerDistance = paddingWidth + wallThickness + wallDistance;
+    innerDistance = paddingWidth + wallThickness + wallDistance / 2;
     innerWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=0, wallDistance=innerDistance);
-    innerHeight = boxHeight + wallDistance * 2;
+    innerHeight = boxHeight + wallDistance;
     innerRadius = ductDiameter / 2 + innerDistance;
 
     outerWidth = innerWidth + containerThickness * 2;;
@@ -173,25 +173,25 @@ module whoopBoxContainer(motorDistance, ductDiameter, wallThickness, containerTh
     outerRadius = innerRadius + containerThickness;
 
     linkWidth = outerWidth - outerRadius * 2;
+    linkWidthTop = linkWidth - printTolerance * 2;
+    linkWidthBottom = linkWidth + printTolerance * 2;
     linkHeight = linkThickness;
 
-    containerWidth = innerWidth + containerThickness * 2;
+    containerWidth = innerWidth + containerThickness;
     containerLength = (innerWidth + containerThickness) * cells.x + containerThickness;
     containerHeight = (innerHeight + containerThickness) * cells.y + containerThickness + linkHeight;
 
     rotateX(-90) {
         difference() {
-            union() {
-                translateZ(-linkHeight / 2) {
-                    extrudePolygon(points=drawBoxCover(length=containerLength, width=containerWidth / 2, radius=outerRadius), height=containerHeight, center=true);
-                    repeatShape3D([outerWidth - containerThickness, outerWidth, containerHeight], [cells.x, 1, 1], center=true) {
-                        rotateZ(180) {
-                            extrudePolygon(points=drawBoxCover(length=outerWidth, width=outerWidth / 2, radius=outerRadius), height=containerHeight, center=true);
-                        }
-                        translateZ(containerHeight / 2) {
-                            rotateX(90) {
-                                extrudePolygon(points=drawBoxLink(width=linkWidth, height=linkHeight, distance=printTolerance), height=outerWidth, distance=-printTolerance, center=true);
-                            }
+            translate([0, containerThickness, -linkHeight] / 2) {
+                extrudePolygon(points=drawBoxCover(length=containerLength, width=containerWidth / 2, radius=outerRadius), height=containerHeight, center=true);
+                repeatShape3D([outerWidth - containerThickness, containerWidth, containerHeight], [cells.x, 1, 1], center=true) {
+                    rotateZ(180) {
+                        extrudePolygon(points=drawBoxCover(length=outerWidth, width=containerWidth / 2, radius=outerRadius), height=containerHeight, center=true);
+                    }
+                    translateZ(containerHeight / 2) {
+                        rotateX(90) {
+                            extrudePolygon(points=drawBoxLink(width=linkWidthTop, height=linkHeight, distance=printTolerance), height=containerWidth, distance=-printTolerance, center=true);
                         }
                     }
                 }
@@ -203,9 +203,11 @@ module whoopBoxContainer(motorDistance, ductDiameter, wallThickness, containerTh
                 translate([0, outerRadius - outerWidth - 1, -innerHeight] / 2) {
                     box([outerWidth + 1, outerRadius + 1, innerHeight]);
                 }
-                translateZ(-(linkHeight + containerHeight) / 2) {
+            }
+            repeatShape3D([outerWidth - containerThickness, containerWidth, containerHeight], [cells.x, 1, 1], center=true) {
+                translate([0, containerThickness, -(linkHeight + containerHeight)] / 2) {
                     rotateX(90) {
-                        extrudePolygon(points=drawBoxLink(width=linkWidth, height=linkHeight, distance=1), height=outerWidth, distance=printTolerance, center=true);
+                        extrudePolygon(points=drawBoxLink(width=linkWidthBottom, height=linkHeight, distance=1), height=containerWidth + 1, distance=printTolerance, center=true);
                     }
                 }
             }
