@@ -137,13 +137,12 @@ module whoopBox(motorDistance, ductDiameter, wallThickness, groundThickness, box
 
     boxIndentation(size=apply3D(boxWidth, z=boxHeight), indentation=boxIndentation, count=1) {
         extrudePolygonBox(points=outerPoints, height=boxHeight, ground=groundThickness, wall=wallThickness);
-    }
-
-    translateZ(groundThickness) {
-        negativeExtrude(height=paddingHeight) {
-            difference() {
-                polygon(points=outerPoints);
-                polygon(points=innerPoints);
+        translateZ(groundThickness) {
+            negativeExtrude(height=paddingHeight) {
+                difference() {
+                    polygon(points=outerPoints);
+                    polygon(points=innerPoints);
+                }
             }
         }
     }
