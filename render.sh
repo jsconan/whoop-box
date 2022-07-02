@@ -45,15 +45,18 @@ format=
 parallel=
 cleanUp=
 slice=
+renderAngled=
+renderWhoop=
+renderAll=1
 
 # include libs
 source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
 # Builds the destination path using the selected preset.
 #
-# @param destpath - The path to the output folder.
+# @param name - The name of the set to render.
 presetpath() {
-    echo "${dstpath}$(prefixif "/" "${preset}")"
+    echo "${dstpath}$(prefixif "/" "$1")$(prefixif "/" "${preset}")"
 }
 
 # Builds the list of config parameters.
@@ -78,13 +81,16 @@ renderpath() {
 }
 
 # Display the render config
+#
+# @param name - The name of the set to render.
 showconfig() {
+    local dest="$(presetpath "$1")"
     local input="${configpath}/setup.scad"
-    local output="${dstpath}/setup.echo"
-    local config="$(presetpath)/config.txt"
-    createpath "${dstpath}" "output"
+    local output="${dest}/setup.echo"
+    local config="${dest}/config.txt"
+    createpath "${dest}" "output"
     printmessage "${C_MSG}The box elements would be generated with respect to the following config:"
-    scadecho "${input}" "${dstpath}" "" "" showConfig=1 $(paramlist) > /dev/null
+    scadecho "${input}" "${dest}" "" "" showConfig=1 $(paramlist) > /dev/null
     sed '1d; $d' "${output}" > "${config}"
     rm "${output}" > /dev/null
     cat "${config}"
@@ -101,21 +107,55 @@ listpresets() {
 }
 
 # Renders the selected preset
+#
+# @param name - The name of the set to render.
 renderpreset() {
+    local dest="$(presetpath "$1")"
+
     # make sure the destination path exists
-    createpath "$(presetpath)"
+    createpath ${dest}
 
     # show the config
-    showconfig
+    showconfig "$1"
 
     # render the files
     printmessage "${C_MSG}Rendering box elements"
-    renderpath "${partpath}" "$(presetpath)"
+    renderpath "${partpath}$(prefixif "/" "$1")" "${dest}"
+}
+
+# Renders the files with respect to the settings.
+renderall() {
+    if [ "${renderAngled}" != "" ]  || \
+       [ "${renderWhoop}" != "" ] || \
+       [ "${renderAll}" != "" ]; then
+        printmessage "${C_MSG}Rendering boxes"
+    else
+        printmessage "${C_MSG}Nothing will be rendered"
+    fi
+    if [ "${renderAngled}" == "1" ] || [ "${renderAll}" == "1" ]; then
+        printmessage "${C_MSG}- sets of angled boxes"
+        renderpreset "angled"
+    fi
+    if [ "${renderWhoop}" == "1" ] || [ "${renderAll}" == "1" ]; then
+        printmessage "${C_MSG}- all whoop boxes"
+        renderpreset "whoop"
+    fi
 }
 
 # load parameters
 while (( "$#" )); do
     case $1 in
+        "a"|"all")
+            renderAll=1
+        ;;
+        "n"|"angled")
+            renderAngled=1
+            renderAll=
+        ;;
+        "w"|"whoop")
+            renderWhoop=1
+            renderAll=
+        ;;
         "-p"|"--preset")
             preset=$2
             shift
@@ -154,6 +194,9 @@ while (( "$#" )); do
             echo -e "  ${C_INF}Usage:${C_RST}"
             echo -e "${C_CTX}\t$0 [command] [-h|--help] [-o|--option value] files${C_RST}"
             echo
+            echo -e "${C_MSG}  a,   all            ${C_RST}Render all elements (default)"
+            echo -e "${C_MSG}  n,   angled         ${C_RST}Render the sets of angled boxes"
+            echo -e "${C_MSG}  w,   whoop          ${C_RST}Render the sets of whoop boxes"
             echo -e "${C_MSG}  -h,  --help         ${C_RST}Show this help"
             echo -e "${C_MSG}  -p   --preset       ${C_RST}Set size preset to apply"
             echo -e "${C_MSG}  -a,  --all          ${C_RST}Render all presets"
@@ -207,10 +250,10 @@ if [ "${allpresets}" == "1" ]; then
     presets=($(listpresets))
     for p in "${presets[@]}"; do
         preset=$p
-        renderpreset
+        renderall
     done
 else
-    renderpreset
+    renderall
 fi
 
 # slice the rendered files
