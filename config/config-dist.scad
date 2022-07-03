@@ -56,9 +56,9 @@ boxIndentation = [30, 10];  // Defines the size of a handle indentation, it will
 outerDistance = 0.5;        // The distance between a box and its container. This is additional size added to the container inner room to fit the box.
 
 // Sets the count of tiny-whoops in each kind of box
-whoopBoxHor = 1;            // The number of boxes per lines in the container (horizontal axis).
-whoopBoxVer = 1;            // The number of boxes per columns in the container (vertical axis).
-whoopBoxDrw = 1;            // The number of drawers in the cupboard.
+whoopBoxX = 1;              // The number of boxes per lines in the container (horizontal axis).
+whoopBoxY = 1;              // The number of boxes per columns in the container (vertical axis).
+whoopBoxZ = 1;              // The number of boxes per lines and columns in the container (depth axis).
 
 // Options for the ready to print models
 showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config

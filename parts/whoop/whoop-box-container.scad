@@ -46,6 +46,6 @@ applyMode(mode=renderMode) {
         boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
         paddingWidth = boxPadding,
         wallDistance = outerDistance,
-        cells = [whoopBoxHor, whoopBoxVer]
+        cells = [whoopBoxX, whoopBoxY]
     );
 }

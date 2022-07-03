@@ -28,9 +28,9 @@
 
 # application params
 preset=
-whoopBoxHor=
-whoopBoxVer=
-whoopBoxDrw=
+whoopBoxX=
+whoopBoxY=
+whoopBoxZ=
 
 # script config
 scriptpath=$(dirname $0)
@@ -62,9 +62,9 @@ presetpath() {
 # Builds the list of config parameters.
 paramlist() {
     local params=(
-        "$(varif "whoopBoxHor" ${whoopBoxHor})"
-        "$(varif "whoopBoxVer" ${whoopBoxVer})"
-        "$(varif "whoopBoxDrw" ${whoopBoxDrw})"
+        "$(varif "whoopBoxX" ${whoopBoxX})"
+        "$(varif "whoopBoxY" ${whoopBoxY})"
+        "$(varif "whoopBoxZ" ${whoopBoxZ})"
         "$(varif "preset" "${preset}" 1)"
     )
     echo "${params[@]}"
@@ -163,16 +163,16 @@ while (( "$#" )); do
         "-a"|"--all")
             allpresets=1
         ;;
-        "-l"|"--line")
-            whoopBoxHor=$2
+        "-x"|"--line")
+            whoopBoxX=$2
             shift
         ;;
-        "-m"|"--column")
-            whoopBoxVer=$2
+        "-y"|"--column")
+            whoopBoxY=$2
             shift
         ;;
-        "-d"|"--drawer")
-            whoopBoxDrw=$2
+        "-z"|"--depth")
+            whoopBoxZ=$2
             shift
         ;;
         "-f"|"--format")
@@ -200,9 +200,9 @@ while (( "$#" )); do
             echo -e "${C_MSG}  -h,  --help         ${C_RST}Show this help"
             echo -e "${C_MSG}  -p   --preset       ${C_RST}Set size preset to apply"
             echo -e "${C_MSG}  -a,  --all          ${C_RST}Render all presets"
-            echo -e "${C_MSG}  -l,  --line         ${C_RST}Set the number of boxes per lines in the container"
-            echo -e "${C_MSG}  -m   --column       ${C_RST}Set the nu,ber of boxes per columns in the container"
-            echo -e "${C_MSG}  -d   --drawer       ${C_RST}Set the number of drawers in the cupboard"
+            echo -e "${C_MSG}  -x,  --line         ${C_RST}Set the number of boxes per lines in the container (X-axis)"
+            echo -e "${C_MSG}  -y   --column       ${C_RST}Set the number of boxes per columns in the container (Y-axis)"
+            echo -e "${C_MSG}  -z   --depth        ${C_RST}Set The number of boxes per lines and columns in the container (Z-axis)"
             echo -e "${C_MSG}  -f   --format       ${C_RST}Set the output format"
             echo -e "${C_MSG}  -p   --parallel     ${C_RST}Set the number of parallel processes"
             echo -e "${C_MSG}  -s   --slice        ${C_RST}Slice the rendered files using the default configuration"
