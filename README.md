@@ -12,6 +12,7 @@ A printable box system to store tiny-whoops.
         -   [Get the code from the repository](#Getthecodefromtherepository)
     -   [Configuration](#Configuration)
 -   [Render the parts](#Rendertheparts)
+-   [Post-scripts](#Post-scripts)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -98,12 +99,15 @@ Renders OpenSCAD files
   Usage:
 	./render.sh [command] [-h|--help] [-o|--option value] files
 
+  a,   all            Render all elements (default)
+  n,   angled         Render the sets of angled boxes
+  w,   whoop          Render the sets of whoop boxes
   -h,  --help         Show this help
   -p   --preset       Set size preset to apply
   -a,  --all          Render all presets
-  -l,  --line         Set the number of boxes per lines in the container
-  -m   --column       Set the nu,ber of boxes per columns in the container
-  -d   --drawer       Set the number of drawers in the cupboard
+  -x,  --line         Set the number of boxes per lines in the container (X-axis)
+  -y   --column       Set the number of boxes per columns in the container (Y-axis)
+  -z   --depth        Set The number of boxes per lines and columns in the container (Z-axis)
   -f   --format       Set the output format
   -p   --parallel     Set the number of parallel processes
   -s   --slice        Slice the rendered files using the default configuration
@@ -115,3 +119,36 @@ All presets can be rendered at once by calling the command `render.sh -a`.
 The STL files are rendered to the `dist/stl` folder.
 
 If the slicer [PrusaSlicer](https://github.com/prusa3d/PrusaSlicer) is installed, running the command `render.sh -s` will produce the [G-code](https://en.wikipedia.org/wiki/G-code) from the rendered STL files and using the setting from the file `config/config.ini`. Out of the box, it is produce instruction for PETG and a 0.2mm layer height.
+
+## <a name='Post-scripts'></a>Post-scripts
+
+When using the built-in script to render/slice the models in batch, you can also add custom post-processing scripts. There is one for `render.sh` and one for `slice.sh`. They are respectively named `post-render.sh` and `post-slice.sh`.
+
+As these script can be defined locally, they are not part of the versioned content. Instead, you can find sample files at `post-render-dist.sh` and `post-slice-dist.sh`. To use them, you need to:
+
+-   copy the dist file to a local file, for example: `cp post-render-dist.sh post-render.sh`.
+-   you need to make sure the file is executable: `chmod +x post-render.sh`.
+-   finally, add you own commands to the copy.
+
+As an example, here is the script used to copy the sliced files to a SD-card:
+
+```sh
+# Bootstrap the script
+scriptpath=$(dirname $0)
+source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
+
+# Script config
+project=$(pwd)
+gcodepath="${project}/dist/gcode/"
+sdcardpath="/PATH/TO/SD/CARD"
+logpath="${project}/dist/gcode-sync.log"
+
+# Post process the sliced files
+printmessage "${C_MSG}==========================================="
+printmessage "${C_MSG}Post-slice script: copy Gcode to the SDcard"
+date > ${logpath}
+createpath "${sdcardpath}"
+rsync -ahvt --no-links --delete --partial --force --modify-window=1 --exclude=.DS_Store --log-file=${logpath} "${gcodepath}" "${sdcardpath}"
+printmessage "${C_MSG}==========================================="
+
+```
