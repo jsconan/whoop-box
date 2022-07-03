@@ -256,6 +256,12 @@ else
     renderall
 fi
 
+# run a post-render script
+if [ -x "${scriptpath}/post-render.sh" ]; then
+    printmessage "${C_CTX}Calling the post-render script"
+    "${scriptpath}/post-render.sh"
+fi
+
 # slice the rendered files
 if [ "${slice}" != "" ]; then
     printmessage "${C_CTX}Slicing the rendered files"

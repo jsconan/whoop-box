@@ -26,6 +26,10 @@ config.ini
 config.scad
 presets.scad
 
+# Local post processing scripts
+post-render.sh
+post-slice.sh
+
 # Generated files
 *.stl
 

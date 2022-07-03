@@ -21,32 +21,23 @@
 #
 
 #
-# Generates the STL files for the tiny-whoops boxes.
+# A sample of post-processing script that can be called once the models have been sliced.
+#
+# To use it as a skeleton for your own script, please first run the following commands:
+#    cp post-slice-dist.sh post-slice.sh
+#    chmod +x post-slice.sh
+#
+# It will copy the sample to the file `post-slice.sh` and make sure it is executable.
+# Then, you can modify the copy and add your own commands.
 #
 # @author jsconan
 #
 
-# script config
+# Bootstrap the script
 scriptpath=$(dirname $0)
-configpath="config/config.ini"
-
-# include libs
 source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
-# defines the config path
-distfile "${configpath}"
-
-# redirect to the lib utils
-"$(dirname $0)/lib/camelSCAD/scripts/slice.sh" \
-    --input "dist/stl" \
-    --output "dist/gcode" \
-    --config "${configpath}" \
-    --prusaslicer \
-    --recurse \
-    "$@"
-
-# run a post-slice script
-if [ -x "${scriptpath}/post-slice.sh" ]; then
-    printmessage "${C_CTX}Calling the post-slice script"
-    "${scriptpath}/post-slice.sh"
-fi
+# Do something... Some helpers have been loaded from the utils
+printmessage "${C_MSG}=============================="
+printmessage "${C_MSG}This is the post slice script!"
+printmessage "${C_MSG}=============================="
