@@ -81,7 +81,7 @@ function drawRoundedBoxShape(motorDistance, ductDiameter) =
  */
 module roundedBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0) {
     boxWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=wallThickness, wallDistance=wallDistance);
-    points = outline(points=drawRoundedBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=wallDistance);
+    points = drawRoundedBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter + wallDistance);
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness) {
         extrudePolygon(points=points, height=boxHeight, distance=wallThickness);
