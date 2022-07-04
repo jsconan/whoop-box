@@ -35,9 +35,18 @@ presets = [
         "DEFAULT",              // IDX_NAME
         65,                     // IDX_MOTOR_DISTANCE
         37,                     // IDX_DUCT_DIAMETER
-        20,                     // IDX_DUCT_HEIGHT
+        23,                     // IDX_DUCT_HEIGHT
         48,                     // IDX_WHOOP_HEIGHT
         7                       // IDX_BOX_PADDING
+    ],
+    [
+        // frame 65, props 31, parts box
+        "PARTS65",              // IDX_NAME
+        65,                     // IDX_MOTOR_DISTANCE
+        36,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        43,                     // IDX_WHOOP_HEIGHT
+        7.5                     // IDX_BOX_PADDING
     ],
     [
         // frame 65, props 31
@@ -67,12 +76,21 @@ presets = [
         6                       // IDX_BOX_PADDING
     ],
     [
+        // frame 75, props 40, parts box
+        "PARTS75",              // IDX_NAME
+        78,                     // IDX_MOTOR_DISTANCE
+        48,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        65,                     // IDX_WHOOP_HEIGHT
+        1                       // IDX_BOX_PADDING
+    ],
+    [
         // frame 75, props 40
         "BETA75X",              // IDX_NAME
         78,                     // IDX_MOTOR_DISTANCE
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
-        55,                     // IDX_WHOOP_HEIGHT
+        56,                     // IDX_WHOOP_HEIGHT
         1                       // IDX_BOX_PADDING
     ],
     [
@@ -81,7 +99,7 @@ presets = [
         78,                     // IDX_MOTOR_DISTANCE
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
-        63,                     // IDX_WHOOP_HEIGHT
+        65,                     // IDX_WHOOP_HEIGHT
         1                       // IDX_BOX_PADDING
     ]
 ];
