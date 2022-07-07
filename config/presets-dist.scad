@@ -37,7 +37,8 @@ presets = [
         37,                     // IDX_DUCT_DIAMETER
         23,                     // IDX_DUCT_HEIGHT
         48,                     // IDX_WHOOP_HEIGHT
-        7                       // IDX_BOX_PADDING
+        7,                      // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 65, props 31, parts box
@@ -46,7 +47,8 @@ presets = [
         36,                     // IDX_DUCT_DIAMETER
         0,                      // IDX_DUCT_HEIGHT
         43,                     // IDX_WHOOP_HEIGHT
-        7.5                     // IDX_BOX_PADDING
+        7.5,                    // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 65, props 31
@@ -55,7 +57,8 @@ presets = [
         36,                     // IDX_DUCT_DIAMETER
         17,                     // IDX_DUCT_HEIGHT
         40,                     // IDX_WHOOP_HEIGHT
-        7.5                     // IDX_BOX_PADDING
+        7.5,                    // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 65, props 31, HD
@@ -64,7 +67,8 @@ presets = [
         36,                     // IDX_DUCT_DIAMETER
         17,                     // IDX_DUCT_HEIGHT
         43,                     // IDX_WHOOP_HEIGHT
-        7.5                     // IDX_BOX_PADDING
+        7.5,                    // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 65, props 35
@@ -73,7 +77,8 @@ presets = [
         39,                     // IDX_DUCT_DIAMETER
         16,                     // IDX_DUCT_HEIGHT
         40,                     // IDX_WHOOP_HEIGHT
-        6                       // IDX_BOX_PADDING
+        6,                      // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 75, props 40, parts box
@@ -82,7 +87,8 @@ presets = [
         48,                     // IDX_DUCT_DIAMETER
         0,                      // IDX_DUCT_HEIGHT
         65,                     // IDX_WHOOP_HEIGHT
-        1                       // IDX_BOX_PADDING
+        1,                      // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 75, props 40
@@ -91,7 +97,8 @@ presets = [
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
         56,                     // IDX_WHOOP_HEIGHT
-        1                       // IDX_BOX_PADDING
+        1,                      // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ],
     [
         // frame 75, props 40, HD
@@ -100,6 +107,7 @@ presets = [
         48,                     // IDX_DUCT_DIAMETER
         28,                     // IDX_DUCT_HEIGHT
         65,                     // IDX_WHOOP_HEIGHT
-        1                       // IDX_BOX_PADDING
+        1,                      // IDX_BOX_PADDING
+        false                   // IDX_BOX_SEPARATOR
     ]
 ];

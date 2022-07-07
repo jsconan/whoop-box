@@ -35,3 +35,4 @@ IDX_DUCT_DIAMETER = 2;  // The index for the outer diameter of a motor duct.
 IDX_DUCT_HEIGHT = 3;    // The index for the outer height of a motor duct, including everything beyond like the screw heads.
 IDX_WHOOP_HEIGHT = 4;   // The index for the outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
 IDX_BOX_PADDING = 5;    // The index for the width of padding between the box sides and the tiny-whoop.
+IDX_BOX_SEPARATOR = 6;  // The index for the flag allowing to add separators.

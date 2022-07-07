@@ -43,13 +43,41 @@ module boxIndentation(size, indentation, count=1) {
 
     difference() {
         children();
-        translateZ(size[2] - indentation[1] / 2) {
+        translateZ(size.z - indentation[1] / 2) {
             repeatShape2D(size, count, center=true) {
                 simplePolyhedron(
                     bottom = drawCross(vadd(size, ALIGN2), indentation[1]),
                     top = drawCross(vadd(size, ALIGN2), indentation[0]),
                     z = indentation[1]
                 );
+            }
+        }
+    }
+}
+
+/**
+ * Removes the handle indentation from the children.
+ * The indentation will be cut from each box side.
+ * @param Vector size - The size of the box.
+ * @param Vector indentation - The size of the indentation.
+ *                             The first value represents the top width,
+ *                             the second represents the bottom width and the depth.
+ */
+module simpleIndentation(size, indentation) {
+    size = vector3D(size);
+    indentation = vector2D(indentation);
+
+    difference() {
+        children();
+        translateZ(size.z - indentation[1] / 2) {
+            translateX(-size.x / 2) {
+                repeatRotate(count=4, origin=[size.x / 2, 0, 0]) {
+                    simplePolyhedron(
+                        bottom = drawRectangle(indentation[1] + ALIGN2),
+                        top = drawRectangle(indentation[0] + ALIGN2),
+                        z = indentation[1]
+                    );
+                }
             }
         }
     }

@@ -45,6 +45,7 @@ applyMode(mode=renderMode) {
         boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
         paddingWidth = boxPadding,
         paddingHeight = ductHeight,
-        wallDistance = getWallDistance(wallThickness=wallThickness)
+        wallDistance = getWallDistance(wallThickness=wallThickness),
+        separator = boxSeparators
     );
 }

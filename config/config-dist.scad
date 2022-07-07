@@ -46,6 +46,7 @@ ductDiameter = getPreset(preset, IDX_DUCT_DIAMETER);     // The outer diameter o
 ductHeight = getPreset(preset, IDX_DUCT_HEIGHT);         // The outer height of a motor duct, including the screw heads.
 whoopHeight = getPreset(preset, IDX_WHOOP_HEIGHT);       // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
 boxPadding = getPreset(preset, IDX_BOX_PADDING);         // The width of padding between the box sides and the tiny-whoop.
+boxSeparators = getPreset(preset, IDX_BOX_SEPARATOR);    // Tells whether the box contains separators or not.
 
 // Specifications for the boxes
 wallThickness = 0.8;        // The thickness of the box walls.

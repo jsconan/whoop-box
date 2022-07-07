@@ -129,8 +129,9 @@ function drawBoxLink(width, height, distance) =
  * @param Number paddingWidth - The width of the padding between the box sides and the tiny-whoop.
  * @param Number paddingHeight - The height of the padding between the box sides and the tiny-whoop.
  * @param Number wallDistance - The distance between a duct and the wall.
+ * @param Boolean [separator] - Tells whether the box contains separators or not.
  */
-module whoopBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, paddingWidth, paddingHeight, wallDistance) {
+module whoopBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, paddingWidth, paddingHeight, wallDistance, separator=false) {
     boxWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=wallThickness, wallDistance=paddingWidth);
     outerPoints = outline(points=drawWhoopBox(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=paddingWidth);
     innerPoints = outline(points=drawWhoopOutline(motorDistance=motorDistance, ductDiameter=ductDiameter), distance=wallDistance);
@@ -146,6 +147,12 @@ module whoopBox(motorDistance, ductDiameter, wallThickness, groundThickness, box
                     }
                 }
             }
+        }
+    }
+    if (separator && paddingHeight == 0) {
+        simpleIndentation(size=apply3D(boxWidth, z=boxHeight), indentation=boxIndentation) {
+            box([boxWidth, wallThickness, boxHeight]);
+            box([wallThickness, boxWidth, boxHeight]);
         }
     }
 }
