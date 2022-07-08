@@ -44,19 +44,6 @@ presets = [
         1,                      // IDX_BOX_Z
     ],
     [
-        // frame 65, parts box
-        "PARTS65",              // IDX_NAME
-        65,                     // IDX_MOTOR_DISTANCE
-        36,                     // IDX_DUCT_DIAMETER
-        0,                      // IDX_DUCT_HEIGHT
-        43,                     // IDX_WHOOP_HEIGHT
-        7.5,                    // IDX_BOX_PADDING
-        false,                  // IDX_BOX_SEPARATOR
-        1,                      // IDX_BOX_X
-        2,                      // IDX_BOX_Y
-        1,                      // IDX_BOX_Z
-    ],
-    [
         // frame 65, props 31
         "METEOR65",             // IDX_NAME
         65,                     // IDX_MOTOR_DISTANCE
@@ -96,19 +83,6 @@ presets = [
         1,                      // IDX_BOX_Z
     ],
     [
-        // frame 75, parts box
-        "PARTS75",              // IDX_NAME
-        78,                     // IDX_MOTOR_DISTANCE
-        48,                     // IDX_DUCT_DIAMETER
-        0,                      // IDX_DUCT_HEIGHT
-        65,                     // IDX_WHOOP_HEIGHT
-        1,                      // IDX_BOX_PADDING
-        false,                  // IDX_BOX_SEPARATOR
-        1,                      // IDX_BOX_X
-        2,                      // IDX_BOX_Y
-        1,                      // IDX_BOX_Z
-    ],
-    [
         // frame 75, props 40
         "BETA75X",              // IDX_NAME
         78,                     // IDX_MOTOR_DISTANCE
@@ -130,6 +104,71 @@ presets = [
         65,                     // IDX_WHOOP_HEIGHT
         1,                      // IDX_BOX_PADDING
         false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
+    ],
+    [
+        // frame 65, parts box
+        "PARTS65",              // IDX_NAME
+        65,                     // IDX_MOTOR_DISTANCE
+        36,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        43,                     // IDX_WHOOP_HEIGHT
+        7.5,                    // IDX_BOX_PADDING
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
+    ],
+    [
+        // frame 75, parts box low profile
+        "PARTS75LO",            // IDX_NAME
+        78,                     // IDX_MOTOR_DISTANCE
+        48,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        56,                     // IDX_WHOOP_HEIGHT
+        1,                      // IDX_BOX_PADDING
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
+    ],
+    [
+        // frame 75, parts box high profile
+        "PARTS75HI",            // IDX_NAME
+        78,                     // IDX_MOTOR_DISTANCE
+        48,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        65,                     // IDX_WHOOP_HEIGHT
+        1,                      // IDX_BOX_PADDING
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
+    ],
+    [
+        // frame 65, props box
+        "PROPS65",              // IDX_NAME
+        65,                     // IDX_MOTOR_DISTANCE
+        36,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        39,                     // IDX_WHOOP_HEIGHT
+        7.5,                    // IDX_BOX_PADDING
+        true,                   // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
+    ],
+    [
+        // frame 75, props box
+        "PROPS75",              // IDX_NAME
+        78,                     // IDX_MOTOR_DISTANCE
+        48,                     // IDX_DUCT_DIAMETER
+        0,                      // IDX_DUCT_HEIGHT
+        39,                     // IDX_WHOOP_HEIGHT
+        1,                      // IDX_BOX_PADDING
+        true,                   // IDX_BOX_SEPARATOR
         1,                      // IDX_BOX_X
         2,                      // IDX_BOX_Y
         1,                      // IDX_BOX_Z
