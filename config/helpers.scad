@@ -138,13 +138,14 @@ function printVersion() = str(PROJECT_VERSION);
  * Gets the preset defined by a name, or a value from a preset.
  * @param String name - The name of the preset to get.
  * @param Number [index] - The index inside the preset for the value to get.
+ * @param * [default] - The default value if the preset does not exist at the given index.
  * @returns Array|Number - The preset or the value at index.
  */
-function getPreset(name, index) =
+function getPreset(name, index, default) =
     let(
         data = uor(fetch(presets, name), fetch(presets, "DEFAULT"))
     )
-    index ? data[index] : data
+    index ? uor(data[index], default) : data
 ;
 
 /**

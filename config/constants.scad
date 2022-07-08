@@ -29,10 +29,13 @@
  */
 
 // Defines the indexes in the presets
-IDX_NAME = 0;           // The index for the preset name
-IDX_MOTOR_DISTANCE = 1; // The index for the distance between motors on the diagonal.
-IDX_DUCT_DIAMETER = 2;  // The index for the outer diameter of a motor duct.
-IDX_DUCT_HEIGHT = 3;    // The index for the outer height of a motor duct, including everything beyond like the screw heads.
-IDX_WHOOP_HEIGHT = 4;   // The index for the outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-IDX_BOX_PADDING = 5;    // The index for the width of padding between the box sides and the tiny-whoop.
-IDX_BOX_SEPARATOR = 6;  // The index for the flag allowing to add separators.
+IDX_NAME           =  0; // The index for the preset name
+IDX_MOTOR_DISTANCE =  1; // The index for the distance between motors on the diagonal.
+IDX_DUCT_DIAMETER  =  2; // The index for the outer diameter of a motor duct.
+IDX_DUCT_HEIGHT    =  3; // The index for the outer height of a motor duct, including everything beyond like the screw heads.
+IDX_WHOOP_HEIGHT   =  4; // The index for the outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
+IDX_BOX_PADDING    =  5; // The index for the width of padding between the box sides and the tiny-whoop.
+IDX_BOX_SEPARATOR  =  6; // The index for the flag allowing to add separators.
+IDX_BOX_X          =  7; // The index for the number of boxes per lines in the container (horizontal axis).
+IDX_BOX_Y          =  8; // The index for the number of boxes per columns in the container (vertical axis).
+IDX_BOX_Z          =  9; // The index for the number of boxes per lines and columns in the container (depth axis).

@@ -39,14 +39,9 @@ printInterval = 5;          // The interval between 2 pieces when presented toge
 printerLength = 250;        // The length of the printer's build plate.
 printerWidth = 210;         // The width of the printer's build plate.
 
-// Defines the size of a tiny-whoop
-preset = "DEFAULT";
-motorDistance = getPreset(preset, IDX_MOTOR_DISTANCE);   // The distance between motors on the diagonal.
-ductDiameter = getPreset(preset, IDX_DUCT_DIAMETER);     // The outer diameter of a motor duct.
-ductHeight = getPreset(preset, IDX_DUCT_HEIGHT);         // The outer height of a motor duct, including the screw heads.
-whoopHeight = getPreset(preset, IDX_WHOOP_HEIGHT);       // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
-boxPadding = getPreset(preset, IDX_BOX_PADDING);         // The width of padding between the box sides and the tiny-whoop.
-boxSeparators = getPreset(preset, IDX_BOX_SEPARATOR);    // Tells whether the box contains separators or not.
+// Options for the metadata
+showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config
+showPresets = 0;            // Show the list of available presets.
 
 // Specifications for the boxes
 wallThickness = 0.8;        // The thickness of the box walls.
@@ -56,11 +51,18 @@ linkThickness = 2;          // The thickness of the link elements.
 boxIndentation = [30, 10];  // Defines the size of a handle indentation, it will be cut from each box side. The first value represents the top width, the second represents the bottom width and the depth.
 outerDistance = 0.5;        // The distance between a box and its container. This is additional size added to the container inner room to fit the box.
 
-// Sets the count of tiny-whoops in each kind of box
-whoopBoxX = 1;              // The number of boxes per lines in the container (horizontal axis).
-whoopBoxY = 1;              // The number of boxes per columns in the container (vertical axis).
-whoopBoxZ = 1;              // The number of boxes per lines and columns in the container (depth axis).
+// Select the config preset
+preset = "DEFAULT";
 
-// Options for the ready to print models
-showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config
-showPresets = 0;            // Show the list of available presets.
+// Defines the size of a tiny-whoop
+motorDistance = getPreset(preset, IDX_MOTOR_DISTANCE);   // The distance between motors on the diagonal.
+ductDiameter = getPreset(preset, IDX_DUCT_DIAMETER);     // The outer diameter of a motor duct.
+ductHeight = getPreset(preset, IDX_DUCT_HEIGHT);         // The outer height of a motor duct, including the screw heads.
+whoopHeight = getPreset(preset, IDX_WHOOP_HEIGHT);       // The outer height of the tiny-whoop, from the bottom of the frame to the top of the canopy, including everything beyond.
+boxPadding = getPreset(preset, IDX_BOX_PADDING);         // The width of padding between the box sides and the tiny-whoop.
+boxSeparators = getPreset(preset, IDX_BOX_SEPARATOR);    // Tells whether the box contains separators or not.
+
+// Sets the count of tiny-whoops in each kind of box
+whoopBoxX = getPreset(preset, IDX_BOX_X, 1);              // The number of boxes per lines in the container (horizontal axis).
+whoopBoxY = getPreset(preset, IDX_BOX_Y, 1);              // The number of boxes per columns in the container (vertical axis).
+whoopBoxZ = getPreset(preset, IDX_BOX_Z, 1);              // The number of boxes per lines and columns in the container (depth axis).

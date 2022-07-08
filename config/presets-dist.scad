@@ -38,17 +38,23 @@ presets = [
         23,                     // IDX_DUCT_HEIGHT
         48,                     // IDX_WHOOP_HEIGHT
         7,                      // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
-        // frame 65, props 31, parts box
+        // frame 65, parts box
         "PARTS65",              // IDX_NAME
         65,                     // IDX_MOTOR_DISTANCE
         36,                     // IDX_DUCT_DIAMETER
         0,                      // IDX_DUCT_HEIGHT
         43,                     // IDX_WHOOP_HEIGHT
         7.5,                    // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
         // frame 65, props 31
@@ -58,7 +64,10 @@ presets = [
         17,                     // IDX_DUCT_HEIGHT
         40,                     // IDX_WHOOP_HEIGHT
         7.5,                    // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
         // frame 65, props 31, HD
@@ -68,7 +77,10 @@ presets = [
         17,                     // IDX_DUCT_HEIGHT
         43,                     // IDX_WHOOP_HEIGHT
         7.5,                    // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
         // frame 65, props 35
@@ -78,17 +90,23 @@ presets = [
         16,                     // IDX_DUCT_HEIGHT
         40,                     // IDX_WHOOP_HEIGHT
         6,                      // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
-        // frame 75, props 40, parts box
+        // frame 75, parts box
         "PARTS75",              // IDX_NAME
         78,                     // IDX_MOTOR_DISTANCE
         48,                     // IDX_DUCT_DIAMETER
         0,                      // IDX_DUCT_HEIGHT
         65,                     // IDX_WHOOP_HEIGHT
         1,                      // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
         // frame 75, props 40
@@ -98,7 +116,10 @@ presets = [
         28,                     // IDX_DUCT_HEIGHT
         56,                     // IDX_WHOOP_HEIGHT
         1,                      // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ],
     [
         // frame 75, props 40, HD
@@ -108,6 +129,9 @@ presets = [
         28,                     // IDX_DUCT_HEIGHT
         65,                     // IDX_WHOOP_HEIGHT
         1,                      // IDX_BOX_PADDING
-        false                   // IDX_BOX_SEPARATOR
+        false,                  // IDX_BOX_SEPARATOR
+        1,                      // IDX_BOX_X
+        2,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
     ]
 ];
