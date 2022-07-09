@@ -183,7 +183,7 @@ function getBoxWidth(motorDistance, ductDiameter, wallThickness, wallDistance) =
  * Computes the outer height of a box that will contain a tiny-whoop.
  * @param Number whoopHeight - The outer height of the tiny-whoop.
  * @param Number groundThickness - The thickness of the box ground.
- * @param Number shells - Th number of shells. This represents the number of nested boxes.
+ * @param Number shells - The number of shells. This represents the number of nested boxes.
  */
 function getBoxHeight(whoopHeight, groundThickness, shells) =
     let(
@@ -197,7 +197,7 @@ function getBoxHeight(whoopHeight, groundThickness, shells) =
 /**
  * Computes the distance between the walls and the ducts of the tiny-whoop.
  * @param Number wallThickness - The thickness of the walls.
- * @param Number shells - Th number of shells. This represents the number of nested boxes.
+ * @param Number shells - The number of shells. This represents the number of nested boxes.
  */
 function getWallDistance(wallThickness, shells) =
     let(
