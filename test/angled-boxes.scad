@@ -43,7 +43,7 @@ applyMode(mode=renderMode) {
                 ductDiameter = ductDiameter,
                 whoopCount = 1,
                 drawerWallThickness = containerThickness,
-                drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=4),
+                drawerHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=3),
                 drawerCount = 1,
                 drawerDistance = outerDistance,
                 wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,

@@ -191,7 +191,7 @@ function getBoxHeight(whoopHeight, groundThickness, shells) =
         groundThickness = float(groundThickness),
         shells = float(shells) + 1
     )
-    layerAligned(whoopHeight + groundThickness * shells)
+    layerAligned(whoopHeight + groundThickness * (shells * 2 - 1))
 ;
 
 /**
