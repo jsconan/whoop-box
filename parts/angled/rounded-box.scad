@@ -30,18 +30,18 @@
  */
 
 // Import the project's setup.
-include <config/setup.scad>
+include <../../config/setup.scad>
 
 // Sets the minimum facet angle and size using the defined render mode.
-// Displays a build box visualization to preview the printer area.
 applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
-    //sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 10], offset=[0, 0, 5])
-    whoopRoundedBox(
-        whoopType = whoopType,
-        wallThickness = getBoxWallThickness(ROUNDED_BOX),
-        groundThickness = getBoxGroundThickness(ROUNDED_BOX),
-        boxHeight = getBoxHeight(ROUNDED_BOX, whoopType),
-        ductDistance = getBoxWhoopDistance(ROUNDED_BOX)
+    // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
+    roundedBox(
+        motorDistance = motorDistance,
+        ductDiameter = ductDiameter,
+        wallThickness = wallThickness,
+        groundThickness = groundThickness,
+        boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
+        wallDistance = getWallDistance(wallThickness=wallThickness)
     );
 }

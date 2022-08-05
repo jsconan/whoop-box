@@ -23,9 +23,32 @@
 /**
  * A box to store tiny-whoops.
  *
- * Version of the project.
+ * Shows the boxes container.
  *
  * @author jsconan
  */
 
-PROJECT_VERSION = "1.0.0";
+// Import the project's setup.
+include <../config/setup.scad>
+
+// Setup the viewport
+$vpr = [330, 30, 360];
+$vpt = [0, 0, 0];
+$vpd = 455;
+
+// Sets the minimum facet angle and size using the defined render mode.
+applyMode(mode=renderMode) {
+    color(colorWhoopBoxContainer) {
+        whoopBoxContainer(
+            motorDistance = motorDistance,
+            ductDiameter = ductDiameter,
+            wallThickness = wallThickness,
+            containerThickness = containerThickness,
+            linkThickness = linkThickness,
+            boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness),
+            paddingWidth = boxPadding,
+            wallDistance = outerDistance,
+            cells = [whoopBoxX, whoopBoxY]
+        );
+    }
+}

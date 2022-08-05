@@ -29,152 +29,182 @@
  */
 
 /**
- * Ajust a height with respect to the target layer height
- * @param Number height
+ * Aligns a value with respect to the target layer height.
+ * @param Number value
  * @returns Number
  */
-function adjustToLayer(height) = roundBy(height, printResolution);
+function layerAligned(value) = roundBy(value, layerHeight);
 
 /**
- * Ajust a width with respect to the target nozzle size
- * @param Number width
+ * Aligns a value with respect to the target nozzle size.
+ * @param Number value
  * @returns Number
  */
-function adjustToNozzle(width) = roundBy(width, nozzle);
+function nozzleAligned(value) = roundBy(value, nozzleWidth);
 
 /**
- * Gets the data defined for a particular tiny-whoop type
- * @param String whoopType - The type of tiny-whoop
- * @param Number [index] - The index of the data to get
- * @returns Array|Number - The tiny-whoop data
+ * Gets the thickness of N layers.
+ * @param Number N
+ * @returns Number
  */
-function getWhoopData(whoopType, index) =
+function layers(N) = N * layerHeight;
+
+/**
+ * Gets the width of N times the nozzle width.
+ * @param Number N
+ * @returns Number
+ */
+function shells(N) = N * nozzleWidth;
+
+/**
+ * Computes the print interval between the centers of 2 objects.
+ * @param Number size - The size of the shape.
+ * @returns Number
+ */
+function getPrintInterval(size) = size + printInterval;
+
+/**
+ * Gets the adjusted quantity of shapes to place on a grid with respect to the size of one shape.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @returns Number
+ */
+function getMaxQuantity(length, width, quantity=1) =
     let(
-        data = fetch(whoopData, whoopType)
+        maxLine = floor(printerLength / length),
+        maxCol = floor(printerWidth / width)
     )
-    index ? data[index] : data
+    min(maxLine * maxCol, quantity)
 ;
 
 /**
- * Gets the data defined for a particular box type
- * @param String boxType - The type of box
- * @param Number [index] - The index of the data to get
- * @returns Array|Number - The box data
+ * Gets the maximal number of shapes that can be placed on a line with respect the size of one shape.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @param Number [line] - The expected number of shapes per line.
+ * @returns Number
  */
-function getBoxData(boxType, index) =
+function getMaxLine(length, width, quantity=1, line=undef) =
     let(
-        data = fetch(boxData, boxType)
+        maxLine = floor(printerLength / length)
     )
-    index ? data[index] : data
+    min(uor(line, ceil(sqrt(quantity))), maxLine)
 ;
 
 /**
- * Gets the cumulative data defined for a particular box type
- * @param String boxType - The type of box
- * @param Number index - The index of the data to sum
- * @returns Number - The box cumulative data
+ * Gets the overall length of the area taken to place the repeated shapes on a grid with respect to the expected quantity.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @param Number [line] - The expected number of shapes per line.
+ * @returns Number
  */
-function getBoxCumulativeData(boxType, index) =
+function getGridLength(length, width, quantity=1, line=undef) =
     let(
-        dataIndex = find(boxData, boxType)
+        length = getPrintInterval(length),
+        width = getPrintInterval(width),
+        quantity = getMaxQuantity(length, width, quantity)
     )
-    vsum([
-        for (boxIndex = [0:dataIndex])
-            boxData[boxIndex][index]
-    ])
+    min(quantity, getMaxLine(length, width, quantity, line)) * length
 ;
 
 /**
- * Gets the list of box types till the provided one
- * @param String boxType - The type of box
- * @returns Array - The box cumulative data
+ * Gets the overall width of the area taken to place the repeated shapes on a grid with respect to the expected quantity.
+ * @param Number length - The length of the shape.
+ * @param Number width - The width of the shape.
+ * @param Number [quantity] - The number of shapes to place.
+ * @param Number [line] - The expected number of shapes per line.
+ * @returns Number
  */
-function getBoxTypeList(boxType) =
+function getGridWidth(length, width, quantity=1, line=undef) =
     let(
-        dataIndex = find(boxData, boxType)
+        length = getPrintInterval(length),
+        width = getPrintInterval(width),
+        quantity = getMaxQuantity(length, width, quantity),
+        line = getMaxLine(length, width, quantity, line)
     )
-    [
-        for (boxIndex = [0:dataIndex])
-            boxData[boxIndex][IDX_ID]
-    ]
+    ceil(quantity / line) * width
 ;
 
 /**
- * Gets the diameter of the propeller duct
- * @param String whoopType - The type of tiny-whoop for which compute the size
- * @returns Number - The diameter of the propeller duct
+ * Prints the project version, including the package version.
+ * @returns String
  */
-function getWhoopDuctDiameter(whoopType) = getWhoopData(whoopType, IDX_WHOOP_DUCT);
+function printVersion() = str(PROJECT_VERSION);
 
 /**
- * Computes the distance between motors based on the diagonal size of a tiny-whoop frame
- * @param String whoopType - The type of tiny-whoop for which compute the size
- * @returns Number - The distance between motors
+ * Gets the preset defined by a name, or a value from a preset.
+ * @param String name - The name of the preset to get.
+ * @param Number [index] - The index inside the preset for the value to get.
+ * @param * [default] - The default value if the preset does not exist at the given index.
+ * @returns Array|Number - The preset or the value at index.
  */
-function getWhoopMotorInterval(whoopType) =
-    sqrt(pow(getWhoopData(whoopType, IDX_WHOOP_FRAME), 2) / 2)
+function getPreset(name, index, default) =
+    let(
+        data = uor(fetch(presets, name), fetch(presets, "DEFAULT"))
+    )
+    index ? uor(data[index], default) : data
 ;
 
 /**
- * Gets the height of a tiny-whoop
- * @param String whoopType - The type of tiny-whoop
- * @returns Number - The height of the tiny-whoop
+ * Gets the list of preset values.
+ * @param Number index - The index inside each preset for the value to get.
+ * @returns Array - The list of preset values.
  */
-function getWhoopHeight(whoopType) = adjustToLayer(
-    getWhoopData(whoopType, IDX_WHOOP_HEIGHT)
-);
+function getPresets(index) = [ for (preset = presets) preset[index] ];
 
 /**
- * Gets the ground thickness
- * @param String boxType - The type of box
- * @returns Number - The ground thickness for the given box
+ * Computes the side distance between motors based on the given diagonal.
+ * @param Number diagonal - The distance between motors on the diagonal.
+ * @returns Number - The distance between motors.
  */
-function getBoxGroundThickness(boxType) = adjustToLayer(
-    getBoxData(boxType, IDX_BOX_GROUND)
-);
+function getMotorInterval(diagonal) = sqrt(pow(diagonal, 2) / 2);
 
 /**
- * Gets the wall thickness
- * @param String boxType - The type of box
- * @returns Number - The wall thickness for the given box
+ * Computes the outer width of a box that will contain a tiny-whoop.
+ * @param Number motorDistance - The distance between motors on the diagonal.
+ * @param Number ductDiameter - The outer diameter of a motor duct.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number wallDistance - The distance between a duct and the wall.
  */
-function getBoxWallThickness(boxType) = adjustToNozzle(
-    getBoxData(boxType, IDX_BOX_WALL)
-);
-
-/**
- * Gets the distance from the internal space to walls
- * @param String boxType - The type of box
- * @returns Number - The distance to walls for the given box
- */
-function getBoxWallDistance(boxType) = wallDistance * getBoxData(boxType, IDX_BOX_DISTANCE);
-
-/**
- * Gets the distance from the tiny-whoop ducts to walls
- * @param String boxType - The type of box
- * @returns Number - The distance to walls for the given box
- */
-function getBoxWhoopDistance(boxType) =
-    wallDistance * getBoxCumulativeData(boxType, IDX_BOX_DISTANCE) +
-    vsum([
-        for (type = pop(getBoxTypeList(boxType)))
-            getBoxWallThickness(type)
-    ])
+function getBoxWidth(motorDistance, ductDiameter, wallThickness, wallDistance) =
+    let(
+        motorDistance = float(motorDistance),
+        ductDiameter = float(ductDiameter),
+        wallThickness = float(wallThickness),
+        wallDistance = float(wallDistance)
+    )
+    ceil(getMotorInterval(motorDistance)) + ductDiameter + (wallDistance + wallThickness) * 2
 ;
 
 /**
- * Gets the height of a box with respect to the given tiny-whoop
- * @param String boxType - The type of box
- * @param String whoopType - The type of tiny-whoop
- * @returns Number - The height of the box
+ * Computes the outer height of a box that will contain a tiny-whoop.
+ * @param Number whoopHeight - The outer height of the tiny-whoop.
+ * @param Number groundThickness - The thickness of the box ground.
+ * @param Number shells - The number of shells. This represents the number of nested boxes.
  */
-function getBoxHeight(boxType, whoopType) =
-    getWhoopHeight(whoopType) +
-    adjustToLayer(getBoxData(boxType, IDX_BOX_HEIGHT)) +
-    vsum([
-        for (type = getBoxTypeList(boxType))
-            getBoxGroundThickness(type)
-    ])
+function getBoxHeight(whoopHeight, groundThickness, shells) =
+    let(
+        whoopHeight = float(whoopHeight),
+        groundThickness = float(groundThickness),
+        shells = float(shells) + 1
+    )
+    layerAligned(whoopHeight + groundThickness * (shells * 2 - 1))
+;
+
+/**
+ * Computes the distance between the walls and the ducts of the tiny-whoop.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number shells - The number of shells. This represents the number of nested boxes.
+ */
+function getWallDistance(wallThickness, shells) =
+    let(
+        wallThickness = float(wallThickness),
+        shells = float(shells)
+    )
+    printTolerance + (wallThickness + printTolerance) * shells
 ;
 
 /**
@@ -195,9 +225,9 @@ function getDuctRadius(sides, diameter) =
  * @param Number diameter - The diameter of a duct
  * @param Vector count - The count of tiny-whoops in each direction
  * @param Number wall - The thickness of a wall
- * @returns Vector - The distance betwenn external ducts
+ * @returns Vector - The distance between external ducts
  */
-function getDuctDistance(interval, diameter, count = 1, wall = 0) =
+function getDuctDistance(interval, diameter, count=1, wall=0) =
     let(
         count = vector2D(count),
         interval = float(interval),
@@ -212,9 +242,9 @@ function getDuctDistance(interval, diameter, count = 1, wall = 0) =
  * @param Number diameter - The diameter of a duct
  * @param Vector count - The count of tiny-whoops in each direction
  * @param Number wall - The thickness of a wall
- * @returns Vector - The distance betwenn external ducts
+ * @returns Vector - The distance between external ducts
  */
-function getDuctPoints(interval, diameter, count = 1, wall = 0) =
+function getDuctPoints(interval, diameter, count=1, wall=0) =
     let(
         point = getDuctDistance(interval, diameter, count, wall) / 2
     )

@@ -29,7 +29,7 @@
  */
 
 /**
- * Computes the points defining the polygon shape of a cupboatd that will
+ * Computes the points defining the polygon shape of a cupboard that will
  * contain drawers for several tiny-whoops.
  * @param Number duct - The duct diameter
  * @param Number interval - The distance between ducts
@@ -38,7 +38,7 @@
  * @param Vector [count] - The number of whoops on each axis
  * @returns Vector[]
  */
-function drawWhoopCupboardShape(duct, interval, wall = 0, offset = 0, count = 1) =
+function drawAngledCupboardShape(duct, interval, wall=0, offset=0, count=1) =
     let(
         n = 8,
         count = vector2D(count),
@@ -53,26 +53,27 @@ function drawWhoopCupboardShape(duct, interval, wall = 0, offset = 0, count = 1)
 ;
 
 /**
- * Builds a cupboatd that will contain drawers for several tiny-whoops.
- * @param String whoopType - The type of tiny-whoop
+ * Builds a cupboard that will contain drawers for several tiny-whoops.
+ * @param Number motorDistance - The distance between motors on the diagonal
+ * @param Number ductDiameter - The outer diameter of a motor duct
  * @param Number drawerWallThickness - The thickness of the internal walls
  * @param Number wallThickness - The thickness of the walls
  * @param Number drawerHeight - The height of a drawer
- * @param Number [ductDistance] - The distance between a duct and a drawer's wall
+ * @param Number [wallDistance] - The distance between a duct and a drawer's wall
  * @param Number [drawerDistance] - The distance between a drawer and the wall
  * @param Number [drawerCount] - The number of drawers
  * @param Vector [whoopCount] - The number of tiny-whoops on each axis
  */
-module whoopCupboard(whoopType, drawerWallThickness, wallThickness, drawerHeight, ductDistance = 0, drawerDistance = 0, drawerCount = 1, whoopCount = 1) {
-    duct = getWhoopDuctDiameter(whoopType) + ductDistance * 2;
-    interval = getWhoopMotorInterval(whoopType);
+module angledCupboard(motorDistance, ductDiameter, drawerWallThickness, wallThickness, drawerHeight, wallDistance=0, drawerDistance=0, drawerCount=1, whoopCount=1) {
+    duct = ductDiameter + wallDistance * 2;
+    interval = getMotorInterval(motorDistance);
     cupboardWidth = getDuctDistance(interval, duct, whoopCount, drawerWallThickness)[0] + duct + (drawerWallThickness + drawerDistance + wallThickness) * 2;
     fullHeight = (drawerHeight + wallThickness) * drawerCount + wallThickness;
 
     rotateX(270) {
-        translate(-[0, cupboardWidth, fullHeight] / 2) {
+        translateZ(-fullHeight / 2) {
             difference() {
-                extrudeShape(points=drawWhoopCupboardShape(
+                extrudePolygon(points=drawAngledCupboardShape(
                     duct = duct,
                     interval = interval,
                     wall = drawerWallThickness,
@@ -82,7 +83,7 @@ module whoopCupboard(whoopType, drawerWallThickness, wallThickness, drawerHeight
 
                 translateZ(wallThickness) {
                     repeat(count=drawerCount, interval = [0, 0, drawerHeight + wallThickness]) {
-                        extrudeShape(points=drawWhoopCupboardShape(
+                        extrudePolygon(points=drawAngledCupboardShape(
                             duct = duct,
                             interval = interval,
                             wall = drawerWallThickness,

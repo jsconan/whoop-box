@@ -23,9 +23,30 @@
 /**
  * A box to store tiny-whoops.
  *
- * Version of the project.
+ * Shows the drawer for containing angled boxes.
  *
  * @author jsconan
  */
 
-PROJECT_VERSION = "1.0.0";
+// Import the project's setup.
+include <../config/setup.scad>
+
+// Setup the viewport
+$vpr = [40, 0, 340];
+$vpt = [0, 0, 25];
+$vpd = 330;
+
+// Sets the minimum facet angle and size using the defined render mode.
+applyMode(mode=renderMode) {
+    color(colorAngledDrawer) {
+        angledDrawer(
+            motorDistance = motorDistance,
+            ductDiameter = ductDiameter,
+            wallThickness = containerThickness,
+            groundThickness = groundThickness,
+            boxHeight = getBoxHeight(whoopHeight=whoopHeight, groundThickness=groundThickness, shells=2),
+            wallDistance = getWallDistance(wallThickness=wallThickness, shells=2) + outerDistance,
+            whoopCount = [whoopBoxX, whoopBoxZ]
+        );
+    }
+}

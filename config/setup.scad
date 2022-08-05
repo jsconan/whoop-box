@@ -23,7 +23,7 @@
 /**
  * A box to store a tiny whoop.
  *
- * Setup the context.
+ * Project's bootstrap.
  *
  * @author jsconan
  */
@@ -35,13 +35,57 @@ include <../lib/camelSCAD/shapes.scad>
 include <version.scad>
 
 // Then we need the config for the project, as well as the related functions
-include <config.scad>
+include <constants.scad>
 include <helpers.scad>
+include <presets.scad>
+include <config.scad>
 
 // Finally, include the shapes
 include <../shapes/box-util.scad>
+include <../shapes/whoop-box.scad>
 include <../shapes/rounded-box.scad>
 include <../shapes/angled-box.scad>
-include <../shapes/container.scad>
-include <../shapes/drawer.scad>
-include <../shapes/cupboard.scad>
+include <../shapes/angled-container.scad>
+include <../shapes/angled-drawer.scad>
+include <../shapes/angled-cupboard.scad>
+
+// Show the config values
+if (showConfig) {
+    echo(join([
+        "",
+        str("-- Tiny-Whoop boxes System ----------"),
+        str("Version:                       ", printVersion()),
+        str("Preset:                        ", preset),
+        str("-- Tiny-Whoop settings --------------"),
+        str("Motor distance:                ", motorDistance, "mm"),
+        str("Duct diameter:                 ", ductDiameter, "mm"),
+        str("Duct height:                   ", ductHeight, "mm"),
+        str("Whoop height:                  ", whoopHeight, "mm"),
+        str("Box padding:                   ", boxPadding, "mm"),
+        str("-- Box settings ---------------------"),
+        str("Wall thickness:                ", wallThickness, "mm"),
+        str("Ground thickness:              ", groundThickness, "mm"),
+        str("Outer distance:                ", outerDistance, "mm"),
+        str("Boxes per lines:               ", whoopBoxX),
+        str("Boxes per columns:             ", whoopBoxY),
+        str("Boxes per lines and columns:   ", whoopBoxZ),
+        str("-- Printer settings -----------------"),
+        str("Nozzle diameter:               ", nozzleWidth, "mm"),
+        str("Print layer:                   ", layerHeight, "mm"),
+        str("Print tolerance:               ", printTolerance, "mm"),
+        str("Printer's length:              ", printerLength / 10, "cm"),
+        str("Printer's width:               ", printerWidth / 10, "cm"),
+        str("Print interval:                ", printInterval, "mm"),
+        ""
+    ], "\n"));
+}
+
+
+// Show the list of available presets
+if (showPresets) {
+    echo(str(
+        "\n",
+        join(getPresets(IDX_NAME), "\n"),
+        "\n"
+    ));
+}
