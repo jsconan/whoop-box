@@ -5,6 +5,8 @@ A printable box system to store tiny-whoops.
 <!-- vscode-markdown-toc -->
 
 -   [At a glance](#Ataglance)
+-   [Whoop boxes](#Whoopboxes)
+-   [Angled boxes](#Angledboxes)
 -   [Install and requirements](#Installandrequirements)
     -   [OpenSCAD](#OpenSCAD)
     -   [Source code](#Sourcecode)
@@ -23,6 +25,64 @@ A printable box system to store tiny-whoops.
 ## <a name='Ataglance'></a>At a glance
 
 The project contains designs for a box system for storing tiny-whoop quadcopters. The parts are designed using a scripting language, processed by [OpenSCAD](https://openscad.org/about.html). There is no ready to use 3D model files in the source code. If you are interested in such files, please look at the [released versions](https://github.com/jsconan/whoop-box/releases) which contains 3D model files built with default parameters. However, if you want to customize these parts, tailoring them with your measures, you should rather download the source code and then tweak the configuration files before generating your own 3D model files.
+
+At that time, the project proposed 2 sets of boxes. The dimensions and the number of cells can be set from the [configuration](./config/config-dist.scad).
+
+The size is defined by:
+
+-   The distance between motors, on the [diagonal](./config/config-dist.scad#L59).
+-   The diameter of [ducts](./config/config-dist.scad#L60).
+-   The height of [ducts](./config/config-dist.scad#L61).
+-   The overall height of the [whoop](./config/config-dist.scad#L62).
+-   The [padding](./config/config-dist.scad#L63) added between the box wall and the whoop.
+
+Several presets are available out of the box in the file [config/presets.scad](./config/presets-dist.scad). The currently selected preset is configured through the variable `preset` in the file [config/config.scad](./config/config-dist.scad#L56).
+
+When using the [render](./render.sh) script, all presets can be rendered at once using the option `-a`. See the section **[Render the parts](#Rendertheparts)**. Otherwise, only one single preset is rendered at a time.
+
+## <a name='Whoopboxes'></a>Whoop boxes
+
+A second iteration on the project added simple boxes with padding inside to better wrap the tiny-whoop. Instead of multiple shells made of several materials, it only relies on a single box and its container.
+
+![simple box set](./doc/whoop-boxes.gif)
+
+This version proposes several variants of the box:
+
+-   A padded box to contain a tiny-whoop
+
+![padded box](./doc/whoop-box.png)
+
+-   A box for spare parts
+
+![spare part box](./doc/parts-box.png)
+
+-   A box for propellers
+
+![propellers box](./doc/propellers-box.png)
+
+## <a name='Angledboxes'></a>Angled boxes
+
+Initially, the project was based on a set of wrapped boxes, to be printed in various materials (TPU, PLA, PET). The set was made modular, in order to either have a simple box to protect a tiny-whoop or to properly store several of them in a cupboard.
+
+![angled box set](./doc/angled-boxes.png)
+
+The proposed boxes are:
+
+-   A rounded box to contain a tiny-whoop
+
+![rounded box](./doc/rounded-box.png)
+
+-   An angled box to contain the rounded box
+
+![angled box](./doc/angled-box.png)
+
+-   A drawer to contain one or more angled boxes with respect to the configuration
+
+![angled drawer](./doc/angled-drawer.png)
+
+-   A cupboard to contain drawers with one or more angled boxes with respect to the configuration
+
+![angled cupboard](./doc/angled-cupboard.png)
 
 ## <a name='Installandrequirements'></a>Install and requirements
 
