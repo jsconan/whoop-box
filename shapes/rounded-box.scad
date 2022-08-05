@@ -38,7 +38,7 @@
  * @param Number n - The number of sectors
  * @returns Vector[]
  */
-function drawWhoopRoundedBoxDuct(point, duct, start, end, n = 12) =
+function drawRoundedBoxDuct(point, duct, start, end, n=12) =
     let(
         point = vector2D(point),
         radius = float(duct) / 2,
@@ -52,42 +52,39 @@ function drawWhoopRoundedBoxDuct(point, duct, start, end, n = 12) =
 /**
  * Computes the points defining the polygon shape surrounding a tiny-whoop.
  * Rounded version.
- * @param Number duct - The duct diameter
- * @param Number interval - The distance between ducts
+ * @param Number motorDistance - The distance between motors on the diagonal.
+ * @param Number ductDiameter - The outer diameter of a motor duct.
  * @returns Vector[]
  */
-function drawWhoopRoundedBoxShape(duct, interval) =
+function drawRoundedBoxShape(motorDistance, ductDiameter) =
     let(
         n = 12,
-        radius = duct / 2,
-        angle = getPolygonAngle(1, n),
-        points = getDuctPoints(interval, duct)
+        points = getDuctPoints(getMotorInterval(motorDistance), ductDiameter)
     )
     concat(
-        drawWhoopRoundedBoxDuct(point=points[0], duct=duct, start=-1.5, end= 4.5, n=n),
-        drawWhoopRoundedBoxDuct(point=points[1], duct=duct, start= 1.5, end= 7.5, n=n),
-        drawWhoopRoundedBoxDuct(point=points[2], duct=duct, start= 4.5, end=10.0, n=n),
-        drawWhoopRoundedBoxDuct(point=points[3], duct=duct, start=-4.0, end= 1.5, n=n)
+        drawRoundedBoxDuct(point=points[0], duct=ductDiameter, start=-1.5, end= 4.5, n=n),
+        drawRoundedBoxDuct(point=points[1], duct=ductDiameter, start= 1.5, end= 7.5, n=n),
+        drawRoundedBoxDuct(point=points[2], duct=ductDiameter, start= 4.5, end=10.0, n=n),
+        drawRoundedBoxDuct(point=points[3], duct=ductDiameter, start=-4.0, end= 1.5, n=n)
     )
 ;
 
 /**
  * Builds a box that will contain a tiny-whoop.
  * Rounded version.
- * @param String whoopType - The type of tiny-whoop
+ * @param Number motorDistance - The distance between motors on the diagonal
+ * @param Number ductDiameter - The outer diameter of a motor duct
  * @param Number wallThickness - The thickness of the walls
  * @param Number groundThickness - The thickness of the ground
  * @param Number boxHeight - The height of the box
- * @param Number [ductDistance] - The distance between a duct and the wall
+ * @param Number [wallDistance] - The distance between a duct and the wall
  */
-module whoopRoundedBox(whoopType, wallThickness, groundThickness, boxHeight, ductDistance = 0) {
-    duct = getWhoopDuctDiameter(whoopType) + ductDistance * 2;
-    interval = getWhoopMotorInterval(whoopType);
-    boxWidth = interval + duct + wallThickness * 2;
-    points = drawWhoopRoundedBoxShape(duct=duct, interval=interval);
+module roundedBox(motorDistance, ductDiameter, wallThickness, groundThickness, boxHeight, wallDistance=0) {
+    boxWidth = getBoxWidth(motorDistance=motorDistance, ductDiameter=ductDiameter, wallThickness=wallThickness, wallDistance=wallDistance);
+    points = drawRoundedBoxShape(motorDistance=motorDistance, ductDiameter=ductDiameter + wallDistance);
 
     boxShape(size=apply3D(boxWidth, z=boxHeight), ground=groundThickness) {
-        extrudeShape(points=points, height=boxHeight, distance=wallThickness);
-        extrudeShape(points=points, height=boxHeight);
+        extrudePolygon(points=points, height=boxHeight, distance=wallThickness);
+        extrudePolygon(points=points, height=boxHeight);
     }
 }

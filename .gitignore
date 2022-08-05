@@ -4,6 +4,7 @@
 # Results
 output
 dist
+tmp
 *.csg
 *.csv
 
@@ -21,6 +22,14 @@ nbproject/
 .settings
 .project
 
+# Local config
+config.ini
+config.scad
+presets.scad
+
+# Local post processing scripts
+post-render.sh
+post-slice.sh
+
 # Generated files
 *.stl
-
