@@ -4,6 +4,7 @@
 # Results
 output
 dist
+tmp
 *.csg
 *.csv
 
@@ -32,4 +33,3 @@ post-slice.sh
 
 # Generated files
 *.stl
-

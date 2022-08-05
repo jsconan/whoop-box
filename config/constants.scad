@@ -39,3 +39,14 @@ IDX_BOX_SEPARATOR  =  6; // The index for the flag allowing to add separators.
 IDX_BOX_X          =  7; // The index for the number of boxes per lines in the container (horizontal axis).
 IDX_BOX_Y          =  8; // The index for the number of boxes per columns in the container (vertical axis).
 IDX_BOX_Z          =  9; // The index for the number of boxes per lines and columns in the container (depth axis).
+
+// Colors applied to the elements when previewed.
+// This will be used for the animations and other pictures, but this won't have effect on the ready to print elements.
+colorWhoopBox = "#d84";                         // Color of a simple whoop box
+colorPropellersBox = "#6aa";                    // Color of a box for propellers
+colorPartsBox = "#ada";                         // Color of a box for spare parts
+colorWhoopBoxContainer = "#eed";                // Color of a whoop box container
+colorAngledBox = "#686";                        // Color of an angled box
+colorRoundedBox = "#88a";                       // Color of a rounded box
+colorAngledDrawer = "#d84";                     // Color of a drawer for angled boxes
+colorAngledCupboard = [.7, .3, .2, .8];     // Color of a cupboard for angled boxes
