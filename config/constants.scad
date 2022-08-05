@@ -49,4 +49,4 @@ colorWhoopBoxContainer = "#eed";                // Color of a whoop box containe
 colorAngledBox = "#686";                        // Color of an angled box
 colorRoundedBox = "#88a";                       // Color of a rounded box
 colorAngledDrawer = "#d84";                     // Color of a drawer for angled boxes
-colorAngledCupboard = [.7, .3, .2, .8];     // Color of a cupboard for angled boxes
+colorAngledCupboard = [.7, .3, .2, .8];         // Color of a cupboard for angled boxes

@@ -60,6 +60,10 @@ This version proposes several variants of the box:
 
 ![propellers box](./doc/propellers-box.png)
 
+-   A container for one or more boxes with respect to the configuration
+
+![container](./doc/whoop-box-container.png)
+
 ## <a name='Angledboxes'></a>Angled boxes
 
 Initially, the project was based on a set of wrapped boxes, to be printed in various materials (TPU, PLA, PET). The set was made modular, in order to either have a simple box to protect a tiny-whoop or to properly store several of them in a cupboard.
