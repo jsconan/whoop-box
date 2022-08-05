@@ -27,7 +27,7 @@
 #
 
 # script config
-scriptpath=$(dirname $0)
+scriptpath="$(dirname $0)"
 configpath="config/config.ini"
 
 # include libs

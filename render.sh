@@ -33,13 +33,13 @@ whoopBoxY=
 whoopBoxZ=
 
 # script config
-scriptpath=$(dirname $0)
-project=$(pwd)
-srcpath=${project}
-dstpath=${project}/dist/stl
-slcpath=${project}/dist/gcode
-configpath=${srcpath}/config
-partpath=${srcpath}/parts
+scriptpath="$(dirname $0)"
+project="$(pwd)"
+srcpath="${project}"
+dstpath="${project}/dist/stl"
+slcpath="${project}/dist/gcode"
+configpath="${srcpath}/config"
+partpath="${srcpath}/parts"
 allpresets=
 format=
 parallel=

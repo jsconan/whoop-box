@@ -27,8 +27,8 @@
 #
 
 # script config
-scriptpath=$(dirname $0)
-configpath=${scriptpath}/config
+scriptpath="$(dirname $0)"
+configpath="${scriptpath}/config"
 
 # make sure to get the library
 if [ ! -d "${scriptpath}/lib/camelSCAD" ]; then
@@ -48,8 +48,6 @@ if [ ! -d "${scriptpath}/lib/camelSCAD" ]; then
 fi
 
 # include the libs
-scriptpath=$(dirname $0)
-configpath=${scriptpath}/config
 source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
 # make sure the config exists
