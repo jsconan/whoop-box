@@ -82,10 +82,6 @@ for filename in "${list[@]}"; do
         # produce the video
         printmessage "${C_RST}Will render a video of ${C_SEL}${length}${C_RST} frames with a rate of ${C_SEL}${framerate}${C_RST} images per seconds"
         ffmpeg -framerate ${framerate} -i "${tmppath}/${name}%5d.${imgext}" "${picture}" -y
-
-        # clean up the place
-        rm "${tmppath}/${name}"*."${imgext}" 2> /dev/null
-        rm "${showsteps}" 2> /dev/null
     else
         picture="${dstpath}/${name}.${imgext}"
 
@@ -93,6 +89,10 @@ for filename in "${list[@]}"; do
         printmessage "${C_RST}Will render a picture from ${C_SEL}${filename}${C_RST}"
         scadpreview "${filename}" "${dstpath}" "${imgext}" "" "" --quiet --projection p --colorscheme "${theme}" --imgsize ${imgwidth},${imgheight}
     fi
+
+    # clean up the place
+    rm "${tmppath}/${name}"*."${imgext}" 2> /dev/null
+    rm "${showsteps}" 2> /dev/null
 
     if [ -f "${picture}" ]; then
         printmessage "${C_RST}Picture rendered at ${C_SEL}${picture}${C_RST}"
