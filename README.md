@@ -212,9 +212,9 @@ logpath="${project}/dist/zip.log"
 # Post process the rendered files
 printmessage "${C_MSG}==========================================="
 printmessage "${C_MSG}Post-render script: zip files"
-$(
+dummy=$(
     cd "${stlpath}"
-    rm *.zip
+    rm *.zip > /dev/null
     zip -r "${zippath}" *
 )
 printmessage "${C_MSG}==========================================="
