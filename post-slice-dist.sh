@@ -37,7 +37,16 @@
 scriptpath=$(dirname $0)
 source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
-# Do something... Some helpers have been loaded from the utils
-printmessage "${C_MSG}=============================="
-printmessage "${C_MSG}This is the post slice script!"
-printmessage "${C_MSG}=============================="
+# Script config
+project=$(pwd)
+gcodepath="${project}/dist/gcode/"
+sdcardpath="/PATH/TO/SD/CARD"   # <-- CHANGE THIS!
+logpath="${project}/dist/gcode-sync.log"
+
+# Post process the sliced files
+printmessage "${C_MSG}==========================================="
+printmessage "${C_MSG}Post-slice script: copy Gcode to the SDcard"
+date > ${logpath}
+createpath "${sdcardpath}"
+rsync -ahvt --no-links --delete --partial --force --modify-window=1 --exclude=.DS_Store --log-file=${logpath} "${gcodepath}" "${sdcardpath}"
+printmessage "${C_MSG}==========================================="
