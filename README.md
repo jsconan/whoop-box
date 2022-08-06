@@ -194,7 +194,33 @@ As these script can be defined locally, they are not part of the versioned conte
 -   you need to make sure the file is executable: `chmod +x post-render.sh`.
 -   finally, add you own commands to the copy.
 
-As an example, here is the script used to copy the sliced files to a SD-card:
+As an example:
+
+-   The script used to zip the rendered files:
+
+```sh
+# Bootstrap the script
+scriptpath=$(dirname $0)
+source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
+
+# Script config
+project=$(pwd)
+stlpath="${project}/dist/stl/"
+zippath="stl.zip"
+logpath="${project}/dist/zip.log"
+
+# Post process the rendered files
+printmessage "${C_MSG}==========================================="
+printmessage "${C_MSG}Post-render script: zip files"
+$(
+    cd "${stlpath}"
+    rm *.zip
+    zip -r "${zippath}" *
+)
+printmessage "${C_MSG}==========================================="
+```
+
+-   The script used to copy the sliced files to a SD-card:
 
 ```sh
 # Bootstrap the script
