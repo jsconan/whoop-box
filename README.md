@@ -100,8 +100,6 @@ First of all you need [OpenSCAD](https://openscad.org/) to be installed. To do s
 
 The source code is hosted on a [Git](https://git-scm.com/) repository. To get it you can either download a [zip file](https://github.com/jsconan/whoop-box/archive/refs/heads/main.zip), or clone the repository locally.
 
-Note: the easiest way is to call the `init.sh` script, that will take care of this for you.
-
 #### <a name='Downloadthezipfile'></a>Download the zip file
 
 The source code can be downloaded from the [GitHub repository](https://github.com/jsconan/whoop-box).
@@ -113,6 +111,8 @@ As the project is using a shared library, that is not supplied with the package,
 Download the zip file from this [link](https://github.com/jsconan/camelSCAD/archive/refs/heads/main.zip).
 
 Then extract its content inside the folder `lib/camelSCAD`. Please make sure the folder directly contains the library and not an intermediate folder like `lib/camelSCAD/camelSCAD-master`. If this is the case, please move the content one folder up and delete the extra folder.
+
+Note: the easiest way is to call the `init.sh` script, that will take care of this for you.
 
 #### <a name='Getthecodefromtherepository'></a>Get the code from the repository
 
@@ -130,6 +130,8 @@ git submodule update
 The source code should have been downloaded, as well as the libraries.
 
 Note: you can also use a graphical interface tool. In this case, please make it can also install the submodules.
+
+Note 2: the easiest way is to call the `init.sh` script, that will take care of this for you.
 
 ### <a name='Configuration'></a>Configuration
 
