@@ -242,5 +242,4 @@ date > ${logpath}
 createpath "${sdcardpath}"
 rsync -ahvt --no-links --delete --partial --force --modify-window=1 --exclude=.DS_Store --log-file=${logpath} "${gcodepath}" "${sdcardpath}"
 printmessage "${C_MSG}==========================================="
-
 ```
