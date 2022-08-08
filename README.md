@@ -110,7 +110,7 @@ As the project is using a shared library, that is not supplied with the package,
 
 Download the zip file from this [link](https://github.com/jsconan/camelSCAD/archive/refs/heads/main.zip).
 
-Then extract its content inside the folder `lib/camelSCAD`. Please make sure the folder directly contains the library and not an intermediate folder like `lib/camelSCAD/camelSCAD-master`. If this is the case, please move the content one folder up and delete the extra folder.
+Then extract its content inside the folder `lib/camelSCAD`. Please make sure the folder directly contains the library and not an intermediate folder like `lib/camelSCAD/camelSCAD-main`. If this is the case, please move the content one folder up and delete the extra folder.
 
 Note: the easiest way is to call the `init.sh` script, that will take care of this for you.
 
