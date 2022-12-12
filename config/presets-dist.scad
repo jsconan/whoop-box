@@ -83,6 +83,19 @@ presets = [
         1,                      // IDX_BOX_Z
     ],
     [
+        // frame 65, props 35, 2022 update
+        "METEOR65PRO2022",      // IDX_NAME
+        66,                     // IDX_MOTOR_DISTANCE
+        40,                     // IDX_DUCT_DIAMETER
+        16,                     // IDX_DUCT_HEIGHT
+        40,                     // IDX_WHOOP_HEIGHT
+        5,                      // IDX_BOX_PADDING
+        false,                  // IDX_BOX_SEPARATOR
+        2,                      // IDX_BOX_X
+        1,                      // IDX_BOX_Y
+        1,                      // IDX_BOX_Z
+    ],
+    [
         // frame 75, props 40
         "BETA75X",              // IDX_NAME
         78,                     // IDX_MOTOR_DISTANCE
