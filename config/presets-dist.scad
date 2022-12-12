@@ -87,7 +87,7 @@ presets = [
         "METEOR65PRO2022",      // IDX_NAME
         66,                     // IDX_MOTOR_DISTANCE
         40,                     // IDX_DUCT_DIAMETER
-        16,                     // IDX_DUCT_HEIGHT
+        17,                     // IDX_DUCT_HEIGHT
         40,                     // IDX_WHOOP_HEIGHT
         5,                      // IDX_BOX_PADDING
         false,                  // IDX_BOX_SEPARATOR
