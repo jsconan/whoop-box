@@ -156,6 +156,27 @@ function getPreset(name, index, default) =
 function getPresets(index) = [ for (preset = presets) preset[index] ];
 
 /**
+ * Gets the battery preset defined by a name, or a value from a battery preset.
+ * @param String name - The name of the battery preset to get.
+ * @param Number [index] - The index inside the battery preset for the value to get.
+ * @param * [default] - The default value if the battery preset does not exist at the given index.
+ * @returns Array|Number - The battery preset or the value at index.
+ */
+function getBatteryPreset(name, index, default) =
+    let(
+        data = uor(fetch(batteries, name), fetch(batteries, "DEFAULT"))
+    )
+    index ? uor(data[index], default) : data
+;
+
+/**
+ * Gets the list of battery preset values.
+ * @param Number index - The index inside each battery preset for the value to get.
+ * @returns Array - The list of battery preset values.
+ */
+function getBatteryPresets(index) = [ for (preset = batteries) preset[index] ];
+
+/**
  * Computes the side distance between motors based on the given diagonal.
  * @param Number diagonal - The distance between motors on the diagonal.
  * @returns Number - The distance between motors.
