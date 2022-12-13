@@ -48,6 +48,7 @@ include <../shapes/angled-box.scad>
 include <../shapes/angled-container.scad>
 include <../shapes/angled-drawer.scad>
 include <../shapes/angled-cupboard.scad>
+include <../shapes/battery-box.scad>
 
 // Show the config values
 if (showConfig) {
