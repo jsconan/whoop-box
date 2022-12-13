@@ -86,41 +86,31 @@ renderpath() {
     scadrenderall "$1" "$2" "$3" "$4" --quiet $(paramlist)
 }
 
+# Gets infos from the rendering.
+#
+# @param variable - The name of the variable that activates the infos display.
+getinfos() {
+    local variable=$1
+    local input="${configpath}/setup.scad"
+    local output="${dstpath}/setup.echo"
+    createpath "${dstpath}" "output" > /dev/null
+    scadecho "${input}" "${dstpath}" "" "" ${variable}=1 $(paramlist) > /dev/null
+    sed '1d; $d' "${output}"
+    rm "${output}" > /dev/null
+}
+
 # Display the render config
 #
 # @param name - The name of the set to render.
 # @param preset - The name of the preset to render.
 showconfig() {
     local dest="$(presetpath "$1" "$2")"
-    local input="${configpath}/setup.scad"
-    local output="${dest}/setup.echo"
-    local config="${dest}/config.txt"
+    local configfile="${dest}/config.txt"
+    local config=$(getinfos "showConfig")
     createpath "${dest}" "output"
+    echo "${config}" > "${configfile}"
     printmessage "${C_MSG}The box elements would be generated with respect to the following config:"
-    scadecho "${input}" "${dest}" "" "" showConfig=1 $(paramlist) > /dev/null
-    sed '1d; $d' "${output}" > "${config}"
-    rm "${output}" > /dev/null
-    cat "${config}"
-}
-
-# List the available presets
-listpresets() {
-    local input="${configpath}/setup.scad"
-    local output="${dstpath}/setup.echo"
-    createpath "${dstpath}" "output" > /dev/null
-    scadecho "${input}" "${dstpath}" "" "" showPresets=1 $(paramlist) > /dev/null
-    sed '1d; $d' "${output}"
-    rm "${output}" > /dev/null
-}
-
-# List the available battery presets
-listbatterypresets() {
-    local input="${configpath}/setup.scad"
-    local output="${dstpath}/setup.echo"
-    createpath "${dstpath}" "output" > /dev/null
-    scadecho "${input}" "${dstpath}" "" "" showBatteryPresets=1 $(paramlist) > /dev/null
-    sed '1d; $d' "${output}"
-    rm "${output}" > /dev/null
+    echo "${config}"
 }
 
 # Renders the selected preset
@@ -147,8 +137,6 @@ renderall() {
        [ "${renderWhoop}" != "" ] || \
        [ "${renderAll}" != "" ]; then
         printmessage "${C_MSG}Rendering boxes"
-    else
-        printmessage "${C_MSG}Nothing will be rendered"
     fi
     if [ "${renderAngled}" == "1" ] || [ "${renderAll}" == "1" ]; then
         printmessage "${C_MSG}- sets of angled boxes"
@@ -288,7 +276,7 @@ distfile "${configpath}/config.scad"
 distfile "${configpath}/presets.scad"
 
 if [ "${allpresets}" == "1" ]; then
-    presets=($(listpresets))
+    presets=($(getinfos "showPresets"))
     for p in "${presets[@]}"; do
         preset=$p
         renderall
@@ -298,7 +286,7 @@ else
 fi
 
 if [ "${allpresets}" == "1" ]; then
-    batteries=($(listbatterypresets))
+    batteries=($(getinfos "showBatteryPresets"))
     for p in "${batteries[@]}"; do
         battery=$p
         renderbattery

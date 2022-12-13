@@ -35,7 +35,7 @@ include <../../config/setup.scad>
 // Sets the minimum facet angle and size using the defined render mode.
 applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
-    // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 1], offset=[0, 0, 5], center=true)
+    // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 10], center=true)
     whoopBatteryCover(
         batteryWidth = batteryWidth,
         batteryHeight = batteryHeight,
