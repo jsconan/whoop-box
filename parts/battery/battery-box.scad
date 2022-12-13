@@ -42,6 +42,7 @@ applyMode(mode=renderMode) {
         batteryLength = batteryLength,
         wallThickness = wallThickness,
         groundThickness = groundThickness,
+        wallDistance = printTolerance,
         cells = [batteryNumber, 1]
     );
 }

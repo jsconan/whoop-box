@@ -29,6 +29,32 @@
  */
 
 /**
+ * Gets the outer size of a box that will contain tiny-whoop batteries.
+ * @param Number batteryWidth - The battery width.
+ * @param Number batteryHeight - The battery height.
+ * @param Number batteryLength - The battery length.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number groundThickness - The thickness of the ground.
+ * @param Number|Vector [cells] - The number of batteries per box. It gives the number on the horizontal and vertical axis.
+ * @param Number wallDistance - The distance between the battery and the wall.
+ * @return Vector - The outer size of the box.
+ */
+function whoopBatterySize(batteryWidth, batteryHeight, batteryLength, wallThickness, groundThickness, cells=[1, 1], wallDistance = 0) =
+    let(
+        cells = vector2D(cells),
+        distance = wallDistance * 2,
+        outerLength = wallThickness + (batteryHeight + wallThickness + distance) * cells.x,
+        outerWidth = wallThickness + (batteryWidth + wallThickness + distance) * cells.y,
+        outerHeight = groundThickness + batteryLength
+    )
+    [
+        outerLength,
+        outerWidth,
+        outerHeight
+    ]
+;
+
+/**
  * Builds a box that will contain tiny-whoop batteries.
  * @param Number batteryWidth - The battery width.
  * @param Number batteryHeight - The battery height.
@@ -36,18 +62,29 @@
  * @param Number wallThickness - The thickness of the walls.
  * @param Number groundThickness - The thickness of the ground.
  * @param Number|Vector [cells] - The number of batteries per box. It gives the number on the horizontal and vertical axis.
+ * @param Number wallDistance - The distance between the battery and the wall.
  */
-module whoopBatteryBox(batteryWidth, batteryHeight, batteryLength, wallThickness, groundThickness, cells=[1, 1]) {
+module whoopBatteryBox(batteryWidth, batteryHeight, batteryLength, wallThickness, groundThickness, cells=[1, 1], wallDistance = 0) {
     cells = vector2D(cells);
-    outerLength = wallThickness + (batteryHeight + wallThickness) * cells.x;
-    outerWidth = wallThickness + (batteryWidth + wallThickness) * cells.y;
-    outerHeight = groundThickness + batteryLength;
+    size = whoopBatterySize(
+        batteryWidth = batteryWidth,
+        batteryHeight = batteryHeight,
+        batteryLength = batteryLength,
+        wallThickness = wallThickness,
+        groundThickness = groundThickness,
+        cells = cells,
+        wallDistance = wallDistance
+    );
+
+    distance = wallDistance * 2;
+    width = batteryWidth + distance;
+    height = batteryHeight + distance;
 
     difference() {
-        box([outerLength, outerWidth, outerHeight]);
+        box(size);
         translateZ(groundThickness) {
-            repeatShape2D(size=[batteryHeight + wallThickness, batteryWidth + wallThickness], count=cells, center=true) {
-                box([batteryHeight, batteryWidth, outerHeight]);
+            repeatShape2D(size=[height + wallThickness, width + wallThickness], count=cells, center=true) {
+                box([height, width, size.z]);
             }
         }
     }
@@ -65,24 +102,30 @@ module whoopBatteryBox(batteryWidth, batteryHeight, batteryLength, wallThickness
  */
 module whoopBatteryCover(batteryWidth, batteryHeight, batteryLength, wallThickness, groundThickness, cells=[1, 1], wallDistance = 0) {
     cells = vector2D(cells);
-    innerLength = wallThickness + (batteryHeight + wallThickness) * cells.x;
-    innerWidth = wallThickness + (batteryWidth + wallThickness) * cells.y;
-    innerHeight = groundThickness + batteryLength;
+    size = whoopBatterySize(
+        batteryWidth = batteryWidth,
+        batteryHeight = batteryHeight,
+        batteryLength = batteryLength,
+        wallThickness = wallThickness,
+        groundThickness = groundThickness,
+        cells = cells,
+        wallDistance = wallDistance
+    );
 
-    outerLength = innerLength + (wallThickness + wallDistance) * 2;
-    outerWidth = innerWidth + (wallThickness + wallDistance) * 2;
-    outerHeight = innerHeight + groundThickness;
-
-    handle = outerWidth / 2;
+    tolerance = wallDistance * 2;
+    addition = wallThickness * 2 + tolerance;
+    innerSize = size + [tolerance, tolerance, groundThickness];
+    outerSize = size + [addition, addition, groundThickness];
+    handle = outerSize.y / 2;
 
     difference() {
-        box([outerLength, outerWidth, outerHeight]);
+        box(outerSize);
         translateZ(groundThickness) {
-            box([innerLength, innerWidth, innerHeight + groundThickness]);
+            box(innerSize);
         }
-        translateZ(outerHeight) {
+        translateZ(outerSize.z) {
             rotateX(90) {
-                cylinder(r=handle, h=outerWidth + wallThickness, center=true);
+                cylinder(r=handle, h=outerSize.y + wallThickness, center=true);
             }
         }
     }
