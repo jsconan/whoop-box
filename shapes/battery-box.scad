@@ -52,3 +52,38 @@ module whoopBatteryBox(batteryWidth, batteryHeight, batteryLength, wallThickness
         }
     }
 }
+
+/**
+ * Builds a cover for a tiny-whoop batteries box.
+ * @param Number batteryWidth - The battery width.
+ * @param Number batteryHeight - The battery height.
+ * @param Number batteryLength - The battery length.
+ * @param Number wallThickness - The thickness of the walls.
+ * @param Number groundThickness - The thickness of the ground.
+ * @param Number|Vector [cells] - The number of batteries per box. It gives the number on the horizontal and vertical axis.
+ * @param Number wallDistance - The distance between the box and the cover.
+ */
+module whoopBatteryCover(batteryWidth, batteryHeight, batteryLength, wallThickness, groundThickness, cells=[1, 1], wallDistance = 0) {
+    cells = vector2D(cells);
+    innerLength = wallThickness + (batteryHeight + wallThickness) * cells.x;
+    innerWidth = wallThickness + (batteryWidth + wallThickness) * cells.y;
+    innerHeight = groundThickness + batteryLength;
+
+    outerLength = innerLength + (wallThickness + wallDistance) * 2;
+    outerWidth = innerWidth + (wallThickness + wallDistance) * 2;
+    outerHeight = innerHeight + groundThickness;
+
+    handle = outerWidth / 2;
+
+    difference() {
+        box([outerLength, outerWidth, outerHeight]);
+        translateZ(groundThickness) {
+            box([innerLength, innerWidth, innerHeight + groundThickness]);
+        }
+        translateZ(outerHeight) {
+            rotateX(90) {
+                cylinder(r=handle, h=outerWidth + wallThickness, center=true);
+            }
+        }
+    }
+}
