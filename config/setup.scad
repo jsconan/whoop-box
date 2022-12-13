@@ -70,6 +70,12 @@ if (showConfig) {
         str("Boxes per lines:               ", whoopBoxX),
         str("Boxes per columns:             ", whoopBoxY),
         str("Boxes per lines and columns:   ", whoopBoxZ),
+        str("-- Battery settings -----------------"),
+        str("Battery:                       ", battery),
+        str("Battery width:                 ", batteryWidth, "mm"),
+        str("Battery height:                ", batteryHeight, "mm"),
+        str("Battery length:                ", batteryLength, "mm"),
+        str("Battery per boxes:             ", batteryNumber),
         str("-- Printer settings -----------------"),
         str("Nozzle diameter:               ", nozzleWidth, "mm"),
         str("Print layer:                   ", layerHeight, "mm"),
@@ -81,12 +87,20 @@ if (showConfig) {
     ], "\n"));
 }
 
-
 // Show the list of available presets
 if (showPresets) {
     echo(str(
         "\n",
         join(getPresets(IDX_NAME), "\n"),
+        "\n"
+    ));
+}
+
+// Show the list of available battery presets
+if (showBatteryPresets) {
+    echo(str(
+        "\n",
+        join(getBatteryPresets(IDX_NAME), "\n"),
         "\n"
     ));
 }

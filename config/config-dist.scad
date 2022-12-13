@@ -42,6 +42,7 @@ printerWidth = 210;         // The width of the printer's build plate.
 // Options for the metadata
 showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config
 showPresets = 0;            // Show the list of available presets.
+showBatteryPresets = 0;     // Show the list of available battery presets.
 showSteps = 0;              // Show the expected number of steps for the whole animation
 
 // Specifications for the boxes
