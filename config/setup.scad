@@ -50,41 +50,25 @@ include <../shapes/angled-drawer.scad>
 include <../shapes/angled-cupboard.scad>
 include <../shapes/battery-box.scad>
 
-// Show the config values
+// Show the config values for the whoop boxes
 if (showConfig) {
-    echo(join([
-        "",
-        str("-- Tiny-Whoop boxes System ----------"),
-        str("Version:                       ", printVersion()),
-        str("Preset:                        ", preset),
-        str("-- Tiny-Whoop settings --------------"),
-        str("Motor distance:                ", motorDistance, "mm"),
-        str("Duct diameter:                 ", ductDiameter, "mm"),
-        str("Duct height:                   ", ductHeight, "mm"),
-        str("Whoop height:                  ", whoopHeight, "mm"),
-        str("Box padding:                   ", boxPadding, "mm"),
-        str("-- Box settings ---------------------"),
-        str("Wall thickness:                ", wallThickness, "mm"),
-        str("Ground thickness:              ", groundThickness, "mm"),
-        str("Outer distance:                ", outerDistance, "mm"),
-        str("Boxes per lines:               ", whoopBoxX),
-        str("Boxes per columns:             ", whoopBoxY),
-        str("Boxes per lines and columns:   ", whoopBoxZ),
-        str("-- Battery settings -----------------"),
-        str("Battery:                       ", battery),
-        str("Battery width:                 ", batteryWidth, "mm"),
-        str("Battery height:                ", batteryHeight, "mm"),
-        str("Battery length:                ", batteryLength, "mm"),
-        str("Battery per boxes:             ", batteryNumber),
-        str("-- Printer settings -----------------"),
-        str("Nozzle diameter:               ", nozzleWidth, "mm"),
-        str("Print layer:                   ", layerHeight, "mm"),
-        str("Print tolerance:               ", printTolerance, "mm"),
-        str("Printer's length:              ", printerLength / 10, "cm"),
-        str("Printer's width:               ", printerWidth / 10, "cm"),
-        str("Print interval:                ", printInterval, "mm"),
-        ""
-    ], "\n"));
+    echo(str(
+        "\n",
+        printSystemInfos(preset),
+        printTinyWhoopSettings(),
+        printBoxSettings(),
+        printPrinterSettings()
+    ));
+}
+
+// Show the config values for the battery boxes
+if (showBatteryConfig) {
+    echo(str(
+        "\n",
+        printSystemInfos(battery),
+        printBatterySettings(),
+        printPrinterSettings()
+    ));
 }
 
 // Show the list of available presets

@@ -273,3 +273,73 @@ function getDuctPoints(interval, diameter, count=1, wall=0) =
         quadrant(point, i)
     ]
 ;
+
+/**
+ * Prints the version and the selected preset into a string.
+ * @param String preset - The name of the selected preset.
+ * @returns String - The version and the selected preset.
+ */
+function printSystemInfos(preset) = join([
+    str("-- Tiny-Whoop boxes System ----------"),
+    str("Version:                       ", printVersion()),
+    str("Preset:                        ", preset),
+    ""
+], "\n");
+
+/**
+ * Prints the settings for the selected tiny-whoop.
+ * @returns String - The tiny-whoop settings.
+ */
+function printTinyWhoopSettings() = join([
+    str("-- Tiny-Whoop settings --------------"),
+    str("Motor distance:                ", motorDistance, "mm"),
+    str("Duct diameter:                 ", ductDiameter, "mm"),
+    str("Duct height:                   ", ductHeight, "mm"),
+    str("Whoop height:                  ", whoopHeight, "mm"),
+    str("Box padding:                   ", boxPadding, "mm"),
+    ""
+], "\n");
+
+/**
+ * Prints the box settings for the selected tiny-whoop.
+ * @returns String - The box settings.
+ */
+function printBoxSettings() = join([
+    str("-- Box settings ---------------------"),
+    str("Wall thickness:                ", wallThickness, "mm"),
+    str("Ground thickness:              ", groundThickness, "mm"),
+    str("Outer distance:                ", outerDistance, "mm"),
+    str("Boxes per lines:               ", whoopBoxX),
+    str("Boxes per columns:             ", whoopBoxY),
+    str("Boxes per lines and columns:   ", whoopBoxZ),
+    ""
+], "\n");
+
+/**
+ * Prints the settings for the selected battery.
+ * @returns String - The battery settings.
+ */
+function printBatterySettings() = join([
+    str("-- Battery settings -----------------"),
+    str("Battery:                       ", battery),
+    str("Battery width:                 ", batteryWidth, "mm"),
+    str("Battery height:                ", batteryHeight, "mm"),
+    str("Battery length:                ", batteryLength, "mm"),
+    str("Battery per boxes:             ", batteryNumber),
+    ""
+], "\n");
+
+/**
+ * Prints the printer settings.
+ * @returns String - The printer settings.
+ */
+function printPrinterSettings() = join([
+    str("-- Printer settings -----------------"),
+    str("Nozzle diameter:               ", nozzleWidth, "mm"),
+    str("Print layer:                   ", layerHeight, "mm"),
+    str("Print tolerance:               ", printTolerance, "mm"),
+    str("Printer's length:              ", printerLength / 10, "cm"),
+    str("Printer's width:               ", printerWidth / 10, "cm"),
+    str("Print interval:                ", printInterval, "mm"),
+    ""
+], "\n");

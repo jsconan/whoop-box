@@ -39,8 +39,9 @@ printInterval = 5;          // The interval between 2 pieces when presented toge
 printerLength = 250;        // The length of the printer's build plate.
 printerWidth = 210;         // The width of the printer's build plate.
 
-// Options for the metadata
-showConfig = 0;             // Show the config when rendering a model. The render script uses it to extract the config
+// Options for the metadata. The render script uses them to extract infos.
+showConfig = 0;             // Show the config when rendering a whoop box.
+showBatteryConfig = 0;      // Show the config when rendering a battery box.
 showPresets = 0;            // Show the list of available presets.
 showBatteryPresets = 0;     // Show the list of available battery presets.
 showSteps = 0;              // Show the expected number of steps for the whole animation
@@ -69,7 +70,6 @@ boxSeparators = getPreset(preset, IDX_BOX_SEPARATOR);    // Tells whether the bo
 whoopBoxX = getPreset(preset, IDX_BOX_X, 1);              // The number of boxes per lines in the container (horizontal axis).
 whoopBoxY = getPreset(preset, IDX_BOX_Y, 1);              // The number of boxes per columns in the container (vertical axis).
 whoopBoxZ = getPreset(preset, IDX_BOX_Z, 1);              // The number of boxes per lines and columns in the container (depth axis).
-
 
 // Defines the size of a tiny-whoop's battery
 batteryWidth = getBatteryPreset(battery, IDX_BATTERY_WIDTH);    // The battery width.

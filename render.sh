@@ -93,6 +93,7 @@ getinfos() {
     local variable=$1
     local input="${configpath}/setup.scad"
     local output="${dstpath}/setup.echo"
+
     createpath "${dstpath}" "output" > /dev/null
     scadecho "${input}" "${dstpath}" "" "" ${variable}=1 $(paramlist) > /dev/null
     sed '1d; $d' "${output}"
@@ -106,7 +107,16 @@ getinfos() {
 showconfig() {
     local dest="$(presetpath "$1" "$2")"
     local configfile="${dest}/config.txt"
-    local config=$(getinfos "showConfig")
+    local variable
+
+    if [ "$1" == "battery" ]; then
+        variable="showBatteryConfig"
+    else
+        variable="showConfig"
+    fi
+
+    local config=$(getinfos "${variable}")
+
     createpath "${dest}" "output"
     echo "${config}" > "${configfile}"
     printmessage "${C_MSG}The box elements would be generated with respect to the following config:"
