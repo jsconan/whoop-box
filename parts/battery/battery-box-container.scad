@@ -36,26 +36,13 @@ include <../../config/setup.scad>
 applyMode(mode=renderMode) {
     // Uncomment the next line to cut a sample from the object
     // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 10], center=true)
-    translateY(-(batteryWidth + printInterval) / 2) {
-        whoopBatteryBox(
-            batteryWidth = batteryWidth,
-            batteryHeight = batteryHeight,
-            batteryLength = batteryLength,
-            wallThickness = wallThickness,
-            groundThickness = groundThickness,
-            wallDistance = printTolerance / 2,
-            cells = [batteryNumber, 1]
-        );
-    }
-    translateY((batteryWidth + printInterval) / 2) {
-        whoopBatteryCover(
-            batteryWidth = batteryWidth,
-            batteryHeight = batteryHeight,
-            batteryLength = batteryLength,
-            wallThickness = wallThickness,
-            groundThickness = groundThickness,
-            wallDistance = printTolerance / 2,
-            cells = [batteryNumber, 1]
-        );
-    }
+    whoopBatteryBox(
+        batteryWidth = batteryWidth,
+        batteryHeight = batteryHeight,
+        batteryLength = batteryLength,
+        wallThickness = wallThickness,
+        groundThickness = groundThickness,
+        wallDistance = printTolerance / 2,
+        cells = [batteryNumber, 1]
+    );
 }
