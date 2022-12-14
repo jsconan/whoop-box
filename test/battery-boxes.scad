@@ -33,7 +33,7 @@ include <../config/setup.scad>
 
 // Sets the minimum facet angle and size using the defined render mode.
 applyMode(mode=renderMode) {
-    %translateZ(batteryLength + groundThickness * 2 + 1) {
+    %translateZ(batteryLength + groundThickness * 2) {
         rotateY(180) {
             whoopBatteryCover(
                 batteryWidth = batteryWidth,
@@ -46,7 +46,7 @@ applyMode(mode=renderMode) {
             );
         }
     }
-    whoopBatteryBox(
+    #whoopBatteryBox(
         batteryWidth = batteryWidth,
         batteryHeight = batteryHeight,
         batteryLength = batteryLength,

@@ -43,9 +43,10 @@ function whoopBatterySize(batteryWidth, batteryHeight, batteryLength, wallThickn
     let(
         cells = vector2D(cells),
         distance = wallDistance * 2,
+        batteryBoxHeight = layerAligned(batteryLength * 65 / 100),
         outerLength = wallThickness + (batteryHeight + wallThickness + distance) * cells.x,
         outerWidth = wallThickness + (batteryWidth + wallThickness + distance) * cells.y,
-        outerHeight = groundThickness + batteryLength
+        outerHeight = groundThickness + batteryBoxHeight
     )
     [
         outerLength,
@@ -115,7 +116,7 @@ module whoopBatteryCover(batteryWidth, batteryHeight, batteryLength, wallThickne
     tolerance = wallDistance * 2;
     addition = wallThickness * 2 + tolerance;
     innerSize = size + [tolerance, tolerance, groundThickness];
-    outerSize = size + [addition, addition, groundThickness];
+    outerSize = size + [addition, addition, 0];
     handle = outerSize.y / 2;
 
     difference() {
