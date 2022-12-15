@@ -54,3 +54,5 @@ colorAngledBox = "#686";                        // Color of an angled box.
 colorRoundedBox = "#88a";                       // Color of a rounded box.
 colorAngledDrawer = "#d84";                     // Color of a drawer for angled boxes.
 colorAngledCupboard = [.7, .3, .2, .8];         // Color of a cupboard for angled boxes.
+colorBatteryBoxContainer = [.6, .7, .6, .8];    // Color of a battery container.
+colorBatteryBoxCover = [.7, .8, .7, .8];        // Color of a battery box cover.
