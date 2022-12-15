@@ -23,7 +23,7 @@
 /**
  * A box to store tiny-whoops.
  *
- * Padded box that will directly contain a tiny-whoop.
+ * Box cover that will contain tiny-whoop's batteries.
  * This should be printed in rigid material, like PLA or PETG.
  *
  * @author jsconan
