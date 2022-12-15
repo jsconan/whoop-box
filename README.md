@@ -6,6 +6,7 @@ A printable box system to store tiny-whoops.
 
 -   [At a glance](#Ataglance)
 -   [Whoop boxes](#Whoopboxes)
+-   [Batteries' box](#Batteriesbox)
 -   [Angled boxes](#Angledboxes)
 -   [Install and requirements](#Installandrequirements)
     -   [OpenSCAD](#OpenSCAD)
@@ -63,6 +64,22 @@ This version proposes several variants of the box:
 -   A container for one or more boxes with respect to the configuration
 
 ![container](./doc/whoop-box-container.png)
+
+## <a name='Batteriesbox'></a>Batteries' box
+
+Aside the boxes for containing tiny-whoops, the project also proposes a parametric box for containing the batteries.
+
+![batteries' box](./doc/battery-boxes.png)
+
+This box is made of two parts:
+
+-   A batteries' container, with separators:
+
+![batteries' container](./doc/battery-box-container.png)
+
+-   A box cover:
+
+![box cover](./doc/battery-box-cover.png)
 
 ## <a name='Angledboxes'></a>Angled boxes
 
