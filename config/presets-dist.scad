@@ -191,27 +191,27 @@ presets = [
 // Defines the size of each battery for which build a box.
 batteries = [
     [
-        // Generic 1S HV 300mAh
+        // Generic 1S 200mAh to 300mAh
         "DEFAULT",              // IDX_NAME
-        11.5,                   // IDX_BATTERY_WIDTH
-        6.5,                    // IDX_BATTERY_HEIGHT
-        50,                     // IDX_BATTERY_LENGTH
+        12,                     // IDX_BATTERY_WIDTH
+        7,                      // IDX_BATTERY_HEIGHT
+        60,                     // IDX_BATTERY_LENGTH
         6,                      // IDX_BATTERY_NUMBER
     ],
     [
-        // BetaFPV 1S HV 300mAh
-        "BF-1S-300",            // IDX_NAME
-        11.6,                   // IDX_BATTERY_WIDTH
-        6.4,                    // IDX_BATTERY_HEIGHT
-        50,                     // IDX_BATTERY_LENGTH
+        // 1S HV 300mAh
+        "1S-300",               // IDX_NAME
+        12,                     // IDX_BATTERY_WIDTH
+        7,                      // IDX_BATTERY_HEIGHT
+        68,                     // IDX_BATTERY_LENGTH
         6,                      // IDX_BATTERY_NUMBER
     ],
     [
-        // Tattu 1S HV 300mAh
-        "TA-1S-300",            // IDX_NAME
-        10.4,                   // IDX_BATTERY_WIDTH
-        6.7,                    // IDX_BATTERY_HEIGHT
-        50,                     // IDX_BATTERY_LENGTH
+        // 1S HV 450mAh
+        "1S-450",               // IDX_NAME
+        17.5,                   // IDX_BATTERY_WIDTH
+        7.5,                    // IDX_BATTERY_HEIGHT
+        68,                     // IDX_BATTERY_LENGTH
         6,                      // IDX_BATTERY_NUMBER
     ],
 ];
