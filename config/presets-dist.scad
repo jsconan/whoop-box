@@ -28,7 +28,7 @@
  * @author jsconan
  */
 
-// Defines the size of tiny-whoops
+// Defines the size of each tiny-whoop for which build a box.
 presets = [
     [
         // frame 65, props 31
@@ -186,4 +186,32 @@ presets = [
         2,                      // IDX_BOX_Y
         1,                      // IDX_BOX_Z
     ]
+];
+
+// Defines the size of each battery for which build a box.
+batteries = [
+    [
+        // Generic 1S 200mAh to 300mAh
+        "DEFAULT",              // IDX_NAME
+        12,                     // IDX_BATTERY_WIDTH
+        7,                      // IDX_BATTERY_HEIGHT
+        60,                     // IDX_BATTERY_LENGTH
+        6,                      // IDX_BATTERY_NUMBER
+    ],
+    [
+        // 1S HV 300mAh
+        "1S-300",               // IDX_NAME
+        12,                     // IDX_BATTERY_WIDTH
+        7,                      // IDX_BATTERY_HEIGHT
+        68,                     // IDX_BATTERY_LENGTH
+        6,                      // IDX_BATTERY_NUMBER
+    ],
+    [
+        // 1S HV 450mAh
+        "1S-450",               // IDX_NAME
+        17.5,                   // IDX_BATTERY_WIDTH
+        7.5,                    // IDX_BATTERY_HEIGHT
+        68,                     // IDX_BATTERY_LENGTH
+        6,                      // IDX_BATTERY_NUMBER
+    ],
 ];

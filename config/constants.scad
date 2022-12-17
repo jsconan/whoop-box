@@ -29,7 +29,7 @@
  */
 
 // Defines the indexes in the presets
-IDX_NAME           =  0; // The index for the preset name
+IDX_NAME           =  0; // The index for the preset name.
 IDX_MOTOR_DISTANCE =  1; // The index for the distance between motors on the diagonal.
 IDX_DUCT_DIAMETER  =  2; // The index for the outer diameter of a motor duct.
 IDX_DUCT_HEIGHT    =  3; // The index for the outer height of a motor duct, including everything beyond like the screw heads.
@@ -39,14 +39,20 @@ IDX_BOX_SEPARATOR  =  6; // The index for the flag allowing to add separators.
 IDX_BOX_X          =  7; // The index for the number of boxes per lines in the container (horizontal axis).
 IDX_BOX_Y          =  8; // The index for the number of boxes per columns in the container (vertical axis).
 IDX_BOX_Z          =  9; // The index for the number of boxes per lines and columns in the container (depth axis).
+IDX_BATTERY_WIDTH  =  1; // The index for the battery width.
+IDX_BATTERY_HEIGHT =  2; // The index for the battery height.
+IDX_BATTERY_LENGTH =  3; // The index for the battery length.
+IDX_BATTERY_NUMBER =  4; // The index for the number of batteries per box.
 
 // Colors applied to the elements when previewed.
 // This will be used for the animations and other pictures, but this won't have effect on the ready to print elements.
-colorWhoopBox = "#d84";                         // Color of a simple whoop box
-colorPropellersBox = "#6aa";                    // Color of a box for propellers
-colorPartsBox = "#ada";                         // Color of a box for spare parts
-colorWhoopBoxContainer = "#eed";                // Color of a whoop box container
-colorAngledBox = "#686";                        // Color of an angled box
-colorRoundedBox = "#88a";                       // Color of a rounded box
-colorAngledDrawer = "#d84";                     // Color of a drawer for angled boxes
-colorAngledCupboard = [.7, .3, .2, .8];         // Color of a cupboard for angled boxes
+colorWhoopBox = "#d84";                         // Color of a simple whoop box.
+colorPropellersBox = "#6aa";                    // Color of a box for propellers.
+colorPartsBox = "#ada";                         // Color of a box for spare parts.
+colorWhoopBoxContainer = "#eed";                // Color of a whoop box container.
+colorAngledBox = "#686";                        // Color of an angled box.
+colorRoundedBox = "#88a";                       // Color of a rounded box.
+colorAngledDrawer = "#d84";                     // Color of a drawer for angled boxes.
+colorAngledCupboard = [.7, .3, .2, .8];         // Color of a cupboard for angled boxes.
+colorBatteryBoxContainer = [.6, .7, .6, .8];    // Color of a battery container.
+colorBatteryBoxCover = [.7, .8, .7, .8];        // Color of a battery box cover.
