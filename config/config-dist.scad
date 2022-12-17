@@ -72,7 +72,7 @@ whoopBoxZ = getPreset(preset, IDX_BOX_Z, 1);              // The number of boxes
 
 // Defines the size of a tiny-whoop's battery
 batteryWidth = getBatteryPreset(preset, IDX_BATTERY_WIDTH);    // The battery width.
-batteryHeight = getBatteryPreset(preset, IDX_BATTERY_HEIGHT);  // The battery height.
+batteryHeight = getBatteryPreset(preset, IDX_BATTERY_HEIGHT);  // The battery height (thickness).
 batteryLength = getBatteryPreset(preset, IDX_BATTERY_LENGTH);  // The battery height.
 
 // Sets the count of batteries in each box
