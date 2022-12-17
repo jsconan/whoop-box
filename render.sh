@@ -28,7 +28,6 @@
 
 # application params
 preset=
-battery=
 whoopBoxX=
 whoopBoxY=
 whoopBoxZ=
@@ -58,9 +57,8 @@ source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 # Builds the destination path using the selected preset.
 #
 # @param name - The name of the set to render.
-# @param preset - The name of the preset to render.
 presetpath() {
-    echo "${dstpath}$(prefixif "/" "$1")$(prefixif "/" "$2")"
+    echo "${dstpath}$(prefixif "/" "$1")$(prefixif "/" "${preset}")"
 }
 
 # Builds the list of config parameters.
@@ -71,7 +69,6 @@ paramlist() {
         "$(varif "whoopBoxZ" ${whoopBoxZ})"
         "$(varif "batteryNumber" ${batteryNumber})"
         "$(varif "preset" "${preset}" 1)"
-        "$(varif "battery" "${battery}" 1)"
     )
     echo "${params[@]}"
 }
@@ -103,9 +100,8 @@ getinfos() {
 # Display the render config
 #
 # @param name - The name of the set to render.
-# @param preset - The name of the preset to render.
 showconfig() {
-    local dest="$(presetpath "$1" "$2")"
+    local dest="$(presetpath "$1")"
     local configfile="${dest}/config.txt"
     local variable
 
@@ -126,43 +122,45 @@ showconfig() {
 # Renders the selected preset
 #
 # @param name - The name of the set to render.
-# @param preset - The name of the preset to render.
 renderpreset() {
-    local dest="$(presetpath "$1" "$2")"
+    local dest="$(presetpath "$1")"
 
     # make sure the destination path exists
     createpath ${dest}
 
     # show the config
-    showconfig "$1" "$2"
+    showconfig "$1"
 
     # render the files
     printmessage "${C_MSG}Rendering box elements"
     renderpath "${partpath}$(prefixif "/" "$1")" "${dest}"
 }
 
-# Renders the files with respect to the settings.
-renderall() {
+# Renders the whoop boxes with respect to the settings.
+renderwhoop() {
     if [ "${renderAngled}" != "" ]  || \
        [ "${renderWhoop}" != "" ] || \
        [ "${renderAll}" != "" ]; then
         printmessage "${C_MSG}Rendering boxes"
     fi
-    if [ "${renderAngled}" == "1" ] || [ "${renderAll}" == "1" ]; then
+    if [ "${renderAngled}" == "1" ] || \
+       [ "${renderAll}" == "1" ]; then
         printmessage "${C_MSG}- sets of angled boxes"
-        renderpreset "angled" "${preset}"
+        renderpreset "angled"
     fi
-    if [ "${renderWhoop}" == "1" ] || [ "${renderAll}" == "1" ]; then
+    if [ "${renderWhoop}" == "1" ] || \
+       [ "${renderAll}" == "1" ]; then
         printmessage "${C_MSG}- all whoop boxes"
-        renderpreset "whoop" "${preset}"
+        renderpreset "whoop"
     fi
 }
 
 # Renders the battery boxes with respect to the settings.
 renderbattery() {
-    if [ "${renderBattery}" == "1" ] || [ "${renderAll}" == "1" ]; then
+    if [ "${renderBattery}" == "1" ] || \
+       [ "${renderAll}" == "1" ]; then
         printmessage "${C_MSG}Rendering battery boxes"
-        renderpreset "battery" "${battery}"
+        renderpreset "battery"
     fi
 }
 
@@ -188,10 +186,6 @@ while (( "$#" )); do
             preset=$2
             shift
         ;;
-        "-b"|"--battery")
-            battery=$2
-            shift
-        ;;
         "-a"|"--all")
             allpresets=1
         ;;
@@ -207,7 +201,7 @@ while (( "$#" )); do
             whoopBoxZ=$2
             shift
         ;;
-        "-n"|"--number")
+        "-b"|"--batteries")
             batteryNumber=$2
             shift
         ;;
@@ -235,13 +229,12 @@ while (( "$#" )); do
             echo -e "${C_MSG}  w,   whoop          ${C_RST}Render the sets of whoop boxes"
             echo -e "${C_MSG}  b,   battery        ${C_RST}Render the sets of battery boxes"
             echo -e "${C_MSG}  -h,  --help         ${C_RST}Show this help"
-            echo -e "${C_MSG}  -p   --preset       ${C_RST}Set size preset to apply"
-            echo -e "${C_MSG}  -b   --battery      ${C_RST}Set battery preset to apply"
+            echo -e "${C_MSG}  -p   --preset       ${C_RST}Set the preset to apply"
             echo -e "${C_MSG}  -a,  --all          ${C_RST}Render all presets"
             echo -e "${C_MSG}  -x,  --line         ${C_RST}Set the number of boxes per lines in the container (X-axis)"
             echo -e "${C_MSG}  -y   --column       ${C_RST}Set the number of boxes per columns in the container (Y-axis)"
             echo -e "${C_MSG}  -z   --depth        ${C_RST}Set The number of boxes per lines and columns in the container (Z-axis)"
-            echo -e "${C_MSG}  -n   --number       ${C_RST}Set The number of batteries per boxes"
+            echo -e "${C_MSG}  -b   --batteries    ${C_RST}Set The number of batteries per boxes"
             echo -e "${C_MSG}  -f   --format       ${C_RST}Set the output format"
             echo -e "${C_MSG}  -p   --parallel     ${C_RST}Set the number of parallel processes"
             echo -e "${C_MSG}  -s   --slice        ${C_RST}Slice the rendered files using the default configuration"
@@ -289,16 +282,16 @@ if [ "${allpresets}" == "1" ]; then
     presets=($(getinfos "showPresets"))
     for p in "${presets[@]}"; do
         preset=$p
-        renderall
+        renderwhoop
     done
 else
-    renderall
+    renderwhoop
 fi
 
 if [ "${allpresets}" == "1" ]; then
     batteries=($(getinfos "showBatteryPresets"))
     for p in "${batteries[@]}"; do
-        battery=$p
+        preset=$p
         renderbattery
     done
 else

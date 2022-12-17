@@ -56,7 +56,6 @@ outerDistance = 0.5;        // The distance between a box and its container. Thi
 
 // Select the config preset
 preset = "DEFAULT";
-battery = "DEFAULT";
 
 // Defines the size of a tiny-whoop
 motorDistance = getPreset(preset, IDX_MOTOR_DISTANCE);   // The distance between motors on the diagonal.
@@ -72,9 +71,9 @@ whoopBoxY = getPreset(preset, IDX_BOX_Y, 1);              // The number of boxes
 whoopBoxZ = getPreset(preset, IDX_BOX_Z, 1);              // The number of boxes per lines and columns in the container (depth axis).
 
 // Defines the size of a tiny-whoop's battery
-batteryWidth = getBatteryPreset(battery, IDX_BATTERY_WIDTH);    // The battery width.
-batteryHeight = getBatteryPreset(battery, IDX_BATTERY_HEIGHT);  // The battery height.
-batteryLength = getBatteryPreset(battery, IDX_BATTERY_LENGTH);  // The battery height.
+batteryWidth = getBatteryPreset(preset, IDX_BATTERY_WIDTH);    // The battery width.
+batteryHeight = getBatteryPreset(preset, IDX_BATTERY_HEIGHT);  // The battery height.
+batteryLength = getBatteryPreset(preset, IDX_BATTERY_LENGTH);  // The battery height.
 
 // Sets the count of batteries in each box
-batteryNumber = getBatteryPreset(battery, IDX_BATTERY_NUMBER);  // The number of batteries.
+batteryNumber = getBatteryPreset(preset, IDX_BATTERY_NUMBER);  // The number of batteries.

@@ -276,10 +276,9 @@ function getDuctPoints(interval, diameter, count=1, wall=0) =
 
 /**
  * Prints the version and the selected preset into a string.
- * @param String preset - The name of the selected preset.
  * @returns String - The version and the selected preset.
  */
-function printSystemInfos(preset) = join([
+function printSystemInfos() = join([
     str("-- Tiny-Whoop boxes System ----------"),
     str("Version:                       ", printVersion()),
     str("Preset:                        ", preset),
@@ -321,7 +320,6 @@ function printBoxSettings() = join([
  */
 function printBatterySettings() = join([
     str("-- Battery settings -----------------"),
-    str("Battery:                       ", battery),
     str("Battery width:                 ", batteryWidth, "mm"),
     str("Battery height:                ", batteryHeight, "mm"),
     str("Battery length:                ", batteryLength, "mm"),

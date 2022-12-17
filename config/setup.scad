@@ -54,7 +54,7 @@ include <../shapes/battery-box.scad>
 if (showConfig) {
     echo(str(
         "\n",
-        printSystemInfos(preset),
+        printSystemInfos(),
         printTinyWhoopSettings(),
         printBoxSettings(),
         printPrinterSettings()
@@ -65,7 +65,7 @@ if (showConfig) {
 if (showBatteryConfig) {
     echo(str(
         "\n",
-        printSystemInfos(battery),
+        printSystemInfos(),
         printBatterySettings(),
         printPrinterSettings()
     ));
