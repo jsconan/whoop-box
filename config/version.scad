@@ -28,4 +28,4 @@
  * @author jsconan
  */
 
-PROJECT_VERSION = "1.0.0";
+PROJECT_VERSION = "1.1.0";
