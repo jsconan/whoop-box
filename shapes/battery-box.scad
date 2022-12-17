@@ -118,6 +118,7 @@ module whoopBatteryCover(batteryWidth, batteryHeight, batteryLength, wallThickne
     innerSize = size + [distance, distance, groundThickness];
     outerSize = size + [addition, addition, 0];
     handle = outerSize.y / 2;
+    cover = batteryLength - size.z + groundThickness;
 
     width = batteryWidth + distance;
     height = batteryHeight + distance;
@@ -135,7 +136,7 @@ module whoopBatteryCover(batteryWidth, batteryHeight, batteryLength, wallThickne
     }
     translateZ(groundThickness) {
         repeatShape2D(size=[height + wallThickness, width + wallThickness], count=cells - [1, 0], center=true) {
-            box([wallThickness, size.y + wallThickness, batteryWidth]);
+            box([wallThickness, size.y + wallThickness, cover]);
         }
     }
 }
