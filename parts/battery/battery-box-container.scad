@@ -23,9 +23,26 @@
 /**
  * A box to store tiny-whoops.
  *
- * Version of the project.
+ * Box that will contain tiny-whoop's batteries.
+ * This should be printed in rigid material, like PLA or PETG.
  *
  * @author jsconan
  */
 
-PROJECT_VERSION = "1.1.0";
+// Import the project's setup.
+include <../../config/setup.scad>
+
+// Sets the minimum facet angle and size using the defined render mode.
+applyMode(mode=renderMode) {
+    // Uncomment the next line to cut a sample from the object
+    // sample(size=[DEFAULT_BUILD_PLATE_SIZE, DEFAULT_BUILD_PLATE_SIZE, 5], offset=[0, 0, 10], center=true)
+    whoopBatteryBox(
+        batteryWidth = batteryWidth,
+        batteryHeight = batteryHeight,
+        batteryLength = batteryLength,
+        wallThickness = wallThickness,
+        groundThickness = groundThickness,
+        wallDistance = printTolerance / 2,
+        cells = [batteryNumber, 1]
+    );
+}

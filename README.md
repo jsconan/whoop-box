@@ -6,6 +6,7 @@ A printable box system to store tiny-whoops.
 
 -   [At a glance](#Ataglance)
 -   [Whoop boxes](#Whoopboxes)
+-   [Batteries' box](#Batteriesbox)
 -   [Angled boxes](#Angledboxes)
 -   [Install and requirements](#Installandrequirements)
     -   [OpenSCAD](#OpenSCAD)
@@ -26,17 +27,30 @@ A printable box system to store tiny-whoops.
 
 The project contains designs for a box system for storing tiny-whoop quadcopters. The parts are designed using a scripting language, processed by [OpenSCAD](https://openscad.org/about.html). There is no ready to use 3D model files in the source code. If you are interested in such files, please look at the [released versions](https://github.com/jsconan/whoop-box/releases) which contains 3D model files built with default parameters. However, if you want to customize these parts, tailoring them with your measures, you should rather download the source code and then tweak the configuration files before generating your own 3D model files.
 
-At that time, the project proposed 2 sets of boxes. The dimensions and the number of cells can be set from the [configuration](./config/config-dist.scad).
+At that time, the project proposes 3 sets of boxes. The dimensions and the number of cells can be set from the [configuration](./config/config-dist.scad).
 
-The size is defined by:
+The size is defined by (in millimeters):
 
--   The distance between motors, on the [diagonal](./config/config-dist.scad#L59).
--   The diameter of [ducts](./config/config-dist.scad#L60).
--   The height of [ducts](./config/config-dist.scad#L61).
--   The overall height of the [whoop](./config/config-dist.scad#L62).
--   The [padding](./config/config-dist.scad#L63) added between the box wall and the whoop.
+-   The distance between motors, on the [diagonal](./config/config-dist.scad#L61).
+-   The diameter of [ducts](./config/config-dist.scad#L62).
+-   The height of [ducts](./config/config-dist.scad#L63).
+-   The overall height of the [whoop](./config/config-dist.scad#L64).
+-   The [padding](./config/config-dist.scad#L65) added between the box wall and the whoop.
 
-Several presets are available out of the box in the file [config/presets.scad](./config/presets-dist.scad). The currently selected preset is configured through the variable `preset` in the file [config/config.scad](./config/config-dist.scad#L56).
+A box is also available for enclosing a set of batteries. Its size can be configured too (millimeters):
+
+-   The [width](./config/config-dist.scad#L74) of the battery.
+-   The [thickness](./config/config-dist.scad#L75) of the battery.
+-   The [length](./config/config-dist.scad#L76) of the battery.
+
+The number of cells for each box is also configurable:
+
+-   The [number of whoops per lines](./config/config-dist.scad#L69) (horizontal).
+-   The [number of whoops per columns](./config/config-dist.scad#L70) (vertical).
+-   The [number of whoops per lines and columns](./config/config-dist.scad#L71) (depth).
+-   The [number of batteries per boxes](./config/config-dist.scad#L79).
+
+Several presets are available out of the box in the file [config/presets.scad](./config/presets-dist.scad). The currently selected preset is configured through the variable `preset` in the file [config/config.scad](./config/config-dist.scad#L58).
 
 When using the [render](./render.sh) script, all presets can be rendered at once using the option `-a`. See the section **[Render the parts](#Rendertheparts)**. Otherwise, only one single preset is rendered at a time.
 
@@ -59,6 +73,26 @@ This version proposes several variants of the box:
 -   A box for propellers
 
 ![propellers box](./doc/propellers-box.png)
+
+-   A container for one or more boxes with respect to the configuration
+
+![container](./doc/whoop-box-container.png)
+
+## <a name='Batteriesbox'></a>Batteries' box
+
+Aside the boxes for containing tiny-whoops, the project also proposes a parametric box for containing the batteries. The size of the batteries and the number per boxes can be configured.
+
+![batteries box](./doc/battery-boxes.png)
+
+This box is made of two parts:
+
+-   A batteries' container, with separators:
+
+![batteries container](./doc/battery-box-container.png)
+
+-   A box cover:
+
+![box cover](./doc/battery-box-cover.png)
 
 ## <a name='Angledboxes'></a>Angled boxes
 
@@ -96,8 +130,6 @@ First of all you need [OpenSCAD](https://openscad.org/) to be installed. To do s
 
 The source code is hosted on a [Git](https://git-scm.com/) repository. To get it you can either download a [zip file](https://github.com/jsconan/whoop-box/archive/refs/heads/main.zip), or clone the repository locally.
 
-Note: the easiest way is to call the `init.sh` script, that will take care of this for you.
-
 #### <a name='Downloadthezipfile'></a>Download the zip file
 
 The source code can be downloaded from the [GitHub repository](https://github.com/jsconan/whoop-box).
@@ -108,7 +140,9 @@ As the project is using a shared library, that is not supplied with the package,
 
 Download the zip file from this [link](https://github.com/jsconan/camelSCAD/archive/refs/heads/main.zip).
 
-Then extract its content inside the folder `lib/camelSCAD`. Please make sure the folder directly contains the library and not an intermediate folder like `lib/camelSCAD/camelSCAD-master`. If this is the case, please move the content one folder up and delete the extra folder.
+Then extract its content inside the folder `lib/camelSCAD`. Please make sure the folder directly contains the library and not an intermediate folder like `lib/camelSCAD/camelSCAD-main`. If this is the case, please move the content one folder up and delete the extra folder.
+
+Note: the easiest way is to call the `init.sh` script, that will take care of this for you.
 
 #### <a name='Getthecodefromtherepository'></a>Get the code from the repository
 
@@ -126,6 +160,8 @@ git submodule update
 The source code should have been downloaded, as well as the libraries.
 
 Note: you can also use a graphical interface tool. In this case, please make it can also install the submodules.
+
+Note 2: the easiest way is to call the `init.sh` script, that will take care of this for you.
 
 ### <a name='Configuration'></a>Configuration
 
@@ -162,12 +198,14 @@ Renders OpenSCAD files
   a,   all            Render all elements (default)
   n,   angled         Render the sets of angled boxes
   w,   whoop          Render the sets of whoop boxes
+  b,   battery        Render the sets of battery boxes
   -h,  --help         Show this help
-  -p   --preset       Set size preset to apply
+  -p   --preset       Set the preset to apply
   -a,  --all          Render all presets
   -x,  --line         Set the number of boxes per lines in the container (X-axis)
   -y   --column       Set the number of boxes per columns in the container (Y-axis)
   -z   --depth        Set The number of boxes per lines and columns in the container (Z-axis)
+  -b   --batteries    Set The number of batteries per boxes
   -f   --format       Set the output format
   -p   --parallel     Set the number of parallel processes
   -s   --slice        Slice the rendered files using the default configuration
@@ -190,7 +228,33 @@ As these script can be defined locally, they are not part of the versioned conte
 -   you need to make sure the file is executable: `chmod +x post-render.sh`.
 -   finally, add you own commands to the copy.
 
-As an example, here is the script used to copy the sliced files to a SD-card:
+As an example:
+
+-   The script used to zip the rendered files:
+
+```sh
+# Bootstrap the script
+scriptpath=$(dirname $0)
+source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
+
+# Script config
+project=$(pwd)
+stlpath="${project}/dist/stl/"
+zippath="stl.zip"
+logpath="${project}/dist/zip.log"
+
+# Post process the rendered files
+printmessage "${C_MSG}==========================================="
+printmessage "${C_MSG}Post-render script: zip files"
+dummy=$(
+    cd "${stlpath}"
+    rm *.zip > /dev/null
+    zip -r "${zippath}" *
+)
+printmessage "${C_MSG}==========================================="
+```
+
+-   The script used to copy the sliced files to a SD-card:
 
 ```sh
 # Bootstrap the script
@@ -210,5 +274,4 @@ date > ${logpath}
 createpath "${sdcardpath}"
 rsync -ahvt --no-links --delete --partial --force --modify-window=1 --exclude=.DS_Store --log-file=${logpath} "${gcodepath}" "${sdcardpath}"
 printmessage "${C_MSG}==========================================="
-
 ```

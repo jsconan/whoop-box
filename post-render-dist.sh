@@ -37,7 +37,18 @@
 scriptpath=$(dirname $0)
 source "${scriptpath}/lib/camelSCAD/scripts/utils.sh"
 
-# Do something... Some helpers have been loaded from the utils
-printmessage "${C_MSG}==============================="
-printmessage "${C_MSG}This is the post render script!"
-printmessage "${C_MSG}==============================="
+# Script config
+project=$(pwd)
+stlpath="${project}/dist/stl/"
+zippath="stl.zip"
+logpath="${project}/dist/zip.log"
+
+# Post process the rendered files
+printmessage "${C_MSG}==========================================="
+printmessage "${C_MSG}Post-render script: zip files"
+dummy=$(
+    cd "${stlpath}"
+    rm *.zip > /dev/null
+    zip -r "${zippath}" *
+)
+printmessage "${C_MSG}==========================================="

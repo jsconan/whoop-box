@@ -1,5 +1,22 @@
 # whoop-box history
 
+## [Version 1.1.0](https://github.com/jsconan/whoop-box/releases/tag/1.1.0)
+
+Features:
+
+-   Add a box containing a set of batteries.
+    ![batteries box](https://github.com/jsconan/whoop-box/raw/fc9cc20544537ea17bdea6db81249c1dae674a7f/doc/battery-boxes.png)
+
+-   Add actual example for the post render scripts.
+-   Add a preset for Meteor65 Pro 2022 edition
+
+Fixes:
+
+-   Add a forgotten picture in the readme.
+-   Fix a misaligned comment.
+-   Fix an error appearing when running the post-render script sample.
+-   Fix a few glitches in the readme file.
+
 ## [Version 1.0.0](https://github.com/jsconan/whoop-box/releases/tag/1.0.0)
 
 Add another set of boxes with padding inside to better wrap the tiny-whoop. Instead of multiple shells made of several materials, it only relies on a single box and its container.
